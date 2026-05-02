@@ -1,0 +1,682 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Dona — Corporación Social Kwel · RTE DIAN</title>
+<meta name="description" content="Apoya a Kwel y obtén beneficio tributario del 25% en renta. Entidad del Régimen Tributario Especial DIAN. NIT 900.554.556-5. Donaciones por PSE, transferencia y Nequi.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400&family=DM+Sans:wght@300;400;500&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root{
+  --verde:#1a4a2e;--verde-medio:#2d6e47;--verde-claro:#4a9e6a;
+  --dorado:#c8a86b;--tierra:#8b5e3c;--crema:#f5f0e8;
+  --blanco:#fafaf7;--gris:#6b7280;--gris-claro:#e8e4dc;--negro:#0f1a0f;
+}
+*{margin:0;padding:0;box-sizing:border-box;}
+html{scroll-behavior:smooth;}
+body{font-family:'DM Sans',sans-serif;background:var(--blanco);color:var(--negro);overflow-x:hidden;}
+a{text-decoration:none;color:inherit;}
+
+/* ── TOPBAR ── */
+.topbar{background:var(--verde);padding:8px 48px;display:flex;justify-content:space-between;align-items:center;font-family:'DM Mono',monospace;font-size:11px;color:rgba(255,255,255,0.55);}
+.topbar a{color:rgba(255,255,255,0.55);transition:color .2s;}
+.topbar a:hover{color:var(--dorado);}
+.lang-toggle{display:flex;gap:4px;}
+.lang-btn{padding:3px 10px;border:1px solid rgba(255,255,255,0.2);font-family:'DM Mono',monospace;font-size:10px;cursor:pointer;color:rgba(255,255,255,0.55);background:transparent;letter-spacing:0.1em;transition:all .2s;}
+.lang-btn.active{background:var(--dorado);color:var(--verde);border-color:var(--dorado);}
+.lang-btn:hover:not(.active){color:var(--dorado);border-color:var(--dorado);}
+
+/* ── NAV ── */
+nav{position:sticky;top:0;z-index:100;background:rgba(250,250,247,0.96);backdrop-filter:blur(12px);border-bottom:1px solid var(--gris-claro);padding:0 48px;display:flex;justify-content:space-between;align-items:center;height:68px;}
+.nav-logo{display:flex;align-items:center;gap:12px;}
+.nav-logo img{width:40px;height:40px;object-fit:contain;}
+.nav-logo-text{font-family:'Playfair Display',serif;font-size:17px;font-weight:700;color:var(--verde);}
+.nav-links{display:flex;gap:32px;align-items:center;}
+.nav-links a{font-size:13px;font-weight:500;color:var(--gris);letter-spacing:0.03em;transition:color .2s;position:relative;}
+.nav-links a::after{content:'';position:absolute;bottom:-4px;left:0;right:0;height:1px;background:var(--verde-claro);transform:scaleX(0);transform-origin:left;transition:transform .2s;}
+.nav-links a:hover{color:var(--verde);}
+.nav-links a:hover::after,.nav-links a.activo::after{transform:scaleX(1);}
+.nav-links a.activo{color:var(--verde);}
+.nav-cta{background:var(--dorado);color:var(--verde);padding:9px 22px;font-size:12px;font-weight:500;font-family:'DM Mono',monospace;letter-spacing:0.1em;text-transform:uppercase;transition:all .2s;border:none;cursor:pointer;}
+.nav-cta:hover{background:var(--verde);color:var(--dorado);}
+.hamburger{display:none;flex-direction:column;gap:5px;cursor:pointer;background:none;border:none;padding:4px;}
+.hamburger span{display:block;width:24px;height:1.5px;background:var(--verde);transition:all .3s;}
+.nav-overlay{display:none;position:fixed;inset:0;z-index:190;}
+.nav-overlay.open{display:block;}
+
+/* ── PAGE HERO ── */
+.page-hero{
+  background:var(--verde);padding:72px 48px 64px;
+  display:grid;grid-template-columns:1fr 1fr;gap:64px;align-items:center;
+  position:relative;overflow:hidden;
+}
+.page-hero::after{
+  content:'';position:absolute;right:-80px;bottom:-80px;
+  width:320px;height:320px;border-radius:50%;
+  border:1px solid rgba(200,168,107,0.12);
+}
+.page-hero::before{
+  content:'';position:absolute;right:60px;bottom:60px;
+  width:180px;height:180px;border-radius:50%;
+  border:1px solid rgba(200,168,107,0.08);
+}
+.ph-eyebrow{font-family:'DM Mono',monospace;font-size:10px;letter-spacing:0.3em;text-transform:uppercase;color:var(--dorado);margin-bottom:16px;display:flex;align-items:center;gap:10px;}
+.ph-eyebrow::before{content:'';display:block;width:24px;height:1px;background:var(--dorado);}
+.ph-titulo{font-family:'Playfair Display',serif;font-size:clamp(32px,4vw,52px);font-weight:900;color:var(--blanco);line-height:1.1;margin-bottom:20px;}
+.ph-titulo em{font-style:italic;color:var(--dorado);}
+.ph-desc{font-size:15px;line-height:1.75;color:rgba(255,255,255,0.65);max-width:420px;}
+.ph-right{display:flex;flex-direction:column;gap:16px;}
+.rte-card{background:rgba(255,255,255,0.06);border:1px solid rgba(200,168,107,0.25);padding:20px 24px;display:flex;gap:16px;align-items:flex-start;}
+.rte-ico{font-size:24px;flex-shrink:0;margin-top:2px;}
+.rte-titulo{font-size:13px;font-weight:500;color:var(--blanco);margin-bottom:4px;}
+.rte-texto{font-size:12px;color:rgba(255,255,255,0.5);line-height:1.6;}
+.rte-texto strong{color:var(--dorado);}
+
+/* ── MAIN LAYOUT ── */
+.main{max-width:1100px;margin:0 auto;padding:72px 48px;}
+.main-grid{display:grid;grid-template-columns:1fr 420px;gap:64px;align-items:start;}
+
+/* ── PASO A PASO ── */
+.pasos-titulo{font-family:'Playfair Display',serif;font-size:26px;font-weight:700;color:var(--verde);margin-bottom:8px;}
+.pasos-sub{font-size:14px;color:var(--gris);margin-bottom:36px;line-height:1.6;}
+
+.paso-group{margin-bottom:48px;}
+.paso-num{font-family:'DM Mono',monospace;font-size:10px;letter-spacing:0.2em;text-transform:uppercase;color:var(--verde-claro);margin-bottom:14px;display:flex;align-items:center;gap:10px;}
+.paso-num::after{content:'';flex:1;height:1px;background:var(--gris-claro);}
+
+/* PROYECTOS */
+.proyectos-dona{display:grid;grid-template-columns:1fr 1fr;gap:10px;}
+.proy-card{
+  border:2px solid var(--gris-claro);padding:16px;cursor:pointer;
+  transition:all .2s;position:relative;
+}
+.proy-card:hover{border-color:var(--verde-claro);}
+.proy-card.sel{border-color:var(--verde);background:rgba(26,74,46,0.04);}
+.proy-card.sel::after{content:'✓';position:absolute;top:10px;right:12px;width:20px;height:20px;background:var(--verde);color:#fff;font-size:11px;display:flex;align-items:center;justify-content:center;border-radius:50%;}
+.proy-ico{font-size:22px;margin-bottom:8px;}
+.proy-nombre{font-size:13px;font-weight:500;color:var(--negro);margin-bottom:4px;}
+.proy-desc{font-size:11.5px;color:var(--gris);line-height:1.5;}
+
+/* MONTOS */
+.montos-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-bottom:14px;}
+.monto-btn{
+  border:1px solid var(--gris-claro);padding:12px 8px;text-align:center;
+  cursor:pointer;transition:all .2s;background:var(--blanco);
+}
+.monto-btn:hover{border-color:var(--verde-claro);}
+.monto-btn.sel{border-color:var(--verde);background:var(--verde);color:var(--blanco);}
+.monto-btn.sel .mb-val{color:var(--blanco);}
+.monto-btn.sel .mb-label{color:rgba(255,255,255,0.6);}
+.mb-val{font-family:'Playfair Display',serif;font-size:16px;font-weight:700;color:var(--negro);line-height:1;}
+.mb-label{font-size:10px;color:var(--gris);margin-top:2px;font-family:'DM Mono',monospace;}
+.monto-input{width:100%;padding:12px 16px;border:1px solid var(--gris-claro);background:var(--blanco);font-size:14px;font-family:'DM Sans',sans-serif;color:var(--negro);outline:none;transition:border-color .2s;margin-bottom:8px;}
+.monto-input:focus{border-color:var(--verde);}
+.monto-hint{font-size:11.5px;color:var(--verde-medio);font-family:'DM Mono',monospace;margin-bottom:0;}
+
+/* MEDIOS DE PAGO */
+.medios{display:flex;flex-direction:column;gap:10px;}
+.medio-opt{
+  border:1px solid var(--gris-claro);padding:14px 16px;
+  cursor:pointer;transition:all .2s;display:flex;gap:14px;align-items:center;
+}
+.medio-opt:hover{border-color:var(--verde-claro);}
+.medio-opt.sel{border-color:var(--verde);background:rgba(26,74,46,0.03);}
+.medio-radio{width:16px;height:16px;border-radius:50%;border:2px solid var(--gris-claro);flex-shrink:0;transition:all .2s;position:relative;}
+.medio-opt.sel .medio-radio{border-color:var(--verde);background:var(--verde);}
+.medio-opt.sel .medio-radio::after{content:'';position:absolute;inset:3px;border-radius:50%;background:#fff;}
+.medio-info{flex:1;}
+.medio-nombre{font-size:13px;font-weight:500;color:var(--negro);}
+.medio-desc{font-size:11.5px;color:var(--gris);margin-top:2px;}
+.medio-logo{font-size:20px;flex-shrink:0;}
+
+/* DATOS TRANSFERENCIA */
+.datos-transferencia{
+  background:var(--crema);border:1px solid var(--gris-claro);
+  padding:20px 24px;margin-top:14px;display:none;
+}
+.datos-transferencia.visible{display:block;}
+.dt-titulo{font-family:'DM Mono',monospace;font-size:10px;letter-spacing:0.15em;text-transform:uppercase;color:var(--verde);margin-bottom:14px;}
+.dt-row{display:flex;justify-content:space-between;padding:7px 0;border-bottom:1px dashed rgba(0,0,0,0.08);font-size:13px;}
+.dt-row:last-child{border-bottom:none;}
+.dt-label{color:var(--gris);}
+.dt-val{font-weight:500;color:var(--negro);font-family:'DM Mono',monospace;font-size:12px;}
+.dt-copy{font-size:11px;color:var(--verde-claro);cursor:pointer;margin-left:8px;text-decoration:underline;}
+.dt-nota{font-size:11.5px;color:var(--tierra);margin-top:12px;line-height:1.6;padding-top:12px;border-top:1px dashed rgba(0,0,0,0.08);}
+
+/* FORMULARIO CERTIFICADO */
+.form-cert{display:flex;flex-direction:column;gap:12px;}
+.field-group{display:grid;grid-template-columns:1fr 1fr;gap:12px;}
+.field{display:flex;flex-direction:column;gap:5px;}
+.field label{font-size:11.5px;font-weight:500;color:var(--negro);letter-spacing:0.02em;}
+.field input,.field select{padding:11px 14px;border:1px solid var(--gris-claro);background:var(--blanco);font-size:13.5px;font-family:'DM Sans',sans-serif;color:var(--negro);outline:none;transition:border-color .2s;width:100%;}
+.field input:focus,.field select:focus{border-color:var(--verde);}
+.field.full{grid-column:span 2;}
+.field select{appearance:none;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Cpath fill='%236b7280' d='M6 8L1 3h10z'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:right 14px center;}
+
+/* CTA FINAL */
+.btn-dona-final{
+  width:100%;padding:16px;background:var(--dorado);
+  color:var(--verde);border:none;cursor:pointer;
+  font-family:'DM Mono',monospace;font-size:13px;
+  letter-spacing:0.15em;text-transform:uppercase;
+  font-weight:500;transition:all .25s;margin-top:8px;
+}
+.btn-dona-final:hover{background:var(--verde);color:var(--dorado);}
+.btn-nota{font-size:11px;color:var(--gris);text-align:center;margin-top:10px;line-height:1.6;}
+
+/* STICKY RESUMEN */
+.resumen-sticky{
+  position:sticky;top:84px;
+  background:var(--verde);padding:32px 28px;
+  color:var(--blanco);
+}
+.res-titulo{font-family:'Playfair Display',serif;font-size:18px;font-weight:700;color:var(--blanco);margin-bottom:20px;padding-bottom:16px;border-bottom:1px solid rgba(255,255,255,0.1);}
+.res-row{display:flex;justify-content:space-between;align-items:center;padding:8px 0;border-bottom:1px dashed rgba(255,255,255,0.08);font-size:13px;}
+.res-row:last-of-type{border-bottom:none;}
+.res-label{color:rgba(255,255,255,0.5);font-size:12px;}
+.res-val{color:var(--blanco);font-weight:500;font-family:'DM Mono',monospace;font-size:12px;}
+.res-monto{font-family:'Playfair Display',serif;font-size:28px;font-weight:700;color:var(--dorado);margin:20px 0 4px;}
+.res-monto-label{font-size:11px;color:rgba(255,255,255,0.4);margin-bottom:20px;}
+.res-beneficio{
+  background:rgba(200,168,107,0.12);border:1px solid rgba(200,168,107,0.25);
+  padding:14px;margin-top:16px;
+}
+.res-ben-titulo{font-size:11px;font-family:'DM Mono',monospace;letter-spacing:0.1em;text-transform:uppercase;color:var(--dorado);margin-bottom:8px;}
+.res-ben-monto{font-family:'Playfair Display',serif;font-size:22px;font-weight:700;color:var(--dorado);}
+.res-ben-desc{font-size:11px;color:rgba(255,255,255,0.45);margin-top:4px;line-height:1.5;}
+.res-nit{font-family:'DM Mono',monospace;font-size:10px;color:rgba(255,255,255,0.3);margin-top:20px;padding-top:16px;border-top:1px solid rgba(255,255,255,0.08);line-height:1.6;}
+
+/* FAQ */
+.faq-section{background:var(--crema);padding:80px 48px;}
+.faq-grid{max-width:860px;margin:40px auto 0;}
+.faq-item{border-bottom:1px solid var(--gris-claro);}
+.faq-q{
+  padding:18px 0;cursor:pointer;display:flex;justify-content:space-between;
+  align-items:center;font-size:14px;font-weight:500;color:var(--negro);
+  user-select:none;gap:16px;
+}
+.faq-q:hover{color:var(--verde);}
+.faq-ico{
+  width:24px;height:24px;border:1px solid var(--gris-claro);
+  display:flex;align-items:center;justify-content:center;
+  font-size:14px;color:var(--gris);flex-shrink:0;transition:all .2s;
+  font-style:normal;
+}
+.faq-item.open .faq-ico{background:var(--verde);border-color:var(--verde);color:#fff;transform:rotate(45deg);}
+.faq-a{max-height:0;overflow:hidden;transition:max-height .35s ease;font-size:13.5px;color:var(--gris);line-height:1.7;}
+.faq-a-inner{padding:0 0 18px;max-width:640px;}
+.faq-a-inner a{color:var(--verde-medio);text-decoration:underline;}
+.faq-item.open .faq-a{max-height:300px;}
+
+/* FOOTER STRIP */
+.footer-strip{
+  background:var(--negro);padding:40px 48px;
+  display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:24px;
+}
+.fs-left{font-family:'DM Mono',monospace;font-size:11px;color:rgba(255,255,255,0.3);line-height:1.8;}
+.fs-links{display:flex;gap:20px;flex-wrap:wrap;}
+.fs-links a{font-size:13px;color:rgba(255,255,255,0.4);transition:color .2s;}
+.fs-links a:hover{color:var(--dorado);}
+
+/* TOAST */
+.toast{position:fixed;bottom:32px;left:50%;transform:translateX(-50%) translateY(20px);background:var(--verde);color:var(--blanco);padding:12px 24px;font-size:13px;font-family:'DM Mono',monospace;letter-spacing:0.06em;opacity:0;transition:all .3s;z-index:999;pointer-events:none;}
+.toast.show{opacity:1;transform:translateX(-50%) translateY(0);}
+
+/* RESPONSIVE */
+@media(max-width:960px){
+  .main{padding:48px 24px;}
+  .main-grid{grid-template-columns:1fr;gap:48px;}
+  .resumen-sticky{position:static;}
+  .page-hero{grid-template-columns:1fr;gap:32px;padding:56px 24px;}
+}
+@media(max-width:768px){
+  .topbar{padding:8px 20px;}
+  nav{padding:0 20px;}
+  .nav-links{display:none;}
+  .hamburger{display:flex;}
+  .nav-links.open{display:flex;flex-direction:column;gap:0;position:fixed;top:68px;left:0;right:0;bottom:0;background:var(--verde);z-index:200;padding:32px 24px;}
+  .nav-links.open a{color:rgba(255,255,255,0.8);font-size:18px;padding:14px 0;border-bottom:1px solid rgba(255,255,255,0.1);}
+  .nav-cta{display:none;}
+  .faq-section{padding:56px 20px;}
+  .footer-strip{padding:32px 20px;flex-direction:column;align-items:flex-start;}
+  .proyectos-dona{grid-template-columns:1fr;}
+  .field-group{grid-template-columns:1fr;}
+  .field.full{grid-column:span 1;}
+}
+@media(max-width:480px){
+  .montos-grid{grid-template-columns:repeat(2,1fr);}
+  .page-hero{padding:40px 16px;}
+  .main{padding:40px 16px;}
+}
+</style>
+</head>
+<body>
+
+<!-- TOPBAR -->
+<div class="topbar">
+  <span>📍 Ed. Scala Of. 1110, Sabaneta &nbsp;·&nbsp; <a href="mailto:kwelsocial@gmail.com">kwelsocial@gmail.com</a> &nbsp;·&nbsp; <a href="tel:+573008561465">300 856 1465</a></span>
+  <div class="lang-toggle">
+    <button class="lang-btn active" onclick="setLang('es')">ES</button>
+    <button class="lang-btn" onclick="setLang('en')">EN</button>
+  </div>
+</div>
+
+<!-- NAV -->
+<nav>
+  <a href="index.html" class="nav-logo">
+    <img src="https://kwelsocial.com/wp-content/uploads/2023/11/KWEL-SOCIAL.png" alt="Kwel Social">
+    <span class="nav-logo-text">Kwel Social</span>
+  </a>
+  <div class="nav-links" id="navLinks">
+    <a href="index.html" data-es="Inicio" data-en="Home">Inicio</a>
+    <a href="nosotros.html" data-es="Nosotros" data-en="About">Nosotros</a>
+    <a href="proyecto-drones.html" data-es="Proyecto Drones" data-en="Drone Project">Proyecto Drones</a>
+    <a href="proyectos.html" data-es="Proyectos" data-en="Projects">Proyectos</a>
+    <a href="transparencia.html" data-es="Transparencia" data-en="Transparency">Transparencia</a>
+    <a href="contacto.html" data-es="Contacto" data-en="Contact">Contacto</a>
+  </div>
+  <a href="dona.html" class="nav-cta activo" data-es="Dona ahora" data-en="Donate now">Dona ahora</a>
+  <button class="hamburger" id="hamburger" onclick="toggleNav()"><span></span><span></span><span></span></button>
+</nav>
+<div class="nav-overlay" id="navOverlay" onclick="toggleNav()"></div>
+
+<!-- PAGE HERO -->
+<section class="page-hero">
+  <div>
+    <div class="ph-eyebrow" data-es="Régimen Tributario Especial · DIAN · Art. 257 E.T." data-en="Special Tax Regime · DIAN · Art. 257 E.T.">Régimen Tributario Especial · DIAN · Art. 257 E.T.</div>
+    <h1 class="ph-titulo">
+      <span data-es="Tu apoyo genera <em>impacto real</em> y beneficio tributario" data-en="Your support creates <em>real impact</em> and tax benefits">Tu apoyo genera <em>impacto real</em> y beneficio tributario</span>
+    </h1>
+    <p class="ph-desc" data-es="Kwel es una entidad del Régimen Tributario Especial de la DIAN. Tus donaciones son deducibles de renta — las personas jurídicas pueden descontar hasta el 25% del valor donado de su impuesto (Art. 257 E.T.)." data-en="Kwel is a DIAN Special Tax Regime entity. Your donations are tax-deductible — legal entities can deduct up to 25% of the donated amount from their taxes (Art. 257 E.T.).">Kwel es una entidad del Régimen Tributario Especial de la DIAN. Tus donaciones son deducibles de renta — las personas jurídicas pueden descontar hasta el 25% del valor donado de su impuesto (Art. 257 E.T.).</p>
+  </div>
+  <div class="ph-right">
+    <div class="rte-card">
+      <div class="rte-ico">🏛️</div>
+      <div>
+        <div class="rte-titulo" data-es="Entidad legalmente habilitada" data-en="Legally authorized entity">Entidad legalmente habilitada</div>
+        <div class="rte-texto" data-es="<strong>NIT 900.554.556-5</strong> · Régimen Tributario Especial. Registro DIAN vigente. Personería jurídica activa." data-en="<strong>NIT 900.554.556-5</strong> · Special Tax Regime. Current DIAN registration. Active legal status."><strong>NIT 900.554.556-5</strong> · Régimen Tributario Especial. Registro DIAN vigente. Personería jurídica activa.</div>
+      </div>
+    </div>
+    <div class="rte-card">
+      <div class="rte-ico">📄</div>
+      <div>
+        <div class="rte-titulo" data-es="Certificado de donación garantizado" data-en="Guaranteed donation certificate">Certificado de donación garantizado</div>
+        <div class="rte-texto" data-es="Emitimos certificado con validez tributaria en máximo <strong>5 días hábiles</strong>. Cumple todos los requisitos de la DIAN para deducción de renta." data-en="We issue a tax-valid certificate within a maximum of <strong>5 business days</strong>. Meets all DIAN requirements for income tax deduction.">Emitimos certificado con validez tributaria en máximo <strong>5 días hábiles</strong>. Cumple todos los requisitos de la DIAN para deducción de renta.</div>
+      </div>
+    </div>
+    <div class="rte-card">
+      <div class="rte-ico">💰</div>
+      <div>
+        <div class="rte-titulo" data-es="Descuento real en impuesto de renta" data-en="Real income tax discount">Descuento real en impuesto de renta</div>
+        <div class="rte-texto" data-es="Si donas <strong>$1.000.000</strong> y tu tarifa de renta es del 25%, pagas <strong>$250.000 menos</strong> de impuestos. La donación neta te cuesta solo $750.000." data-en="If you donate <strong>$1,000,000</strong> and your tax rate is 25%, you pay <strong>$250,000 less</strong> in taxes. The net donation only costs you $750,000.">Si donas <strong>$1.000.000</strong> y tu tarifa de renta es del 25%, pagas <strong>$250.000 menos</strong> de impuestos. La donación neta te cuesta solo $750.000.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- MAIN -->
+<div class="main">
+  <div class="main-grid">
+
+    <!-- COLUMNA IZQUIERDA — FORMULARIO -->
+    <div>
+      <h2 class="pasos-titulo" data-es="Realiza tu donación" data-en="Make your donation">Realiza tu donación</h2>
+      <p class="pasos-sub" data-es="Completa los siguientes pasos. Al final recibirás tu certificado de donación con validez ante la DIAN." data-en="Complete the following steps. You will receive your DIAN-valid donation certificate at the end.">Completa los siguientes pasos. Al final recibirás tu certificado de donación con validez ante la DIAN.</p>
+
+      <!-- PASO 1: PROYECTO -->
+      <div class="paso-group">
+        <div class="paso-num" data-es="Paso 1 — Elige el proyecto a apoyar" data-en="Step 1 — Choose the project to support">Paso 1 — Elige el proyecto a apoyar</div>
+        <div class="proyectos-dona">
+          <div class="proy-card sel" onclick="selProyecto(this,'drones')">
+            <div class="proy-ico">✈️</div>
+            <div class="proy-nombre" data-es="Drones Agrícolas" data-en="Agricultural Drones">Drones Agrícolas</div>
+            <div class="proy-desc" data-es="DJI Agras T100 · Agricultura de precisión" data-en="DJI Agras T100 · Precision agriculture">DJI Agras T100 · Agricultura de precisión</div>
+          </div>
+          <div class="proy-card" onclick="selProyecto(this,'agroecologia')">
+            <div class="proy-ico">🌱</div>
+            <div class="proy-nombre" data-es="Proyectos Agroecológicos" data-en="Agroecological Projects">Proyectos Agroecológicos</div>
+            <div class="proy-desc" data-es="Producción limpia y seguridad alimentaria" data-en="Clean production and food security">Producción limpia y seguridad alimentaria</div>
+          </div>
+          <div class="proy-card" onclick="selProyecto(this,'arte')">
+            <div class="proy-ico">🎨</div>
+            <div class="proy-nombre" data-es="Arte y Cultura" data-en="Art & Culture">Arte y Cultura</div>
+            <div class="proy-desc" data-es="Murales, concursos y expresión comunitaria" data-en="Murals, competitions and community expression">Murales, concursos y expresión comunitaria</div>
+          </div>
+          <div class="proy-card" onclick="selProyecto(this,'albergue')">
+            <div class="proy-ico">🐾</div>
+            <div class="proy-nombre" data-es="Albergue Animal" data-en="Animal Shelter">Albergue Animal</div>
+            <div class="proy-desc" data-es="Rescate y adopción responsable" data-en="Rescue and responsible adoption">Rescate y adopción responsable</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- PASO 2: MONTO -->
+      <div class="paso-group">
+        <div class="paso-num" data-es="Paso 2 — Define el monto" data-en="Step 2 — Set the amount">Paso 2 — Define el monto</div>
+        <div class="montos-grid">
+          <div class="monto-btn" onclick="selMonto(this,50000)"><div class="mb-val">$50.000</div><div class="mb-label">COP</div></div>
+          <div class="monto-btn sel" onclick="selMonto(this,100000)"><div class="mb-val">$100.000</div><div class="mb-label">COP</div></div>
+          <div class="monto-btn" onclick="selMonto(this,500000)"><div class="mb-val">$500.000</div><div class="mb-label">COP</div></div>
+          <div class="monto-btn" onclick="selMonto(this,1000000)"><div class="mb-val">$1.000.000</div><div class="mb-label">COP</div></div>
+          <div class="monto-btn" onclick="selMonto(this,5000000)"><div class="mb-val">$5.000.000</div><div class="mb-label">COP</div></div>
+          <div class="monto-btn" onclick="selMonto(this,0)"><div class="mb-val">Otro</div><div class="mb-label">valor libre</div></div>
+        </div>
+        <input type="number" class="monto-input" id="montoLibre" placeholder="Ingresa el monto en pesos COP" min="10000" oninput="actualizarResumen()">
+        <p class="monto-hint" id="beneficioHint">💡 Con $100.000 tu beneficio tributario es de $25.000 — Art. 257 E.T.</p>
+      </div>
+
+      <!-- PASO 3: MEDIO DE PAGO -->
+      <div class="paso-group">
+        <div class="paso-num" data-es="Paso 3 — Elige cómo pagar" data-en="Step 3 — Choose payment method">Paso 3 — Elige cómo pagar</div>
+        <div class="medios">
+          <div class="medio-opt sel" onclick="selMedio(this,'pse')">
+            <div class="medio-radio"></div>
+            <div class="medio-logo">🏦</div>
+            <div class="medio-info">
+              <div class="medio-nombre">PSE — Débito en línea</div>
+              <div class="medio-desc" data-es="Pago directo desde tu cuenta bancaria. Seguro y certificado." data-en="Direct payment from your bank account. Secure and certified.">Pago directo desde tu cuenta bancaria. Seguro y certificado.</div>
+            </div>
+          </div>
+          <div class="medio-opt" onclick="selMedio(this,'transferencia')">
+            <div class="medio-radio"></div>
+            <div class="medio-logo">🏛️</div>
+            <div class="medio-info">
+              <div class="medio-nombre" data-es="Transferencia bancaria" data-en="Bank transfer">Transferencia bancaria</div>
+              <div class="medio-desc" data-es="Consigna directamente a nuestra cuenta. Te enviamos el certificado al correo." data-en="Deposit directly to our account. We send the certificate to your email.">Consigna directamente a nuestra cuenta. Te enviamos el certificado al correo.</div>
+            </div>
+          </div>
+          <div class="medio-opt" onclick="selMedio(this,'nequi')">
+            <div class="medio-radio"></div>
+            <div class="medio-logo">📱</div>
+            <div class="medio-info">
+              <div class="medio-nombre">Nequi / Daviplata</div>
+              <div class="medio-desc" data-es="Transfiere desde tu billetera móvil al número registrado." data-en="Transfer from your mobile wallet to the registered number.">Transfiere desde tu billetera móvil al número registrado.</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- DATOS TRANSFERENCIA (visible solo si sel transferencia) -->
+        <div class="datos-transferencia" id="datosTransferencia">
+          <div class="dt-titulo" data-es="Datos para la consignación" data-en="Deposit information">Datos para la consignación</div>
+          <div class="dt-row"><span class="dt-label" data-es="Banco" data-en="Bank">Banco</span><span class="dt-val">[Banco por completar] <span class="dt-copy" onclick="copiar('banco','[Banco por completar]')">copiar</span></span></div>
+          <div class="dt-row"><span class="dt-label" data-es="Tipo de cuenta" data-en="Account type">Tipo de cuenta</span><span class="dt-val">[Ahorros / Corriente] <span class="dt-copy" onclick="copiar('tipo','[Ahorros / Corriente]')">copiar</span></span></div>
+          <div class="dt-row"><span class="dt-label" data-es="Número de cuenta" data-en="Account number">Número de cuenta</span><span class="dt-val">[Número por completar] <span class="dt-copy" onclick="copiar('cuenta','[Número por completar]')">copiar</span></span></div>
+          <div class="dt-row"><span class="dt-label" data-es="Titular" data-en="Account holder">Titular</span><span class="dt-val">Corporación Social Kwel</span></div>
+          <div class="dt-row"><span class="dt-label">NIT</span><span class="dt-val">900.554.556-5 <span class="dt-copy" onclick="copiar('nit','900.554.556-5')">copiar</span></span></div>
+          <div class="dt-row"><span class="dt-label" data-es="Concepto" data-en="Concept">Concepto</span><span class="dt-val" data-es="Donación + tu nombre" data-en="Donation + your name">Donación + tu nombre</span></div>
+          <div class="dt-nota" data-es="⚠️ Después de realizar la consignación, completa el formulario de abajo con el comprobante para que podamos emitir tu certificado de donación." data-en="⚠️ After making the deposit, complete the form below with your receipt so we can issue your donation certificate.">⚠️ Después de realizar la consignación, completa el formulario de abajo con el comprobante para que podamos emitir tu certificado de donación.</div>
+        </div>
+
+        <!-- DATOS NEQUI -->
+        <div class="datos-transferencia" id="datosNequi">
+          <div class="dt-titulo">Nequi / Daviplata</div>
+          <div class="dt-row"><span class="dt-label" data-es="Número" data-en="Number">Número</span><span class="dt-val">300 856 1465 <span class="dt-copy" onclick="copiar('nequi','3008561465')">copiar</span></span></div>
+          <div class="dt-row"><span class="dt-label" data-es="Titular" data-en="Holder">Titular</span><span class="dt-val">Corporación Social Kwel</span></div>
+          <div class="dt-nota" data-es="⚠️ Registra en el mensaje: tu nombre completo y la palabra 'Donación'. Luego completa el formulario para recibir tu certificado." data-en="⚠️ Include in the message: your full name and the word 'Donation'. Then complete the form to receive your certificate.">⚠️ Registra en el mensaje: tu nombre completo y la palabra 'Donación'. Luego completa el formulario para recibir tu certificado.</div>
+        </div>
+      </div>
+
+      <!-- PASO 4: DATOS PARA CERTIFICADO -->
+      <div class="paso-group">
+        <div class="paso-num" data-es="Paso 4 — Datos para tu certificado de donación" data-en="Step 4 — Data for your donation certificate">Paso 4 — Datos para tu certificado de donación</div>
+        <div class="form-cert">
+          <div class="field-group">
+            <div class="field">
+              <label data-es="Tipo de donante" data-en="Donor type">Tipo de donante</label>
+              <select id="tipoDonante" onchange="toggleTipoDoc()">
+                <option value="natural" data-es="Persona natural" data-en="Individual">Persona natural</option>
+                <option value="juridica" data-es="Persona jurídica / Empresa" data-en="Legal entity / Company">Persona jurídica / Empresa</option>
+              </select>
+            </div>
+            <div class="field">
+              <label id="labelDoc" data-es="Cédula de ciudadanía" data-en="ID number">Cédula de ciudadanía</label>
+              <input type="text" id="numDoc" placeholder="Número de documento">
+            </div>
+          </div>
+          <div class="field-group">
+            <div class="field">
+              <label id="labelNombre" data-es="Nombre completo" data-en="Full name">Nombre completo</label>
+              <input type="text" id="nombre" placeholder="Como aparece en el documento">
+            </div>
+            <div class="field">
+              <label data-es="Correo electrónico" data-en="Email">Correo electrónico</label>
+              <input type="email" id="correo" placeholder="Para enviar el certificado">
+            </div>
+          </div>
+          <div class="field-group">
+            <div class="field">
+              <label data-es="Teléfono de contacto" data-en="Contact phone">Teléfono de contacto</label>
+              <input type="tel" id="telefono" placeholder="Celular o fijo">
+            </div>
+            <div class="field">
+              <label data-es="Ciudad / Municipio" data-en="City / Municipality">Ciudad / Municipio</label>
+              <input type="text" id="ciudad" placeholder="Tu ciudad de residencia">
+            </div>
+          </div>
+          <div class="field full">
+            <label data-es="Observaciones (opcional)" data-en="Observations (optional)">Observaciones (opcional)</label>
+            <input type="text" id="observaciones" placeholder="Ej: número de comprobante de pago, mensaje para Kwel...">
+          </div>
+        </div>
+        <button class="btn-dona-final" id="btnDonar" onclick="procesarDonacion()" data-es="Completar donación →" data-en="Complete donation →">Completar donación →</button>
+        <p class="btn-nota" data-es="Recibirás confirmación a tu correo en máx. 24 horas. El certificado de donación llega en máx. 5 días hábiles." data-en="You'll receive confirmation to your email within 24 hours. The donation certificate arrives within 5 business days.">Recibirás confirmación a tu correo en máx. 24 horas. El certificado de donación llega en máx. 5 días hábiles.</p>
+      </div>
+    </div>
+
+    <!-- COLUMNA DERECHA — RESUMEN STICKY -->
+    <div>
+      <div class="resumen-sticky" id="resumenBox">
+        <div class="res-titulo" data-es="Resumen de tu donación" data-en="Your donation summary">Resumen de tu donación</div>
+        <div class="res-row"><span class="res-label" data-es="Proyecto" data-en="Project">Proyecto</span><span class="res-val" id="resProy">Drones Agrícolas</span></div>
+        <div class="res-row"><span class="res-label" data-es="Medio de pago" data-en="Payment method">Medio de pago</span><span class="res-val" id="resMedio">PSE</span></div>
+        <div class="res-monto" id="resMonto">$100.000</div>
+        <div class="res-monto-label">COP</div>
+        <div class="res-beneficio">
+          <div class="res-ben-titulo" data-es="Tu beneficio tributario" data-en="Your tax benefit">Tu beneficio tributario</div>
+          <div class="res-ben-monto" id="resBeneficio">$25.000</div>
+          <div class="res-ben-desc" data-es="Descuento en impuesto de renta · Art. 257 E.T. (25%)" data-en="Income tax discount · Art. 257 E.T. (25%)">Descuento en impuesto de renta · Art. 257 E.T. (25%)</div>
+        </div>
+        <div class="res-nit">
+          Corporación Social Kwel<br>
+          NIT 900.554.556-5<br>
+          Régimen Tributario Especial · DIAN<br>
+          Cll 52 Sur N° 43A 20 Of. 1110<br>
+          Ed. Scala · Sabaneta, Antioquia
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<!-- FAQ -->
+<section class="faq-section">
+  <div style="max-width:860px;margin:0 auto;">
+    <div style="font-family:'DM Mono',monospace;font-size:10px;letter-spacing:0.3em;text-transform:uppercase;color:var(--verde-claro);margin-bottom:12px;" data-es="Preguntas frecuentes" data-en="Frequently asked questions">Preguntas frecuentes</div>
+    <h2 style="font-family:'Playfair Display',serif;font-size:clamp(24px,3vw,36px);font-weight:700;color:var(--verde);" data-es="Todo lo que necesitas saber" data-en="Everything you need to know">Todo lo que necesitas saber</h2>
+    <div class="faq-grid">
+      <div class="faq-item">
+        <div class="faq-q" onclick="toggleFaq(this)"><span data-es="¿Qué es el Régimen Tributario Especial (RTE)?" data-en="What is the Special Tax Regime (RTE)?">¿Qué es el Régimen Tributario Especial (RTE)?</span><i class="faq-ico">+</i></div>
+        <div class="faq-a"><div class="faq-a-inner" data-es="El RTE es una categoría tributaria especial de la DIAN para entidades sin ánimo de lucro como Kwel. Estas entidades están exentas del impuesto de renta sobre sus excedentes, siempre que los reinviertan en su objeto social. A cambio, deben cumplir con obligaciones de transparencia y publicación de información." data-en="The RTE is a special tax category from DIAN for nonprofit entities like Kwel. These entities are exempt from income tax on their surpluses, as long as they reinvest them in their social purpose. In exchange, they must comply with transparency and information disclosure obligations.">El RTE es una categoría tributaria especial de la DIAN para entidades sin ánimo de lucro como Kwel. Estas entidades están exentas del impuesto de renta sobre sus excedentes, siempre que los reinviertan en su objeto social. A cambio, deben cumplir con obligaciones de transparencia y publicación de información.</div></div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q" onclick="toggleFaq(this)"><span data-es="¿Cómo funciona el beneficio del Art. 257 E.T.?" data-en="How does the Art. 257 E.T. benefit work?">¿Cómo funciona el beneficio del Art. 257 E.T.?</span><i class="faq-ico">+</i></div>
+        <div class="faq-a"><div class="faq-a-inner" data-es="El artículo 257 del Estatuto Tributario permite a personas jurídicas (empresas) descontar directamente de su impuesto de renta el 25% del valor donado a entidades del RTE. Es un descuento real, no una deducción — significa que si debes $10.000.000 de impuesto y donas $1.000.000, pagas $750.000 menos (el 25% × $1.000.000). Para personas naturales aplica como deducción de la base gravable." data-en="Article 257 of the Tax Statute allows legal entities (companies) to directly discount 25% of the donated value from their income tax when donating to RTE entities. It's a real discount, not a deduction — meaning if you owe $10,000,000 in taxes and donate $1,000,000, you pay $750,000 less (25% × $1,000,000). For individuals, it applies as a deduction from the taxable base.">El artículo 257 del Estatuto Tributario permite a personas jurídicas (empresas) descontar directamente de su impuesto de renta el 25% del valor donado a entidades del RTE. Es un descuento real, no una deducción — si debes $10.000.000 de impuesto y donas $1.000.000, pagas $750.000 menos. Para personas naturales aplica como deducción de la base gravable.</div></div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q" onclick="toggleFaq(this)"><span data-es="¿Qué documentos necesito para el certificado?" data-en="What documents do I need for the certificate?">¿Qué documentos necesito para el certificado?</span><i class="faq-ico">+</i></div>
+        <div class="faq-a"><div class="faq-a-inner" data-es="Solo necesitas completar el formulario de esta página con tu nombre o razón social, número de documento (CC o NIT), correo y valor donado. Kwel emitirá el certificado oficial con todos los datos requeridos por la DIAN: valor, fecha, NIT del donante y del receptor, y descripción del proyecto." data-en="You just need to complete the form on this page with your name or company name, document number (CC or NIT), email and donated amount. Kwel will issue the official certificate with all DIAN-required data: amount, date, donor and recipient NIT, and project description.">Solo necesitas completar el formulario con tu nombre o razón social, número de documento, correo y valor donado. Kwel emitirá el certificado oficial con todos los datos requeridos por la DIAN.</div></div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q" onclick="toggleFaq(this)"><span data-es="¿En cuánto tiempo recibo el certificado?" data-en="How long until I receive the certificate?">¿En cuánto tiempo recibo el certificado?</span><i class="faq-ico">+</i></div>
+        <div class="faq-a"><div class="faq-a-inner" data-es="Emitimos el certificado en máximo 5 días hábiles después de confirmar la donación. Lo enviamos al correo electrónico registrado. Si necesitas el certificado con urgencia para cierre fiscal, escríbenos a kwelsocial@gmail.com indicando la fecha límite." data-en="We issue the certificate within a maximum of 5 business days after confirming the donation. We send it to the registered email. If you need the certificate urgently for fiscal year-end, write to kwelsocial@gmail.com indicating your deadline.">Emitimos el certificado en máximo 5 días hábiles después de confirmar la donación. Lo enviamos al correo electrónico registrado. Si necesitas el certificado con urgencia para cierre fiscal, escríbenos a kwelsocial@gmail.com.</div></div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q" onclick="toggleFaq(this)"><span data-es="¿Puedo designar a qué proyecto va mi donación?" data-en="Can I designate which project receives my donation?">¿Puedo designar a qué proyecto va mi donación?</span><i class="faq-ico">+</i></div>
+        <div class="faq-a"><div class="faq-a-inner" data-es="Sí. En el formulario puedes elegir entre los proyectos activos de Kwel: Drones Agrícolas, Proyectos Agroecológicos, Arte y Cultura, o Albergue Animal. Tu certificado indicará el proyecto al que fue destinada la donación." data-en="Yes. In the form you can choose from Kwel's active projects: Agricultural Drones, Agroecological Projects, Art and Culture, or Animal Shelter. Your certificate will indicate the project to which the donation was directed.">Sí. Puedes elegir entre los proyectos activos: Drones Agrícolas, Proyectos Agroecológicos, Arte y Cultura, o Albergue Animal. Tu certificado indicará el proyecto destinatario.</div></div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q" onclick="toggleFaq(this)"><span data-es="¿Hay monto mínimo para donar?" data-en="Is there a minimum donation amount?">¿Hay monto mínimo para donar?</span><i class="faq-ico">+</i></div>
+        <div class="faq-a"><div class="faq-a-inner" data-es="No hay monto mínimo fijo. Sin embargo, para que el trámite del certificado sea administrativamente eficiente, recomendamos donaciones desde $50.000 COP. Donaciones corporativas o de alto valor son bienvenidas — contáctanos directamente para coordinar un proceso personalizado." data-en="There is no fixed minimum amount. However, for the certificate process to be administratively efficient, we recommend donations from $50,000 COP. Corporate or high-value donations are welcome — contact us directly to coordinate a personalized process.">No hay monto mínimo fijo. Recomendamos donaciones desde $50.000 COP para que el trámite sea eficiente. Para donaciones corporativas de alto valor, contáctanos directamente.</div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER STRIP -->
+<div class="footer-strip">
+  <div class="fs-left">
+    <strong style="color:rgba(255,255,255,0.55);">Corporación Social Kwel</strong><br>
+    NIT 900.554.556-5 · Régimen Tributario Especial · DIAN<br>
+    Cll 52 Sur N° 43A 20 Of. 1110 · Ed. Scala · Sabaneta, Antioquia<br>
+    kwelsocial@gmail.com · 300 856 1465
+  </div>
+  <div class="fs-links">
+    <a href="index.html" data-es="Inicio" data-en="Home">Inicio</a>
+    <a href="transparencia.html" data-es="Transparencia" data-en="Transparency">Transparencia</a>
+    <a href="proyecto-drones.html" data-es="Proyecto Drones" data-en="Drone Project">Proyecto Drones</a>
+    <a href="contacto.html" data-es="Contacto" data-en="Contact">Contacto</a>
+    <a href="politica-privacidad.html" data-es="Privacidad" data-en="Privacy">Privacidad</a>
+  </div>
+</div>
+
+<div class="toast" id="toast"></div>
+
+<script>
+// Estado
+const state = {
+  proyecto: 'Drones Agrícolas',
+  monto: 100000,
+  medio: 'PSE'
+};
+
+// Lang
+function setLang(lang) {
+  document.querySelectorAll('.lang-btn').forEach(b => b.classList.toggle('active', b.textContent === lang.toUpperCase()));
+  document.querySelectorAll('[data-' + lang + ']').forEach(el => {
+    const v = el.getAttribute('data-' + lang);
+    if (v) el.innerHTML = v;
+  });
+  document.documentElement.lang = lang;
+}
+
+// Nav mobile
+function toggleNav() {
+  const l = document.getElementById('navLinks');
+  const o = document.getElementById('navOverlay');
+  const h = document.getElementById('hamburger');
+  l.classList.toggle('open'); o.classList.toggle('open');
+  const open = l.classList.contains('open');
+  h.children[0].style.transform = open ? 'rotate(45deg) translate(4px,4px)' : '';
+  h.children[1].style.opacity = open ? '0' : '1';
+  h.children[2].style.transform = open ? 'rotate(-45deg) translate(4px,-4px)' : '';
+}
+
+// Proyecto
+const proyNombres = { drones:'Drones Agrícolas', agroecologia:'Proyectos Agroecológicos', arte:'Arte y Cultura', albergue:'Albergue Animal' };
+function selProyecto(el, id) {
+  document.querySelectorAll('.proy-card').forEach(c => c.classList.remove('sel'));
+  el.classList.add('sel');
+  state.proyecto = proyNombres[id];
+  document.getElementById('resProy').textContent = state.proyecto;
+}
+
+// Monto
+function selMonto(el, val) {
+  document.querySelectorAll('.monto-btn').forEach(b => b.classList.remove('sel'));
+  el.classList.add('sel');
+  const inp = document.getElementById('montoLibre');
+  if (val === 0) { inp.value = ''; inp.focus(); }
+  else { inp.value = val; state.monto = val; }
+  actualizarResumen();
+}
+
+function actualizarResumen() {
+  const v = parseInt(document.getElementById('montoLibre').value) || state.monto;
+  state.monto = v;
+  const fmt = v.toLocaleString('es-CO', {style:'currency', currency:'COP', minimumFractionDigits:0, maximumFractionDigits:0});
+  document.getElementById('resMonto').textContent = fmt;
+  const ben = Math.round(v * 0.25);
+  document.getElementById('resBeneficio').textContent = ben.toLocaleString('es-CO', {style:'currency', currency:'COP', minimumFractionDigits:0, maximumFractionDigits:0});
+  document.getElementById('beneficioHint').textContent = '💡 Con ' + fmt + ' tu beneficio tributario es de ' + ben.toLocaleString('es-CO', {style:'currency', currency:'COP', minimumFractionDigits:0, maximumFractionDigits:0}) + ' — Art. 257 E.T.';
+}
+
+// Medio
+const medioNombres = { pse:'PSE', transferencia:'Transferencia', nequi:'Nequi / Daviplata' };
+function selMedio(el, id) {
+  document.querySelectorAll('.medio-opt').forEach(m => m.classList.remove('sel'));
+  el.classList.add('sel');
+  state.medio = medioNombres[id];
+  document.getElementById('resMedio').textContent = state.medio;
+  document.getElementById('datosTransferencia').classList.toggle('visible', id === 'transferencia');
+  document.getElementById('datosNequi').classList.toggle('visible', id === 'nequi');
+}
+
+// Tipo documento
+function toggleTipoDoc() {
+  const tipo = document.getElementById('tipoDonante').value;
+  document.getElementById('labelDoc').textContent = tipo === 'juridica' ? 'NIT de la empresa' : 'Cédula de ciudadanía';
+  document.getElementById('labelNombre').textContent = tipo === 'juridica' ? 'Razón social' : 'Nombre completo';
+}
+
+// Copiar datos bancarios
+function copiar(campo, valor) {
+  navigator.clipboard.writeText(valor).then(() => mostrarToast('Copiado: ' + valor));
+}
+
+// Toast
+function mostrarToast(msg) {
+  const t = document.getElementById('toast');
+  t.textContent = msg; t.classList.add('show');
+  setTimeout(() => t.classList.remove('show'), 2800);
+}
+
+// Procesar donación
+function procesarDonacion() {
+  const nombre = document.getElementById('nombre').value.trim();
+  const correo = document.getElementById('correo').value.trim();
+  const doc = document.getElementById('numDoc').value.trim();
+  if (!nombre || !correo || !doc) {
+    mostrarToast('⚠️ Completa nombre, documento y correo');
+    return;
+  }
+  if (!correo.includes('@')) { mostrarToast('⚠️ Correo inválido'); return; }
+  // Aquí iría la integración real con PSE (Wompi/PayU/ePayco)
+  // Por ahora redirige al WhatsApp con los datos
+  const msg = encodeURIComponent(
+    '¡Hola Kwel! Quiero realizar una donación:\n' +
+    '• Proyecto: ' + state.proyecto + '\n' +
+    '• Monto: $' + state.monto.toLocaleString('es-CO') + ' COP\n' +
+    '• Medio: ' + state.medio + '\n' +
+    '• Nombre: ' + nombre + '\n' +
+    '• Doc: ' + doc + '\n' +
+    '• Correo: ' + correo
+  );
+  window.open('https://wa.me/573008561465?text=' + msg, '_blank');
+}
+
+// FAQ
+function toggleFaq(el) {
+  const item = el.parentElement;
+  const wasOpen = item.classList.contains('open');
+  document.querySelectorAll('.faq-item').forEach(i => i.classList.remove('open'));
+  if (!wasOpen) item.classList.add('open');
+}
+
+// Sticky nav shadow
+window.addEventListener('scroll', () => {
+  document.querySelector('nav').style.boxShadow = window.scrollY > 10 ? '0 2px 20px rgba(0,0,0,0.08)' : 'none';
+});
+
+// Init desde URL param
+const params = new URLSearchParams(window.location.search);
+if (params.get('monto')) {
+  const m = parseInt(params.get('monto'));
+  document.getElementById('montoLibre').value = m;
+  state.monto = m;
+  actualizarResumen();
+}
+</script>
+</body>
+</html>

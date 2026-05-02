@@ -1,0 +1,808 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Proyecto Drones Agrícolas — Corporación Social Kwel</title>
+<meta name="description" content="Kwel implementa dos drones DJI Agras T100 para servicios de agricultura de precisión en Colombia. Proyecto de $500M con 6 empleos directos. NIT 900.554.556-5.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400&family=DM+Sans:wght@300;400;500&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root{
+  --verde:#1a4a2e;--verde-medio:#2d6e47;--verde-claro:#4a9e6a;
+  --dorado:#c8a86b;--tierra:#8b5e3c;--crema:#f5f0e8;
+  --blanco:#fafaf7;--gris:#6b7280;--gris-claro:#e8e4dc;--negro:#0f1a0f;
+}
+*{margin:0;padding:0;box-sizing:border-box;}
+html{scroll-behavior:smooth;}
+body{font-family:'DM Sans',sans-serif;background:var(--blanco);color:var(--negro);overflow-x:hidden;}
+a{text-decoration:none;color:inherit;}
+img{display:block;width:100%;object-fit:cover;}
+
+/* ── TOPBAR ── */
+.topbar{background:var(--verde);padding:8px 48px;display:flex;justify-content:space-between;align-items:center;font-family:'DM Mono',monospace;font-size:11px;color:rgba(255,255,255,0.55);}
+.topbar a{color:rgba(255,255,255,0.55);transition:color .2s;}
+.topbar a:hover{color:var(--dorado);}
+.lang-toggle{display:flex;gap:4px;}
+.lang-btn{padding:3px 10px;border:1px solid rgba(255,255,255,0.2);font-family:'DM Mono',monospace;font-size:10px;cursor:pointer;color:rgba(255,255,255,0.55);background:transparent;letter-spacing:0.1em;transition:all .2s;}
+.lang-btn.active{background:var(--dorado);color:var(--verde);border-color:var(--dorado);}
+.lang-btn:hover:not(.active){color:var(--dorado);border-color:var(--dorado);}
+
+/* ── NAV ── */
+nav{position:sticky;top:0;z-index:100;background:rgba(250,250,247,0.96);backdrop-filter:blur(12px);border-bottom:1px solid var(--gris-claro);padding:0 48px;display:flex;justify-content:space-between;align-items:center;height:68px;}
+.nav-logo{display:flex;align-items:center;gap:12px;}
+.nav-logo img{width:40px;height:40px;object-fit:contain;}
+.nav-logo-text{font-family:'Playfair Display',serif;font-size:17px;font-weight:700;color:var(--verde);}
+.nav-links{display:flex;gap:32px;align-items:center;}
+.nav-links a{font-size:13px;font-weight:500;color:var(--gris);letter-spacing:0.03em;transition:color .2s;position:relative;}
+.nav-links a::after{content:'';position:absolute;bottom:-4px;left:0;right:0;height:1px;background:var(--verde-claro);transform:scaleX(0);transform-origin:left;transition:transform .2s;}
+.nav-links a:hover{color:var(--verde);}
+.nav-links a:hover::after,.nav-links a.activo::after{transform:scaleX(1);}
+.nav-links a.activo{color:var(--verde);}
+.nav-cta{background:var(--dorado);color:var(--verde);padding:9px 22px;font-size:12px;font-weight:500;font-family:'DM Mono',monospace;letter-spacing:0.1em;text-transform:uppercase;transition:all .2s;border:none;cursor:pointer;display:inline-block;}
+.nav-cta:hover{background:var(--verde);color:var(--dorado);}
+.hamburger{display:none;flex-direction:column;gap:5px;cursor:pointer;background:none;border:none;padding:4px;}
+.hamburger span{display:block;width:24px;height:1.5px;background:var(--verde);transition:all .3s;}
+.nav-overlay{display:none;position:fixed;inset:0;z-index:190;}
+.nav-overlay.open{display:block;}
+
+/* ── HERO CINEMÁTICO ── */
+.hero{
+  min-height:96vh;position:relative;overflow:hidden;
+  display:flex;align-items:flex-end;
+}
+.hero-bg{
+  position:absolute;inset:0;
+  background:linear-gradient(160deg,#0a2015 0%,#1a4a2e 40%,#0f2a1a 100%);
+}
+.hero-img{
+  position:absolute;inset:0;width:100%;height:100%;object-fit:cover;
+  opacity:0.32;mix-blend-mode:luminosity;
+}
+/* grilla tecno de fondo */
+.hero-grid{
+  position:absolute;inset:0;
+  background-image:
+    linear-gradient(rgba(74,158,106,0.07) 1px,transparent 1px),
+    linear-gradient(90deg,rgba(74,158,106,0.07) 1px,transparent 1px);
+  background-size:64px 64px;
+}
+.hero-gradient{
+  position:absolute;inset:0;
+  background:linear-gradient(to top,rgba(10,32,21,0.98) 0%,rgba(10,32,21,0.4) 55%,transparent 100%);
+}
+.hero-content{
+  position:relative;z-index:2;
+  padding:0 48px 80px;max-width:900px;
+}
+.hero-status{
+  display:inline-flex;align-items:center;gap:8px;
+  background:rgba(200,168,107,0.12);border:1px solid rgba(200,168,107,0.3);
+  padding:6px 16px;margin-bottom:28px;
+  font-family:'DM Mono',monospace;font-size:10px;letter-spacing:0.2em;
+  text-transform:uppercase;color:var(--dorado);
+}
+.status-dot{width:6px;height:6px;border-radius:50%;background:var(--dorado);animation:pulse 2s infinite;}
+@keyframes pulse{0%,100%{opacity:1;}50%{opacity:0.4;}}
+.hero-titulo{
+  font-family:'Playfair Display',serif;
+  font-size:clamp(40px,6vw,80px);
+  font-weight:900;line-height:1.02;
+  color:var(--blanco);margin-bottom:24px;
+}
+.hero-titulo em{font-style:italic;color:var(--dorado);}
+.hero-desc{
+  font-size:16px;line-height:1.75;
+  color:rgba(255,255,255,0.62);max-width:580px;margin-bottom:40px;
+}
+.hero-ctas{display:flex;gap:14px;flex-wrap:wrap;}
+.btn-prim{background:var(--dorado);color:var(--verde);padding:14px 32px;font-size:12px;font-weight:500;font-family:'DM Mono',monospace;letter-spacing:0.12em;text-transform:uppercase;transition:all .25s;border:2px solid var(--dorado);display:inline-block;cursor:pointer;}
+.btn-prim:hover{background:transparent;color:var(--dorado);}
+.btn-sec{background:transparent;color:rgba(255,255,255,0.8);padding:14px 32px;font-size:12px;font-weight:500;font-family:'DM Mono',monospace;letter-spacing:0.12em;text-transform:uppercase;transition:all .25s;border:1px solid rgba(255,255,255,0.25);display:inline-block;cursor:pointer;}
+.btn-sec:hover{border-color:var(--dorado);color:var(--dorado);}
+
+/* métricas flotantes hero */
+.hero-metricas{
+  position:absolute;right:48px;top:50%;transform:translateY(-50%);
+  z-index:2;display:flex;flex-direction:column;gap:2px;
+}
+.hm-item{
+  background:rgba(10,32,21,0.75);backdrop-filter:blur(8px);
+  border:1px solid rgba(200,168,107,0.2);
+  padding:16px 20px;min-width:160px;
+  border-left:2px solid var(--dorado);
+}
+.hm-num{font-family:'Playfair Display',serif;font-size:26px;font-weight:700;color:var(--dorado);line-height:1;}
+.hm-label{font-size:10px;color:rgba(255,255,255,0.45);margin-top:4px;letter-spacing:0.06em;font-family:'DM Mono',monospace;}
+
+/* scroll hint */
+.scroll-hint{
+  position:absolute;bottom:32px;right:48px;z-index:2;
+  font-family:'DM Mono',monospace;font-size:10px;letter-spacing:0.2em;
+  color:rgba(255,255,255,0.3);text-transform:uppercase;
+  display:flex;align-items:center;gap:8px;
+}
+.scroll-line{width:40px;height:1px;background:rgba(255,255,255,0.2);}
+
+/* ── ESTADO DEL PROYECTO ── */
+.estado-strip{
+  background:var(--negro);
+  display:grid;grid-template-columns:repeat(5,1fr);
+}
+.est-item{
+  padding:28px 20px;text-align:center;
+  border-right:1px solid rgba(255,255,255,0.06);
+  position:relative;
+}
+.est-item:last-child{border-right:none;}
+.est-item.activo::after{
+  content:'';position:absolute;bottom:0;left:0;right:0;
+  height:2px;background:var(--dorado);
+}
+.est-fase{font-family:'DM Mono',monospace;font-size:9px;letter-spacing:0.15em;text-transform:uppercase;color:rgba(255,255,255,0.3);margin-bottom:6px;}
+.est-nombre{font-size:12px;font-weight:500;color:rgba(255,255,255,0.5);}
+.est-item.activo .est-nombre{color:var(--dorado);}
+.est-item.done .est-nombre{color:var(--verde-claro);}
+.est-item.done::before{content:'✓ ';color:var(--verde-claro);font-size:10px;}
+
+/* ── SECCIONES ── */
+.seccion{padding:96px 48px;}
+.sec-inner{max-width:1080px;margin:0 auto;}
+.sec-eyebrow{font-family:'DM Mono',monospace;font-size:10px;letter-spacing:0.3em;text-transform:uppercase;color:var(--verde-claro);margin-bottom:14px;}
+.sec-titulo{font-family:'Playfair Display',serif;font-size:clamp(28px,3.5vw,46px);font-weight:700;color:var(--verde);line-height:1.12;margin-bottom:18px;}
+.sec-titulo em{font-style:italic;color:var(--dorado);}
+.sec-desc{font-size:15px;line-height:1.75;color:var(--gris);max-width:600px;}
+
+/* ── PROBLEMA / SOLUCIÓN ── */
+.prob-sol{display:grid;grid-template-columns:1fr 1fr;gap:2px;margin-top:48px;}
+.ps-panel{padding:40px 36px;position:relative;overflow:hidden;}
+.ps-panel.problema{background:var(--crema);}
+.ps-panel.solucion{background:var(--verde);}
+.ps-tag{font-family:'DM Mono',monospace;font-size:9px;letter-spacing:0.2em;text-transform:uppercase;margin-bottom:20px;}
+.ps-panel.problema .ps-tag{color:var(--tierra);}
+.ps-panel.solucion .ps-tag{color:var(--dorado);}
+.ps-titulo{font-family:'Playfair Display',serif;font-size:22px;font-weight:700;margin-bottom:20px;line-height:1.2;}
+.ps-panel.problema .ps-titulo{color:var(--negro);}
+.ps-panel.solucion .ps-titulo{color:var(--blanco);}
+.ps-lista{list-style:none;display:flex;flex-direction:column;gap:12px;}
+.ps-lista li{display:flex;gap:12px;align-items:flex-start;font-size:13.5px;line-height:1.6;}
+.ps-panel.problema .ps-lista li{color:#4a3a2a;}
+.ps-panel.solucion .ps-lista li{color:rgba(255,255,255,0.7);}
+.ps-ico{font-size:16px;flex-shrink:0;margin-top:1px;}
+
+/* ── FICHA TÉCNICA ── */
+.ficha-section{background:var(--negro);padding:96px 48px;}
+.ficha-grid{display:grid;grid-template-columns:1fr 1fr;gap:64px;align-items:start;max-width:1080px;margin:0 auto;}
+.ficha-img-wrap{position:relative;}
+.ficha-img{height:420px;filter:brightness(0.85) contrast(1.1);}
+.ficha-tag-img{
+  position:absolute;top:20px;left:20px;
+  background:var(--dorado);color:var(--verde);
+  font-family:'DM Mono',monospace;font-size:10px;
+  letter-spacing:0.12em;text-transform:uppercase;padding:6px 14px;
+}
+.ficha-specs-grid{display:grid;grid-template-columns:1fr 1fr;gap:1px;background:rgba(255,255,255,0.05);margin-top:2px;}
+.spec-box{
+  background:rgba(255,255,255,0.02);padding:16px 18px;
+  border-left:2px solid transparent;transition:border-color .2s;
+}
+.spec-box:hover{border-left-color:var(--dorado);}
+.spec-val{font-family:'Playfair Display',serif;font-size:20px;font-weight:700;color:var(--dorado);line-height:1;}
+.spec-lab{font-size:11px;color:rgba(255,255,255,0.35);margin-top:4px;font-family:'DM Mono',monospace;letter-spacing:0.06em;}
+.ficha-derecha .sec-eyebrow{color:var(--verde-claro);}
+.ficha-derecha .sec-titulo{color:var(--blanco);}
+.ficha-tabla{margin-top:28px;border:1px solid rgba(255,255,255,0.06);}
+.ft-row{display:flex;justify-content:space-between;padding:11px 16px;border-bottom:1px solid rgba(255,255,255,0.05);font-size:13px;}
+.ft-row:last-child{border-bottom:none;}
+.ft-key{color:rgba(255,255,255,0.4);}
+.ft-val{color:rgba(255,255,255,0.85);font-weight:500;font-family:'DM Mono',monospace;font-size:12px;text-align:right;}
+.ft-row.hl{background:rgba(200,168,107,0.06);}
+.ft-row.hl .ft-val{color:var(--dorado);}
+
+/* ── CULTIVOS ── */
+.cultivos-section{padding:96px 48px;background:var(--crema);}
+.cultivos-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:2px;margin-top:48px;}
+.cult-card{
+  background:var(--blanco);padding:28px 24px;
+  border-bottom:2px solid transparent;transition:all .25s;cursor:default;
+}
+.cult-card:hover{border-bottom-color:var(--verde-claro);background:var(--verde);color:var(--blanco);}
+.cult-ico{font-size:28px;margin-bottom:14px;}
+.cult-nombre{font-size:14px;font-weight:500;color:var(--negro);margin-bottom:6px;transition:color .25s;}
+.cult-card:hover .cult-nombre{color:var(--blanco);}
+.cult-region{font-size:11.5px;color:var(--gris);line-height:1.5;transition:color .25s;}
+.cult-card:hover .cult-region{color:rgba(255,255,255,0.6);}
+.cult-tarifa{
+  display:inline-block;margin-top:10px;
+  font-family:'DM Mono',monospace;font-size:10px;
+  letter-spacing:0.08em;color:var(--verde-claro);
+  transition:color .25s;
+}
+.cult-card:hover .cult-tarifa{color:var(--dorado);}
+
+/* ── MODELO OPERATIVO ── */
+.operativo-section{padding:96px 48px;}
+.op-grid{display:grid;grid-template-columns:1fr 1fr;gap:64px;align-items:start;max-width:1080px;margin:40px auto 0;}
+.timeline-op{display:flex;flex-direction:column;gap:0;}
+.tl-item{display:grid;grid-template-columns:80px 1fr;gap:20px;position:relative;}
+.tl-item::before{content:'';position:absolute;left:79px;top:32px;bottom:0;width:1px;background:var(--gris-claro);}
+.tl-item:last-child::before{display:none;}
+.tl-mes-wrap{text-align:right;padding:20px 0;}
+.tl-mes-label{font-family:'DM Mono',monospace;font-size:9px;color:var(--verde-claro);text-transform:uppercase;letter-spacing:0.1em;}
+.tl-mes-num{font-family:'Playfair Display',serif;font-size:26px;font-weight:900;color:var(--verde);line-height:1;}
+.tl-body{padding:20px 0 20px 24px;position:relative;}
+.tl-body::before{content:'';position:absolute;left:-5px;top:28px;width:10px;height:10px;background:var(--dorado);border-radius:50%;}
+.tl-titulo{font-weight:500;font-size:14px;color:var(--verde);margin-bottom:5px;}
+.tl-desc{font-size:13px;color:var(--gris);line-height:1.6;}
+.op-derecha{display:flex;flex-direction:column;gap:14px;}
+.op-card{
+  border:1px solid var(--gris-claro);padding:20px 22px;
+  position:relative;transition:border-color .2s;
+}
+.op-card:hover{border-color:var(--verde-claro);}
+.op-card::before{content:'';position:absolute;left:0;top:0;bottom:0;width:3px;background:var(--dorado);}
+.op-card-titulo{font-size:13px;font-weight:500;color:var(--verde);margin-bottom:6px;}
+.op-card-desc{font-size:12.5px;color:var(--gris);line-height:1.6;}
+.op-card .op-num{font-family:'Playfair Display',serif;font-size:22px;font-weight:700;color:var(--dorado);float:right;line-height:1;margin-left:12px;}
+
+/* ── RETORNO OPERATIVO ── */
+.retorno-section{background:var(--verde);padding:96px 48px;}
+.retorno-grid{display:grid;grid-template-columns:1fr 1fr;gap:64px;align-items:start;max-width:1080px;margin:40px auto 0;}
+.ret-table{border:1px solid rgba(255,255,255,0.08);}
+.ret-thead{background:rgba(200,168,107,0.15);padding:10px 16px;font-family:'DM Mono',monospace;font-size:10px;letter-spacing:0.12em;text-transform:uppercase;color:var(--dorado);display:grid;grid-template-columns:2fr 1fr 1fr;}
+.ret-row{display:grid;grid-template-columns:2fr 1fr 1fr;padding:11px 16px;border-bottom:1px solid rgba(255,255,255,0.05);font-size:13px;}
+.ret-row:last-child{border-bottom:none;}
+.ret-row.hl{background:rgba(200,168,107,0.07);}
+.ret-row.total{background:rgba(200,168,107,0.15);font-weight:600;}
+.ret-label{color:rgba(255,255,255,0.6);}
+.ret-val{font-family:'DM Mono',monospace;font-size:12px;color:rgba(255,255,255,0.85);text-align:right;}
+.ret-val.pos{color:#6fcf8a;}
+.ret-val.neg{color:rgba(255,120,120,0.8);}
+.ret-val.tot{color:var(--dorado);font-size:13px;}
+.ret-row.total .ret-label{color:var(--blanco);}
+.ret-nota{
+  background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.08);
+  padding:20px 22px;margin-top:16px;font-size:13px;color:rgba(255,255,255,0.55);line-height:1.7;
+}
+.ret-nota strong{color:var(--dorado);}
+.ret-escenario{
+  display:flex;flex-direction:column;gap:12px;
+}
+.esc-card{
+  background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.08);
+  padding:20px 22px;border-left:3px solid transparent;transition:border-color .2s;
+}
+.esc-card.base{border-left-color:var(--dorado);}
+.esc-card.cons{border-left-color:var(--verde-claro);}
+.esc-tag{font-family:'DM Mono',monospace;font-size:9px;letter-spacing:0.15em;text-transform:uppercase;margin-bottom:8px;}
+.esc-card.base .esc-tag{color:var(--dorado);}
+.esc-card.cons .esc-tag{color:var(--verde-claro);}
+.esc-monto{font-family:'Playfair Display',serif;font-size:26px;font-weight:700;color:var(--blanco);margin-bottom:4px;line-height:1;}
+.esc-desc{font-size:12px;color:rgba(255,255,255,0.45);line-height:1.5;}
+.retorno-titulo{font-family:'Playfair Display',serif;font-size:clamp(26px,3vw,38px);font-weight:700;color:var(--blanco);margin-bottom:14px;}
+.retorno-eyebrow{font-family:'DM Mono',monospace;font-size:10px;letter-spacing:0.3em;text-transform:uppercase;color:var(--dorado);margin-bottom:14px;}
+.retorno-desc{font-size:14px;color:rgba(255,255,255,0.6);line-height:1.75;margin-bottom:32px;max-width:480px;}
+
+/* ── MARCO LEGAL ── */
+.legal-section{padding:96px 48px;background:var(--crema);}
+.legal-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:2px;margin-top:48px;}
+.legal-card{background:var(--blanco);padding:28px 24px;border-top:2px solid var(--gris-claro);transition:border-color .2s;}
+.legal-card:hover{border-top-color:var(--verde);}
+.legal-ico{font-size:22px;margin-bottom:14px;}
+.legal-titulo{font-size:14px;font-weight:500;color:var(--verde);margin-bottom:8px;}
+.legal-desc{font-size:13px;color:var(--gris);line-height:1.6;}
+.legal-estado{display:inline-block;margin-top:10px;font-family:'DM Mono',monospace;font-size:9px;letter-spacing:0.1em;padding:3px 10px;}
+.estado-pend{background:rgba(200,168,107,0.12);color:var(--tierra);}
+.estado-inc{background:rgba(74,158,106,0.1);color:var(--verde-medio);}
+
+/* ── CTA ALIADOS ── */
+.aliados-cta{
+  background:var(--negro);padding:96px 48px;
+  display:grid;grid-template-columns:1fr 1fr;gap:64px;align-items:center;
+  max-width:none;
+}
+.ac-eyebrow{font-family:'DM Mono',monospace;font-size:10px;letter-spacing:0.3em;text-transform:uppercase;color:var(--dorado);margin-bottom:16px;}
+.ac-titulo{font-family:'Playfair Display',serif;font-size:clamp(28px,3.5vw,44px);font-weight:700;color:var(--blanco);line-height:1.12;margin-bottom:20px;}
+.ac-titulo em{font-style:italic;color:var(--dorado);}
+.ac-desc{font-size:15px;color:rgba(255,255,255,0.55);line-height:1.75;margin-bottom:32px;}
+.ac-ctas{display:flex;gap:14px;flex-wrap:wrap;}
+.ac-derecha{display:flex;flex-direction:column;gap:14px;}
+.ac-item{
+  display:flex;gap:16px;align-items:flex-start;
+  background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.07);
+  padding:18px 20px;transition:border-color .2s;
+}
+.ac-item:hover{border-color:rgba(200,168,107,0.3);}
+.ac-ico{font-size:22px;flex-shrink:0;margin-top:2px;}
+.ac-item-titulo{font-size:13px;font-weight:500;color:var(--blanco);margin-bottom:4px;}
+.ac-item-desc{font-size:12px;color:rgba(255,255,255,0.45);line-height:1.5;}
+
+/* ── FOOTER ── */
+footer{background:var(--negro);padding:48px;border-top:1px solid rgba(255,255,255,0.06);}
+.footer-bottom{display:flex;justify-content:space-between;align-items:center;font-family:'DM Mono',monospace;font-size:10px;color:rgba(255,255,255,0.2);flex-wrap:wrap;gap:12px;}
+.footer-bottom a{color:rgba(255,255,255,0.3);transition:color .2s;}
+.footer-bottom a:hover{color:var(--dorado);}
+.footer-links-bot{display:flex;gap:20px;flex-wrap:wrap;}
+
+/* ── RESPONSIVE ── */
+@media(max-width:1024px){
+  .hero-metricas{display:none;}
+  .ficha-grid,.op-grid,.retorno-grid,.aliados-cta{grid-template-columns:1fr;gap:40px;}
+  .prob-sol{grid-template-columns:1fr;}
+}
+@media(max-width:768px){
+  .topbar{padding:8px 20px;}
+  nav{padding:0 20px;}
+  .nav-links{display:none;}
+  .hamburger{display:flex;}
+  .nav-links.open{display:flex;flex-direction:column;position:fixed;top:68px;left:0;right:0;bottom:0;background:var(--verde);z-index:200;padding:32px 24px;gap:0;}
+  .nav-links.open a{color:rgba(255,255,255,0.8);font-size:18px;padding:14px 0;border-bottom:1px solid rgba(255,255,255,0.1);}
+  .nav-cta{display:none;}
+  .hero-content{padding:0 20px 64px;}
+  .seccion,.cultivos-section,.operativo-section,.legal-section{padding:64px 20px;}
+  .retorno-section{padding:64px 20px;}
+  .ficha-section{padding:64px 20px;}
+  .aliados-cta{padding:64px 20px;}
+  footer{padding:40px 20px;}
+  .estado-strip{grid-template-columns:repeat(3,1fr);}
+  .est-item:nth-child(4),.est-item:nth-child(5){border-top:1px solid rgba(255,255,255,0.06);}
+  .ret-thead,.ret-row{font-size:11px;}
+}
+@media(max-width:480px){
+  .hero-titulo{font-size:34px;}
+  .estado-strip{grid-template-columns:1fr 1fr;}
+  .cultivos-grid{grid-template-columns:1fr 1fr;}
+  .legal-grid{grid-template-columns:1fr;}
+  .ficha-specs-grid{grid-template-columns:repeat(2,1fr);}
+}
+
+/* Animaciones scroll */
+@keyframes fadeUp{from{opacity:0;transform:translateY(24px);}to{opacity:1;transform:translateY(0);}}
+.anim{opacity:0;transform:translateY(24px);transition:opacity .65s ease,transform .65s ease;}
+.anim.visible{opacity:1;transform:translateY(0);}
+</style>
+</head>
+<body>
+
+<!-- TOPBAR -->
+<div class="topbar">
+  <span>📍 Ed. Scala Of. 1110, Sabaneta &nbsp;·&nbsp; <a href="mailto:kwelsocial@gmail.com">kwelsocial@gmail.com</a> &nbsp;·&nbsp; <a href="tel:+573008561465">300 856 1465</a></span>
+  <div class="lang-toggle">
+    <button class="lang-btn active" onclick="setLang('es')">ES</button>
+    <button class="lang-btn" onclick="setLang('en')">EN</button>
+  </div>
+</div>
+
+<!-- NAV -->
+<nav>
+  <a href="index.html" class="nav-logo">
+    <img src="https://kwelsocial.com/wp-content/uploads/2023/11/KWEL-SOCIAL.png" alt="Kwel Social">
+    <span class="nav-logo-text">Kwel Social</span>
+  </a>
+  <div class="nav-links" id="navLinks">
+    <a href="index.html" data-es="Inicio" data-en="Home">Inicio</a>
+    <a href="nosotros.html" data-es="Nosotros" data-en="About">Nosotros</a>
+    <a href="proyecto-drones.html" class="activo" data-es="Proyecto Drones" data-en="Drone Project">Proyecto Drones</a>
+    <a href="proyectos.html" data-es="Proyectos" data-en="Projects">Proyectos</a>
+    <a href="transparencia.html" data-es="Transparencia" data-en="Transparency">Transparencia</a>
+    <a href="contacto.html" data-es="Contacto" data-en="Contact">Contacto</a>
+  </div>
+  <a href="dona.html" class="nav-cta" data-es="Dona ahora" data-en="Donate now">Dona ahora</a>
+  <button class="hamburger" id="hamburger" onclick="toggleNav()"><span></span><span></span><span></span></button>
+</nav>
+<div class="nav-overlay" id="navOverlay" onclick="toggleNav()"></div>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-bg"></div>
+  <!-- PLACEHOLDER: Foto aérea de cultivo extensivo en Colombia -->
+  <img class="hero-img" src="https://images.unsplash.com/photo-1464226184884-fa280b87c399?w=1600&q=80" alt="Agricultura de precisión — imagen de referencia">
+  <div class="hero-grid"></div>
+  <div class="hero-gradient"></div>
+
+  <div class="hero-content">
+    <div class="hero-status">
+      <span class="status-dot"></span>
+      <span data-es="En fase de financiación · Banco Agrario de Colombia" data-en="In financing phase · Banco Agrario de Colombia">En fase de financiación · Banco Agrario de Colombia</span>
+    </div>
+    <h1 class="hero-titulo">
+      <span data-es="Agricultura de <em>precisión</em><br>con drones DJI Agras T100" data-en="<em>Precision</em> agriculture<br>with DJI Agras T100 drones">Agricultura de <em>precisión</em><br>con drones DJI Agras T100</span>
+    </h1>
+    <p class="hero-desc" data-es="Kwel implementa dos unidades del drone agrícola de mayor capacidad disponible en Colombia: el DJI Agras T100, con 100 kg de carga útil y cobertura de hasta 24 hectáreas por hora. Un proyecto de $500 millones que transforma la mecanización agrícola del país." data-en="Kwel deploys two units of the highest-capacity agricultural drone available in Colombia: the DJI Agras T100, with 100 kg payload and coverage of up to 24 hectares per hour. A $500 million project transforming agricultural mechanization in the country.">Kwel implementa dos unidades del drone agrícola de mayor capacidad disponible en Colombia: el DJI Agras T100, con 100 kg de carga útil y cobertura de hasta 24 hectáreas por hora. Un proyecto de $500 millones que transforma la mecanización agrícola del país.</p>
+    <div class="hero-ctas">
+      <a href="#ficha" class="btn-prim" data-es="Ver ficha técnica" data-en="See technical sheet">Ver ficha técnica</a>
+      <a href="propuesta-kwel-drones.html" class="btn-sec" target="_blank" data-es="Descargar propuesta completa →" data-en="Download full proposal →">Descargar propuesta completa →</a>
+    </div>
+  </div>
+
+  <div class="hero-metricas">
+    <div class="hm-item"><div class="hm-num">$500M</div><div class="hm-label" data-es="COP · Inversión total" data-en="COP · Total investment">COP · Inversión total</div></div>
+    <div class="hm-item"><div class="hm-num">2</div><div class="hm-label" data-es="Drones T100" data-en="T100 Drones">Drones T100</div></div>
+    <div class="hm-item"><div class="hm-num">40 Ha/h</div><div class="hm-label" data-es="Capacidad total flota" data-en="Total fleet capacity">Capacidad total flota</div></div>
+    <div class="hm-item"><div class="hm-num">6</div><div class="hm-label" data-es="Empleos directos" data-en="Direct jobs">Empleos directos</div></div>
+  </div>
+
+  <div class="scroll-hint"><div class="scroll-line"></div><span data-es="explorar" data-en="explore">explorar</span></div>
+</section>
+
+<!-- ESTADO DEL PROYECTO -->
+<div class="estado-strip">
+  <div class="est-item done"><div class="est-fase" data-es="Completado" data-en="Completed">Completado</div><div class="est-nombre" data-es="Diseño del proyecto" data-en="Project design">Diseño del proyecto</div></div>
+  <div class="est-item done"><div class="est-fase" data-es="Completado" data-en="Completed">Completado</div><div class="est-nombre" data-es="Propuesta técnica" data-en="Technical proposal">Propuesta técnica</div></div>
+  <div class="est-item activo"><div class="est-fase" data-es="En curso" data-en="In progress">En curso</div><div class="est-nombre" data-es="Financiación · Banco Agrario" data-en="Financing · Banco Agrario">Financiación · Banco Agrario</div></div>
+  <div class="est-item"><div class="est-fase" data-es="Próximo" data-en="Upcoming">Próximo</div><div class="est-nombre" data-es="Adquisición y montaje" data-en="Acquisition and setup">Adquisición y montaje</div></div>
+  <div class="est-item"><div class="est-fase" data-es="Proyectado" data-en="Projected">Proyectado</div><div class="est-nombre" data-es="Operación comercial" data-en="Commercial operation">Operación comercial</div></div>
+</div>
+
+<!-- PROBLEMA / SOLUCIÓN -->
+<section class="seccion">
+  <div class="sec-inner">
+    <div class="sec-eyebrow anim" data-es="El contexto" data-en="The context">El contexto</div>
+    <h2 class="sec-titulo anim" data-es="Un problema real,<br><em>una solución concreta</em>" data-en="A real problem,<br><em>a concrete solution</em>">Un problema real,<br><em>una solución concreta</em></h2>
+    <div class="prob-sol anim">
+      <div class="ps-panel problema">
+        <div class="ps-tag" data-es="⚠ El problema" data-en="⚠ The problem">⚠ El problema</div>
+        <div class="ps-titulo" data-es="La agricultura colombiana opera con métodos del siglo pasado" data-en="Colombian agriculture operates with last century's methods">La agricultura colombiana opera con métodos del siglo pasado</div>
+        <ul class="ps-lista">
+          <li><span class="ps-ico">🧑‍🌾</span><span data-es="Escasez creciente de mano de obra rural — los jóvenes migran a ciudades" data-en="Growing rural labor shortage — youth migrating to cities">Escasez creciente de mano de obra rural — los jóvenes migran a ciudades</span></li>
+          <li><span class="ps-ico">💧</span><span data-es="Fumigación terrestre desperdicia hasta el 40% de agroquímicos por deriva" data-en="Ground spraying wastes up to 40% of agrochemicals due to drift">Fumigación terrestre desperdicia hasta el 40% de agroquímicos por deriva</span></li>
+          <li><span class="ps-ico">✈️</span><span data-es="Avionetas cuestan $80.000–$120.000/Ha con restricciones legales y climáticas" data-en="Crop dusters cost $80,000–$120,000/Ha with legal and weather restrictions">Avionetas cuestan $80.000–$120.000/Ha con restricciones legales y climáticas</span></li>
+          <li><span class="ps-ico">🏔️</span><span data-es="Topografía de ladera imposible para maquinaria terrestre convencional" data-en="Hillside topography impossible for conventional ground machinery">Topografía de ladera imposible para maquinaria terrestre convencional</span></li>
+          <li><span class="ps-ico">📉</span><span data-es="Márgenes de pequeños y medianos productores en caída constante" data-en="Small and medium producer margins in constant decline">Márgenes de pequeños y medianos productores en caída constante</span></li>
+        </ul>
+      </div>
+      <div class="ps-panel solucion">
+        <div class="ps-tag" data-es="✓ La solución Kwel" data-en="✓ The Kwel solution">✓ La solución Kwel</div>
+        <div class="ps-titulo" style="color:var(--blanco);" data-es="Servicio de aspersión de precisión accesible para cualquier productor" data-en="Accessible precision spraying service for any producer">Servicio de aspersión de precisión accesible para cualquier productor</div>
+        <ul class="ps-lista">
+          <li><span class="ps-ico">🚁</span><span data-es="$35.000–$50.000/Ha — hasta 60% más económico que la avioneta" data-en="$35,000–$50,000/Ha — up to 60% cheaper than crop dusters">$35.000–$50.000/Ha — hasta 60% más económico que la avioneta</span></li>
+          <li><span class="ps-ico">🎯</span><span data-es="Precisión RTK centimétrica: deriva menor al 5%, ahorro real de insumos" data-en="Centimetric RTK precision: less than 5% drift, real input savings">Precisión RTK centimétrica: deriva menor al 5%, ahorro real de insumos</span></li>
+          <li><span class="ps-ico">⏱️</span><span data-es="18–24 Ha/hora por drone — 6 min/Ha vs. horas de trabajo manual" data-en="18–24 Ha/hour per drone — 6 min/Ha vs. hours of manual work">18–24 Ha/hora por drone — 6 min/Ha vs. horas de trabajo manual</span></li>
+          <li><span class="ps-ico">🌙</span><span data-es="Operación nocturna habilitada — doble turno sin CAPEX adicional" data-en="Night operation enabled — double shift without additional CAPEX">Operación nocturna habilitada — doble turno sin CAPEX adicional</span></li>
+          <li><span class="ps-ico">📲</span><span data-es="Sin mínimo de hectáreas — accesible para minifundios y grandes fincas" data-en="No minimum hectares — accessible for small farms and large estates">Sin mínimo de hectáreas — accesible para minifundios y grandes fincas</span></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FICHA TÉCNICA -->
+<section class="ficha-section" id="ficha">
+  <div class="ficha-grid">
+    <div class="ficha-izquierda anim">
+      <div class="ficha-img-wrap">
+        <!-- PLACEHOLDER: Foto oficial DJI Agras T100 -->
+        <img class="ficha-img" src="https://images.unsplash.com/photo-1473968512647-3e447244af8f?w=800&q=80" alt="DJI Agras T100 — imagen de referencia">
+        <div class="ficha-tag-img">DJI Agras T100</div>
+      </div>
+      <div class="ficha-specs-grid">
+        <div class="spec-box"><div class="spec-val">100 kg</div><div class="spec-lab" data-es="Carga útil líquida" data-en="Liquid payload">Carga útil líquida</div></div>
+        <div class="spec-box"><div class="spec-val">24 Ha/h</div><div class="spec-lab" data-es="Rendimiento máximo" data-en="Max performance">Rendimiento máximo</div></div>
+        <div class="spec-box"><div class="spec-val">12 m/s</div><div class="spec-lab" data-es="Velocidad operativa" data-en="Operating speed">Velocidad operativa</div></div>
+        <div class="spec-box"><div class="spec-val">RTK</div><div class="spec-lab" data-es="Sistema posicionamiento" data-en="Positioning system">Sistema posicionamiento</div></div>
+        <div class="spec-box"><div class="spec-val">24h</div><div class="spec-lab" data-es="Operación nocturna" data-en="Night operation">Operación nocturna</div></div>
+        <div class="spec-box"><div class="spec-val">&lt;5%</div><div class="spec-lab" data-es="Deriva agroquímicos" data-en="Chemical drift">Deriva agroquímicos</div></div>
+      </div>
+    </div>
+    <div class="ficha-derecha anim">
+      <div class="sec-eyebrow" data-es="Especificaciones técnicas" data-en="Technical specifications">Especificaciones técnicas</div>
+      <h2 class="sec-titulo" style="color:var(--blanco);" data-es="DJI Agras T100 — <em>El drone agrícola más potente de Colombia</em>" data-en="DJI Agras T100 — <em>The most powerful agricultural drone in Colombia</em>">DJI Agras T100 — <em>El drone agrícola más potente de Colombia</em></h2>
+      <div class="ficha-tabla">
+        <div class="ft-row hl"><span class="ft-key" data-es="Flota del proyecto" data-en="Project fleet">Flota del proyecto</span><span class="ft-val" data-es="2 unidades T100" data-en="2 T100 units">2 unidades T100</span></div>
+        <div class="ft-row"><span class="ft-key" data-es="Carga útil" data-en="Payload">Carga útil</span><span class="ft-val">≈ 100 kg</span></div>
+        <div class="ft-row"><span class="ft-key" data-es="Rendimiento / hora" data-en="Performance / hour">Rendimiento / hora</span><span class="ft-val">18 – 24 Ha/h</span></div>
+        <div class="ft-row"><span class="ft-key" data-es="Capacidad flota total" data-en="Total fleet capacity">Capacidad flota total</span><span class="ft-val">36 – 48 Ha/h</span></div>
+        <div class="ft-row"><span class="ft-key" data-es="Posicionamiento" data-en="Positioning">Posicionamiento</span><span class="ft-val">RTK / GPS dual</span></div>
+        <div class="ft-row"><span class="ft-key" data-es="Velocidad máx. operativa" data-en="Max operating speed">Velocidad máx. operativa</span><span class="ft-val">12 m/s</span></div>
+        <div class="ft-row"><span class="ft-key" data-es="Operación nocturna" data-en="Night operation">Operación nocturna</span><span class="ft-val" data-es="Habilitada (iluminación integrada)" data-en="Enabled (integrated lighting)">Habilitada</span></div>
+        <div class="ft-row"><span class="ft-key" data-es="Peso estructura vacío" data-en="Empty frame weight">Peso estructura vacío</span><span class="ft-val">≈ 50 kg</span></div>
+        <div class="ft-row"><span class="ft-key" data-es="Generador de campo" data-en="Field generator">Generador de campo</span><span class="ft-val">DJI D14000iE</span></div>
+        <div class="ft-row hl"><span class="ft-key" data-es="Precio unitario referencia" data-en="Unit reference price">Precio unitario referencia</span><span class="ft-val">≈ $124.500.000 COP</span></div>
+        <div class="ft-row"><span class="ft-key" data-es="Cultivos compatibles" data-en="Compatible crops">Cultivos compatibles</span><span class="ft-val" data-es="Arroz, palma, caña, maíz, papa, frutales" data-en="Rice, palm, cane, corn, potato, fruit trees">Arroz, palma, caña, maíz, papa, frutales</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CULTIVOS OBJETIVO -->
+<section class="cultivos-section">
+  <div class="sec-inner">
+    <div class="sec-eyebrow anim" data-es="Mercado objetivo" data-en="Target market">Mercado objetivo</div>
+    <h2 class="sec-titulo anim" data-es="Cultivos y regiones que <em>atendemos</em>" data-en="Crops and regions <em>we serve</em>">Cultivos y regiones que <em>atendemos</em></h2>
+    <div class="cultivos-grid anim">
+      <div class="cult-card">
+        <div class="cult-ico">🌴</div>
+        <div class="cult-nombre" data-es="Palma de aceite" data-en="Oil palm">Palma de aceite</div>
+        <div class="cult-region">Meta, Casanare, Cesar</div>
+        <div class="cult-tarifa" data-es="Control plagas dosel alto" data-en="High canopy pest control">Control plagas dosel alto</div>
+      </div>
+      <div class="cult-card">
+        <div class="cult-ico">🌾</div>
+        <div class="cult-nombre" data-es="Arroz" data-en="Rice">Arroz</div>
+        <div class="cult-region">Tolima, Huila, Llanos</div>
+        <div class="cult-tarifa" data-es="Extensivos inundables" data-en="Flooded extensive crops">Extensivos inundables</div>
+      </div>
+      <div class="cult-card">
+        <div class="cult-ico">🌿</div>
+        <div class="cult-nombre" data-es="Caña de azúcar" data-en="Sugarcane">Caña de azúcar</div>
+        <div class="cult-region">Valle del Cauca, Cauca</div>
+        <div class="cult-tarifa" data-es="Fertilización y maduración" data-en="Fertilization and ripening">Fertilización y maduración</div>
+      </div>
+      <div class="cult-card">
+        <div class="cult-ico">🌽</div>
+        <div class="cult-nombre" data-es="Maíz y cereales" data-en="Corn and cereals">Maíz y cereales</div>
+        <div class="cult-region">Córdoba, Antioquia, Sucre</div>
+        <div class="cult-tarifa" data-es="Grandes extensiones planas" data-en="Large flat extensions">Grandes extensiones planas</div>
+      </div>
+      <div class="cult-card">
+        <div class="cult-ico">🥔</div>
+        <div class="cult-nombre" data-es="Papa" data-en="Potato">Papa</div>
+        <div class="cult-region">Nariño, Cundinamarca, Antioquia</div>
+        <div class="cult-tarifa" data-es="Control hongos en ladera" data-en="Hillside fungal control">Control hongos en ladera</div>
+      </div>
+      <div class="cult-card">
+        <div class="cult-ico">🍋</div>
+        <div class="cult-nombre" data-es="Frutales y cacao" data-en="Fruit trees and cacao">Frutales y cacao</div>
+        <div class="cult-region">Antioquia, Huila, Santander</div>
+        <div class="cult-tarifa" data-es="Topografía compleja" data-en="Complex topography">Topografía compleja</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- MODELO OPERATIVO -->
+<section class="operativo-section">
+  <div class="sec-inner">
+    <div class="sec-eyebrow anim" data-es="Plan de ejecución" data-en="Execution plan">Plan de ejecución</div>
+    <h2 class="sec-titulo anim" data-es="Cronograma e <em>indicadores clave</em>" data-en="Timeline and <em>key indicators</em>">Cronograma e <em>indicadores clave</em></h2>
+    <div class="op-grid anim">
+      <div class="timeline-op">
+        <div class="tl-item">
+          <div class="tl-mes-wrap"><div class="tl-mes-label" data-es="Mes" data-en="Month">Mes</div><div class="tl-mes-num">1–2</div></div>
+          <div class="tl-body">
+            <div class="tl-titulo" data-es="Adquisición y trámites" data-en="Acquisition and procedures">Adquisición y trámites</div>
+            <div class="tl-desc" data-es="Compra de los dos DJI Agras T100, generadores y baterías. Registro ante Aerocivil (RAC 100). Arriendo y adecuación de bodega en Sabaneta. Contratación de director de proyecto." data-en="Purchase of two DJI Agras T100s, generators and batteries. Registration with Aerocivil (RAC 100). Rental and setup of warehouse in Sabaneta. Hiring project director.">Compra drones, generadores y baterías. Registro Aerocivil. Adecuación bodega Sabaneta. Contratación director de proyecto.</div>
+          </div>
+        </div>
+        <div class="tl-item">
+          <div class="tl-mes-wrap"><div class="tl-mes-label" data-es="Mes" data-en="Month">Mes</div><div class="tl-mes-num">2</div></div>
+          <div class="tl-body">
+            <div class="tl-titulo" data-es="Certificación y montaje" data-en="Certification and setup">Certificación y montaje</div>
+            <div class="tl-desc" data-es="Certificación de 2 pilotos ante Aerocivil. Compra del vehículo Renault Oroch. Activación de seguros y pólizas. Pruebas técnicas en campo. Consecución de primeros contratos." data-en="Certification of 2 pilots with Aerocivil. Purchase of Renault Oroch vehicle. Activation of insurance policies. Field technical tests. Securing first contracts.">Certificación pilotos Aerocivil. Compra Renault Oroch. Seguros activos. Pruebas en campo. Primeros contratos.</div>
+          </div>
+        </div>
+        <div class="tl-item">
+          <div class="tl-mes-wrap"><div class="tl-mes-label" data-es="Mes" data-en="Month">Mes</div><div class="tl-mes-num">3</div></div>
+          <div class="tl-body">
+            <div class="tl-titulo" data-es="Inicio de operaciones" data-en="Operations begin">Inicio de operaciones</div>
+            <div class="tl-desc" data-es="Primera jornada comercial. Meta: 200 Ha en el mes. Foco en cultivos de ciclo corto (arroz, maíz) para flujo de caja inmediato. Inicio de facturación." data-en="First commercial day. Target: 200 Ha in the month. Focus on short-cycle crops (rice, corn) for immediate cash flow. Billing begins.">Primera jornada comercial. Meta: 200 Ha/mes. Foco arroz y maíz para flujo de caja inmediato.</div>
+          </div>
+        </div>
+        <div class="tl-item">
+          <div class="tl-mes-wrap"><div class="tl-mes-label" data-es="Mes" data-en="Month">Mes</div><div class="tl-mes-num">4–6</div></div>
+          <div class="tl-body">
+            <div class="tl-titulo" data-es="Rampa de crecimiento" data-en="Growth ramp">Rampa de crecimiento</div>
+            <div class="tl-desc" data-es="Meta: 600–1.000 Ha/mes. Activación operaciones nocturnas. Contratos recurrentes con agroindustrias. Expansión a nuevas regiones." data-en="Target: 600–1,000 Ha/month. Night operations activated. Recurring contracts with agribusinesses. Expansion to new regions.">Meta: 600–1.000 Ha/mes. Operaciones nocturnas activas. Contratos recurrentes.</div>
+          </div>
+        </div>
+        <div class="tl-item">
+          <div class="tl-mes-wrap"><div class="tl-mes-label" data-es="Mes" data-en="Month">Mes</div><div class="tl-mes-num">7–12</div></div>
+          <div class="tl-body">
+            <div class="tl-titulo" data-es="Operación plena" data-en="Full operation">Operación plena</div>
+            <div class="tl-desc" data-es="Meta: 1.200–1.500 Ha/mes con ambos drones. Servicio de deuda activo (mes 13). Evaluación de expansión de flota." data-en="Target: 1,200–1,500 Ha/month with both drones. Debt service active (month 13). Fleet expansion evaluation.">Meta: 1.200–1.500 Ha/mes. Servicio de deuda inicia mes 13.</div>
+          </div>
+        </div>
+      </div>
+      <div class="op-derecha">
+        <div class="op-card">
+          <span class="op-num">6</span>
+          <div class="op-card-titulo" data-es="Empleos directos generados" data-en="Direct jobs created">Empleos directos generados</div>
+          <div class="op-card-desc" data-es="Director de proyecto, 2 pilotos certificados Aerocivil, técnico de mantenimiento y 2 asistentes de campo." data-en="Project director, 2 Aerocivil-certified pilots, maintenance technician and 2 field assistants.">Director, 2 pilotos certificados, técnico de mantenimiento y 2 asistentes de campo.</div>
+        </div>
+        <div class="op-card">
+          <span class="op-num">2</span>
+          <div class="op-card-titulo" data-es="Meses de implementación antes de operar" data-en="Implementation months before operating">Meses de implementación antes de operar</div>
+          <div class="op-card-desc" data-es="El período de gracia del crédito cubre la implementación completa y la rampa inicial de operaciones." data-en="The credit grace period covers complete implementation and initial operations ramp.">El año de gracia del crédito cubre implementación y rampa. Sin presión de caja desde el inicio.</div>
+        </div>
+        <div class="op-card">
+          <span class="op-num">24h</span>
+          <div class="op-card-titulo" data-es="Capacidad de operación continua" data-en="Continuous operation capacity">Capacidad de operación continua</div>
+          <div class="op-card-desc" data-es="El T100 opera de noche con iluminación integrada. Doble turno posible sin incrementar el CAPEX fijo." data-en="The T100 operates at night with integrated lighting. Double shift possible without increasing fixed CAPEX.">Operación diurna y nocturna habilitada. Doble turno sin CAPEX adicional.</div>
+        </div>
+        <div class="op-card">
+          <span class="op-num">≈18m</span>
+          <div class="op-card-titulo" data-es="Recuperación de inversión proyectada" data-en="Projected investment recovery">Recuperación de inversión proyectada</div>
+          <div class="op-card-desc" data-es="En escenario base (60% utilización). En escenario conservador al 40%, recuperación en 24 meses." data-en="In base scenario (60% utilization). In conservative 40% scenario, recovery in 24 months.">Escenario base al 60% de utilización. Escenario conservador: 24 meses.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- RETORNO OPERATIVO -->
+<section class="retorno-section">
+  <div style="max-width:1080px;margin:0 auto;">
+    <div class="retorno-eyebrow" data-es="Proyección financiera" data-en="Financial projection">Proyección financiera</div>
+    <h2 class="retorno-titulo" data-es="Retorno por operación" data-en="Return per operation">Retorno por operación</h2>
+    <p class="retorno-desc" data-es="Estimado para 1 drone en jornada de 8 horas. Tarifa promedio de mercado colombiano: $40.000 COP/Ha. Con dos drones y operación plena, los excedentes mensuales superan los $189 millones." data-en="Estimated for 1 drone in an 8-hour shift. Average Colombian market rate: $40,000 COP/Ha. With two drones and full operation, monthly surpluses exceed $189 million.">Estimado para 1 drone en jornada de 8 horas. Tarifa promedio $40.000 COP/Ha.</p>
+    <div class="retorno-grid">
+      <div>
+        <div class="ret-table">
+          <div class="ret-thead">
+            <span data-es="Concepto" data-en="Concept">Concepto</span>
+            <span data-es="1 drone/día" data-en="1 drone/day">1 drone/día</span>
+            <span data-es="2 drones/mes" data-en="2 drones/month">2 drones/mes</span>
+          </div>
+          <div class="ret-row hl"><span class="ret-label" data-es="Hectáreas cubiertas" data-en="Hectares covered">Hectáreas cubiertas</span><span class="ret-val">160 Ha</span><span class="ret-val">6.400 Ha</span></div>
+          <div class="ret-row"><span class="ret-label" data-es="Ingreso bruto" data-en="Gross income">Ingreso bruto</span><span class="ret-val pos">$6.400.000</span><span class="ret-val pos">$256.000.000</span></div>
+          <div class="ret-row"><span class="ret-label" data-es="Combustible" data-en="Fuel">Combustible</span><span class="ret-val neg">-$120.000</span><span class="ret-val neg">-$4.800.000</span></div>
+          <div class="ret-row"><span class="ret-label" data-es="Baterías (amortización)" data-en="Batteries (amortization)">Baterías</span><span class="ret-val neg">-$180.000</span><span class="ret-val neg">-$7.200.000</span></div>
+          <div class="ret-row"><span class="ret-label" data-es="Nómina (prorrateo)" data-en="Payroll (prorated)">Nómina</span><span class="ret-val neg">-$290.000</span><span class="ret-val neg">-$19.430.000</span></div>
+          <div class="ret-row"><span class="ret-label" data-es="Combustible vehículo" data-en="Vehicle fuel">Vehículo</span><span class="ret-val neg">-$80.000</span><span class="ret-val neg">-$3.200.000</span></div>
+          <div class="ret-row"><span class="ret-label" data-es="Mantenimiento + seguros" data-en="Maintenance + insurance">Mantenimiento + seguros</span><span class="ret-val neg">-$150.000</span><span class="ret-val neg">-$6.000.000</span></div>
+          <div class="ret-row"><span class="ret-label" data-es="Arriendo sede" data-en="Office rent">Arriendo sede</span><span class="ret-val neg">—</span><span class="ret-val neg">-$2.000.000</span></div>
+          <div class="ret-row"><span class="ret-label" data-es="Cuota banco (mes 13+)" data-en="Bank payment (month 13+)">Cuota banco (mes 13+)</span><span class="ret-val neg">—</span><span class="ret-val neg">-$12.500.000</span></div>
+          <div class="ret-row total"><span class="ret-label" data-es="EXCEDENTE NETO" data-en="NET SURPLUS">EXCEDENTE NETO</span><span class="ret-val tot">$5.580.000</span><span class="ret-val tot">$189.270.000</span></div>
+        </div>
+        <div class="ret-nota">
+          <strong data-es="Supuesto:" data-en="Assumption:">Supuesto:</strong> <span data-es="20 días operativos/mes por drone. Tarifa $40.000/Ha. Utilización al 60% de capacidad teórica. Escenario base conservador." data-en="20 operating days/month per drone. $40,000/Ha rate. 60% of theoretical capacity utilization. Conservative base scenario.">20 días operativos/mes por drone. Tarifa $40.000/Ha. Utilización al 60%. Escenario base conservador.</span>
+        </div>
+      </div>
+      <div class="ret-escenario">
+        <div class="esc-card base">
+          <div class="esc-tag" data-es="Escenario base · 60% utilización" data-en="Base scenario · 60% utilization">Escenario base · 60% utilización</div>
+          <div class="esc-monto">$189.270.000</div>
+          <div class="esc-desc" data-es="Excedente mensual neto en operación plena (mes 7+). Incluye servicio de deuda." data-en="Monthly net surplus in full operation (month 7+). Includes debt service.">Excedente mensual neto en operación plena. Incluye servicio de deuda.</div>
+        </div>
+        <div class="esc-card cons">
+          <div class="esc-tag" data-es="Escenario conservador · 40% utilización" data-en="Conservative scenario · 40% utilization">Escenario conservador · 40% utilización</div>
+          <div class="esc-monto">$73.000.000</div>
+          <div class="esc-desc" data-es="Con condiciones climáticas o logísticas adversas. Sigue siendo viable y sostenible." data-en="With adverse weather or logistical conditions. Still viable and sustainable.">Con condiciones climáticas adversas. Sigue siendo viable y sostenible.</div>
+        </div>
+        <div class="esc-card" style="border-left-color:rgba(255,255,255,0.15);">
+          <div class="esc-tag" style="color:rgba(255,255,255,0.4);" data-es="Recuperación de inversión" data-en="Investment recovery">Recuperación de inversión</div>
+          <div class="esc-monto" style="font-size:20px;" data-es="18 – 24 meses" data-en="18 – 24 months">18 – 24 meses</div>
+          <div class="esc-desc" data-es="Según escenario. Año de gracia del banco cubre la implementación y rampa inicial sin presión de caja." data-en="Depending on scenario. Bank grace year covers implementation and initial ramp without cash pressure.">El año de gracia del banco cubre implementación y rampa sin presión de caja.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- MARCO LEGAL -->
+<section class="legal-section">
+  <div class="sec-inner">
+    <div class="sec-eyebrow anim" data-es="Cumplimiento normativo" data-en="Regulatory compliance">Cumplimiento normativo</div>
+    <h2 class="sec-titulo anim" data-es="Marco legal y <em>certificaciones</em>" data-en="Legal framework and <em>certifications</em>">Marco legal y <em>certificaciones</em></h2>
+    <div class="legal-grid anim">
+      <div class="legal-card">
+        <div class="legal-ico">✈️</div>
+        <div class="legal-titulo" data-es="Registro Aerocivil · RAC 100" data-en="Aerocivil Registration · RAC 100">Registro Aerocivil · RAC 100</div>
+        <div class="legal-desc" data-es="Los dos drones T100 serán registrados en el Registro Aeronáutico Nacional. Obligatorio para toda aeronave >200g en operación comercial." data-en="Both T100 drones will be registered in the National Aeronautical Registry. Mandatory for all aircraft >200g in commercial operation.">Los dos drones serán registrados en el Registro Aeronáutico Nacional antes del inicio de operaciones.</div>
+        <span class="legal-estado estado-pend" data-es="Trámite en fase adquisición" data-en="Processing in acquisition phase">Trámite en fase adquisición</span>
+      </div>
+      <div class="legal-card">
+        <div class="legal-ico">🪪</div>
+        <div class="legal-titulo" data-es="Licencia Piloto Remoto UAS" data-en="UAS Remote Pilot License">Licencia Piloto Remoto UAS</div>
+        <div class="legal-desc" data-es="Dos pilotos certificados ante Aerocivil o centro de instrucción autorizado. Incluido en el presupuesto de implementación." data-en="Two pilots certified with Aerocivil or authorized training center. Included in implementation budget.">Dos pilotos certificados. La multa por operar sin licencia supera los $20M — riesgo eliminado desde el inicio.</div>
+        <span class="legal-estado estado-pend" data-es="Certificación en mes 2" data-en="Certification in month 2">Certificación en mes 2</span>
+      </div>
+      <div class="legal-card">
+        <div class="legal-ico">🌾</div>
+        <div class="legal-titulo" data-es="Habilitación ICA · Agroquímicos aéreos" data-en="ICA Authorization · Aerial agrochemicals">Habilitación ICA · Agroquímicos aéreos</div>
+        <div class="legal-desc" data-es="Verificación de registro ICA para aspersión aérea de todos los insumos aplicados. Garantiza trazabilidad sanitaria y acceso a productores exportadores." data-en="ICA registration verification for aerial spraying of all applied inputs. Ensures health traceability and access to export producers.">Verificación de registros ICA para aspersión aérea. Requisito para clientes exportadores.</div>
+        <span class="legal-estado estado-pend" data-es="Trámite en fase adquisición" data-en="Processing in acquisition phase">Trámite en fase adquisición</span>
+      </div>
+      <div class="legal-card">
+        <div class="legal-ico">🛡️</div>
+        <div class="legal-titulo" data-es="Seguro todo riesgo · RC aérea" data-en="All-risk insurance · Aerial liability">Seguro todo riesgo · RC aérea</div>
+        <div class="legal-desc" data-es="Póliza todo riesgo para los dos drones + póliza de responsabilidad civil extracontractual. Requerida por grandes agroindustrias para contratar el servicio." data-en="All-risk policy for both drones + extracontractual civil liability policy. Required by major agribusinesses to contract the service.">Póliza todo riesgo drones + RC extracontractual. Incluida en CAPEX. Requisito de clientes corporativos.</div>
+        <span class="legal-estado estado-inc" data-es="Incluido en presupuesto" data-en="Included in budget">Incluido en presupuesto</span>
+      </div>
+      <div class="legal-card">
+        <div class="legal-ico">🚗</div>
+        <div class="legal-titulo" data-es="SOAT + Todo riesgo vehículo" data-en="SOAT + Vehicle all-risk">SOAT + Todo riesgo vehículo</div>
+        <div class="legal-desc" data-es="Cobertura completa para la Renault Oroch en uso comercial. SOAT y póliza todo riesgo incluidas en el presupuesto de implementación." data-en="Full coverage for the Renault Oroch in commercial use. SOAT and all-risk policy included in implementation budget.">Cobertura total para la Renault Oroch en uso comercial. Incluida en CAPEX.</div>
+        <span class="legal-estado estado-inc" data-es="Incluido en presupuesto" data-en="Included in budget">Incluido en presupuesto</span>
+      </div>
+      <div class="legal-card">
+        <div class="legal-ico">⚖️</div>
+        <div class="legal-titulo" data-es="Registro ICA productos fitosanitarios" data-en="ICA registration phytosanitary products">Protocolo fitosanitario</div>
+        <div class="legal-desc" data-es="Protocolo de manejo y almacenamiento de agroquímicos conforme a normativa ICA y Ministerio de Salud. Equipos de protección personal y hojas de seguridad." data-en="Agrochemical handling and storage protocol per ICA and Ministry of Health regulations. Personal protective equipment and safety data sheets.">Protocolo de manejo conforme a ICA y Min. Salud. EPIs y hojas de seguridad para todo el equipo.</div>
+        <span class="legal-estado estado-inc" data-es="Incluido en montaje" data-en="Included in setup">Incluido en montaje</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA ALIADOS -->
+<section class="aliados-cta">
+  <div>
+    <div class="ac-eyebrow" data-es="Únete al proyecto" data-en="Join the project">Únete al proyecto</div>
+    <h2 class="ac-titulo">
+      <span data-es="¿Eres productor, aliado o <em>inversionista</em>?" data-en="Are you a producer, partner or <em>investor</em>?">¿Eres productor, aliado o <em>inversionista</em>?</span>
+    </h2>
+    <p class="ac-desc" data-es="El proyecto de drones agrícolas de Kwel está abierto a alianzas con productores que quieran contratar el servicio de aspersión, aliados institucionales y cooperantes que apoyen la expansión de la flota." data-en="Kwel's agricultural drone project is open to partnerships with producers wanting to contract spraying services, institutional partners and cooperators supporting fleet expansion.">El proyecto está abierto a alianzas con productores que quieran contratar el servicio, aliados institucionales y cooperantes que apoyen la expansión.</p>
+    <div class="ac-ctas">
+      <a href="dona.html" class="btn-prim" data-es="Apoya el proyecto" data-en="Support the project">Apoya el proyecto</a>
+      <a href="propuesta-kwel-drones.html" class="btn-sec" target="_blank" data-es="Propuesta técnica completa →" data-en="Full technical proposal →">Propuesta técnica completa →</a>
+    </div>
+  </div>
+  <div class="ac-derecha">
+    <div class="ac-item">
+      <div class="ac-ico">🌾</div>
+      <div>
+        <div class="ac-item-titulo" data-es="Soy productor agrícola" data-en="I'm an agricultural producer">Soy productor agrícola</div>
+        <div class="ac-item-desc" data-es="Contrata el servicio de aspersión para tus cultivos. Tarifas desde $35.000/Ha. Sin mínimo de hectáreas." data-en="Hire the spraying service for your crops. Rates from $35,000/Ha. No minimum hectares.">Contrata el servicio de aspersión. Tarifas desde $35.000/Ha. Sin mínimo.</div>
+      </div>
+    </div>
+    <div class="ac-item">
+      <div class="ac-ico">🏛️</div>
+      <div>
+        <div class="ac-item-titulo" data-es="Soy aliado institucional" data-en="I'm an institutional partner">Soy aliado institucional</div>
+        <div class="ac-item-desc" data-es="Gremios, cooperativas, UMATAS y asociaciones de productores: desarrollemos un contrato marco de servicios." data-en="Guilds, cooperatives, UMATAs and producer associations: let's develop a framework service contract.">Gremios, cooperativas y asociaciones: desarrollemos un contrato marco.</div>
+      </div>
+    </div>
+    <div class="ac-item">
+      <div class="ac-ico">💼</div>
+      <div>
+        <div class="ac-item-titulo" data-es="Quiero apoyar como donante corporativo" data-en="I want to support as a corporate donor">Quiero apoyar como donante corporativo</div>
+        <div class="ac-item-desc" data-es="Tu donación tiene beneficio tributario del 25% (Art. 257 E.T.). Emitimos certificado con validez ante la DIAN." data-en="Your donation has a 25% tax benefit (Art. 257 E.T.). We issue a DIAN-valid certificate.">Tu donación tiene beneficio tributario 25%. Certificado DIAN garantizado.</div>
+      </div>
+    </div>
+    <div style="margin-top:4px;">
+      <a href="contacto.html" style="display:block;text-align:center;padding:14px;border:1px solid rgba(255,255,255,0.15);font-family:'DM Mono',monospace;font-size:11px;letter-spacing:0.12em;text-transform:uppercase;color:rgba(255,255,255,0.6);transition:all .2s;" onmouseover="this.style.borderColor='#c8a86b';this.style.color='#c8a86b';" onmouseout="this.style.borderColor='rgba(255,255,255,0.15)';this.style.color='rgba(255,255,255,0.6)';" data-es="Contactar al equipo Kwel →" data-en="Contact the Kwel team →">Contactar al equipo Kwel →</a>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-bottom">
+    <span>© 2025 Corporación Social Kwel · NIT 900.554.556-5 · Régimen Tributario Especial · DIAN</span>
+    <div class="footer-links-bot">
+      <a href="index.html" data-es="Inicio" data-en="Home">Inicio</a>
+      <a href="dona.html" data-es="Dona ahora" data-en="Donate now">Dona ahora</a>
+      <a href="transparencia.html" data-es="Transparencia" data-en="Transparency">Transparencia</a>
+      <a href="contacto.html" data-es="Contacto" data-en="Contact">Contacto</a>
+      <span style="color:rgba(255,255,255,0.15);" data-es="Desarrollado por Delta Studio Comunicaciones" data-en="Developed by Delta Studio Comunicaciones">Delta Studio Comunicaciones</span>
+    </div>
+  </div>
+</footer>
+
+<script>
+// Lang
+function setLang(lang) {
+  document.querySelectorAll('.lang-btn').forEach(b => b.classList.toggle('active', b.textContent === lang.toUpperCase()));
+  document.querySelectorAll('[data-' + lang + ']').forEach(el => {
+    const v = el.getAttribute('data-' + lang);
+    if (v) el.innerHTML = v;
+  });
+  document.documentElement.lang = lang;
+}
+
+// Nav mobile
+function toggleNav() {
+  const l = document.getElementById('navLinks');
+  const o = document.getElementById('navOverlay');
+  const h = document.getElementById('hamburger');
+  l.classList.toggle('open'); o.classList.toggle('open');
+  const open = l.classList.contains('open');
+  h.children[0].style.transform = open ? 'rotate(45deg) translate(4px,4px)' : '';
+  h.children[1].style.opacity   = open ? '0' : '1';
+  h.children[2].style.transform = open ? 'rotate(-45deg) translate(4px,-4px)' : '';
+}
+
+// Sticky nav shadow
+window.addEventListener('scroll', () => {
+  document.querySelector('nav').style.boxShadow = window.scrollY > 10 ? '0 2px 20px rgba(0,0,0,0.08)' : 'none';
+});
+
+// Scroll animations
+const obs = new IntersectionObserver(entries => {
+  entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
+}, { threshold: 0.1 });
+document.querySelectorAll('.anim').forEach(el => obs.observe(el));
+</script>
+</body>
+</html>

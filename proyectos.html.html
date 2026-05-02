@@ -1,0 +1,292 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Proyectos — Corporación Social Kwel</title>
+<meta name="description" content="Drones agrícolas, agroecología con COAS, arte y cultura, albergue animal Casa Leo. Proyectos activos de la Corporación Social Kwel en Antioquia. NIT 900.554.556-5.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400&family=DM+Sans:wght@300;400;500&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root{--verde:#1a4a2e;--verde-medio:#2d6e47;--verde-claro:#4a9e6a;--dorado:#c8a86b;--tierra:#8b5e3c;--crema:#f5f0e8;--blanco:#fafaf7;--gris:#6b7280;--gris-claro:#e8e4dc;--negro:#0f1a0f;}
+*{margin:0;padding:0;box-sizing:border-box;}html{scroll-behavior:smooth;}
+body{font-family:'DM Sans',sans-serif;background:var(--blanco);color:var(--negro);overflow-x:hidden;}
+a{text-decoration:none;color:inherit;}img{display:block;width:100%;object-fit:cover;}
+.topbar{background:var(--verde);padding:8px 48px;display:flex;justify-content:space-between;align-items:center;font-family:'DM Mono',monospace;font-size:11px;color:rgba(255,255,255,0.55);}
+.topbar a{color:rgba(255,255,255,0.55);transition:color .2s;}.topbar a:hover{color:var(--dorado);}
+.lang-toggle{display:flex;gap:4px;}
+.lang-btn{padding:3px 10px;border:1px solid rgba(255,255,255,0.2);font-family:'DM Mono',monospace;font-size:10px;cursor:pointer;color:rgba(255,255,255,0.55);background:transparent;letter-spacing:0.1em;transition:all .2s;}
+.lang-btn.active{background:var(--dorado);color:var(--verde);border-color:var(--dorado);}
+.lang-btn:hover:not(.active){color:var(--dorado);border-color:var(--dorado);}
+nav{position:sticky;top:0;z-index:100;background:rgba(250,250,247,0.96);backdrop-filter:blur(12px);border-bottom:1px solid var(--gris-claro);padding:0 48px;display:flex;justify-content:space-between;align-items:center;height:68px;}
+.nav-logo{display:flex;align-items:center;gap:12px;}
+.nav-logo img{width:40px;height:40px;object-fit:contain;}
+.nav-logo-text{font-family:'Playfair Display',serif;font-size:17px;font-weight:700;color:var(--verde);}
+.nav-links{display:flex;gap:32px;align-items:center;}
+.nav-links a{font-size:13px;font-weight:500;color:var(--gris);letter-spacing:0.03em;transition:color .2s;position:relative;}
+.nav-links a::after{content:'';position:absolute;bottom:-4px;left:0;right:0;height:1px;background:var(--verde-claro);transform:scaleX(0);transform-origin:left;transition:transform .2s;}
+.nav-links a:hover{color:var(--verde);}.nav-links a:hover::after,.nav-links a.activo::after{transform:scaleX(1);}.nav-links a.activo{color:var(--verde);}
+.nav-cta{background:var(--dorado);color:var(--verde);padding:9px 22px;font-size:12px;font-weight:500;font-family:'DM Mono',monospace;letter-spacing:0.1em;text-transform:uppercase;transition:all .2s;border:none;cursor:pointer;display:inline-block;}
+.nav-cta:hover{background:var(--verde);color:var(--dorado);}
+.hamburger{display:none;flex-direction:column;gap:5px;cursor:pointer;background:none;border:none;padding:4px;}
+.hamburger span{display:block;width:24px;height:1.5px;background:var(--verde);transition:all .3s;}
+.nav-overlay{display:none;position:fixed;inset:0;z-index:190;}.nav-overlay.open{display:block;}
+
+/* HERO */
+.page-hero{background:var(--verde);padding:72px 48px 64px;position:relative;overflow:hidden;}
+.page-hero::after{content:'';position:absolute;right:-60px;bottom:-60px;width:280px;height:280px;border-radius:50%;border:1px solid rgba(200,168,107,0.1);}
+.ph-eyebrow{font-family:'DM Mono',monospace;font-size:10px;letter-spacing:0.3em;text-transform:uppercase;color:var(--dorado);margin-bottom:16px;display:flex;align-items:center;gap:10px;}
+.ph-eyebrow::before{content:'';display:block;width:24px;height:1px;background:var(--dorado);}
+.ph-titulo{font-family:'Playfair Display',serif;font-size:clamp(36px,5vw,60px);font-weight:900;color:var(--blanco);line-height:1.08;margin-bottom:16px;max-width:700px;}
+.ph-titulo em{font-style:italic;color:var(--dorado);}
+.ph-desc{font-size:15px;line-height:1.75;color:rgba(255,255,255,0.62);max-width:560px;}
+.proyectos-nav{display:flex;gap:8px;flex-wrap:wrap;margin-top:32px;}
+.pn-btn{font-family:'DM Mono',monospace;font-size:10px;letter-spacing:0.1em;text-transform:uppercase;padding:7px 16px;border:1px solid rgba(255,255,255,0.2);color:rgba(255,255,255,0.6);cursor:pointer;transition:all .2s;background:transparent;}
+.pn-btn:hover,.pn-btn.active{background:var(--dorado);border-color:var(--dorado);color:var(--verde);}
+
+/* PROYECTO CARD GRANDE */
+.proyecto-bloque{padding:96px 48px;border-bottom:1px solid var(--gris-claro);}
+.proyecto-bloque:nth-child(even){background:var(--crema);}
+.pb-inner{max-width:1080px;margin:0 auto;display:grid;grid-template-columns:1fr 1fr;gap:64px;align-items:center;}
+.pb-inner.reverse{direction:rtl;}
+.pb-inner.reverse > *{direction:ltr;}
+.pb-img-wrap{position:relative;overflow:hidden;}
+.pb-img{height:380px;filter:brightness(0.85);}
+.pb-img-tag{position:absolute;top:16px;left:16px;font-family:'DM Mono',monospace;font-size:9px;letter-spacing:0.15em;text-transform:uppercase;padding:5px 12px;}
+.tag-verde{background:var(--verde);color:var(--dorado);}
+.tag-dorado{background:var(--dorado);color:var(--verde);}
+.tag-tierra{background:var(--tierra);color:var(--blanco);}
+.tag-negro{background:var(--negro);color:var(--dorado);}
+.pb-estado{display:inline-flex;align-items:center;gap:6px;margin-bottom:16px;font-family:'DM Mono',monospace;font-size:10px;letter-spacing:0.15em;text-transform:uppercase;}
+.estado-dot{width:6px;height:6px;border-radius:50%;}
+.dot-activo{background:var(--verde-claro);}
+.dot-construccion{background:var(--dorado);}
+.pb-eyebrow{font-family:'DM Mono',monospace;font-size:10px;letter-spacing:0.25em;text-transform:uppercase;color:var(--verde-claro);margin-bottom:10px;}
+.pb-titulo{font-family:'Playfair Display',serif;font-size:clamp(26px,3vw,38px);font-weight:700;color:var(--verde);line-height:1.15;margin-bottom:16px;}
+.pb-titulo em{font-style:italic;color:var(--dorado);}
+.pb-desc{font-size:14px;color:var(--gris);line-height:1.75;margin-bottom:24px;}
+.pb-features{display:flex;flex-direction:column;gap:10px;margin-bottom:28px;}
+.pb-feat{display:flex;gap:12px;align-items:flex-start;font-size:13px;color:var(--negro);}
+.pf-ico{font-size:16px;flex-shrink:0;margin-top:1px;}
+.pb-alianza{background:var(--verde);padding:16px 20px;display:flex;gap:12px;align-items:center;margin-bottom:24px;}
+.pa-label{font-family:'DM Mono',monospace;font-size:9px;letter-spacing:0.15em;text-transform:uppercase;color:var(--dorado);margin-bottom:2px;}
+.pa-nombre{font-size:13px;color:var(--blanco);font-weight:500;}
+.pb-btn{display:inline-block;padding:12px 28px;font-family:'DM Mono',monospace;font-size:11px;letter-spacing:0.12em;text-transform:uppercase;transition:all .2s;border:2px solid var(--verde);color:var(--verde);}
+.pb-btn:hover{background:var(--verde);color:var(--blanco);}
+.pb-btn.prim{background:var(--verde);color:var(--blanco);}
+.pb-btn.prim:hover{background:var(--verde-medio);}
+.pb-stats{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--gris-claro);margin-top:16px;}
+.ps-item{background:var(--blanco);padding:14px;text-align:center;}
+.ps-num{font-family:'Playfair Display',serif;font-size:22px;font-weight:700;color:var(--verde);line-height:1;}
+.ps-label{font-size:10px;color:var(--gris);margin-top:3px;font-family:'DM Mono',monospace;letter-spacing:0.05em;}
+
+/* CTA DONA */
+.dona-cta{background:var(--negro);padding:72px 48px;text-align:center;}
+.dc-titulo{font-family:'Playfair Display',serif;font-size:clamp(26px,3.5vw,40px);font-weight:700;color:var(--blanco);margin-bottom:12px;}
+.dc-titulo em{font-style:italic;color:var(--dorado);}
+.dc-desc{font-size:14px;color:rgba(255,255,255,0.5);max-width:480px;margin:0 auto 28px;line-height:1.75;}
+.dc-btns{display:flex;gap:12px;justify-content:center;flex-wrap:wrap;}
+.btn-d{background:var(--dorado);color:var(--verde);padding:13px 30px;font-family:'DM Mono',monospace;font-size:11px;letter-spacing:0.12em;text-transform:uppercase;transition:all .25s;display:inline-block;border:2px solid var(--dorado);}
+.btn-d:hover{background:transparent;color:var(--dorado);}
+.btn-d2{background:transparent;color:rgba(255,255,255,0.7);padding:13px 30px;font-family:'DM Mono',monospace;font-size:11px;letter-spacing:0.12em;text-transform:uppercase;border:1px solid rgba(255,255,255,0.2);display:inline-block;transition:all .25s;}
+.btn-d2:hover{border-color:var(--dorado);color:var(--dorado);}
+
+.footer-strip{background:var(--negro);padding:40px 48px;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:24px;border-top:1px solid rgba(255,255,255,0.06);}
+.fs-left{font-family:'DM Mono',monospace;font-size:11px;color:rgba(255,255,255,0.3);line-height:1.8;}
+.fs-links{display:flex;gap:20px;flex-wrap:wrap;}
+.fs-links a{font-size:13px;color:rgba(255,255,255,0.4);transition:color .2s;}.fs-links a:hover{color:var(--dorado);}
+
+@media(max-width:1024px){.pb-inner,.pb-inner.reverse{grid-template-columns:1fr;direction:ltr;gap:40px;}}
+@media(max-width:768px){
+  .topbar{padding:8px 20px;}nav{padding:0 20px;}.nav-links{display:none;}.hamburger{display:flex;}
+  .nav-links.open{display:flex;flex-direction:column;position:fixed;top:68px;left:0;right:0;bottom:0;background:var(--verde);z-index:200;padding:32px 24px;gap:0;}
+  .nav-links.open a{color:rgba(255,255,255,0.8);font-size:18px;padding:14px 0;border-bottom:1px solid rgba(255,255,255,0.1);}
+  .nav-cta{display:none;}
+  .page-hero,.proyecto-bloque,.dona-cta{padding:64px 20px;}
+  .footer-strip{padding:32px 20px;flex-direction:column;align-items:flex-start;}
+}
+@media(max-width:480px){.page-hero{padding:40px 16px;}.pb-stats{grid-template-columns:1fr 1fr;}}
+.anim{opacity:0;transform:translateY(20px);transition:opacity .65s ease,transform .65s ease;}
+.anim.visible{opacity:1;transform:translateY(0);}
+</style>
+</head>
+<body>
+<div class="topbar">
+  <span>📍 Ed. Scala Of. 1110, Sabaneta &nbsp;·&nbsp; <a href="mailto:kwelsocial@gmail.com">kwelsocial@gmail.com</a> &nbsp;·&nbsp; <a href="tel:+573021011871">302 101 1871</a></span>
+  <div class="lang-toggle"><button class="lang-btn active" onclick="setLang('es')">ES</button><button class="lang-btn" onclick="setLang('en')">EN</button></div>
+</div>
+<nav>
+  <a href="index.html" class="nav-logo">
+    <img src="https://kwelsocial.com/wp-content/uploads/2023/11/KWEL-SOCIAL.png" alt="Kwel Social">
+    <span class="nav-logo-text">Kwel Social</span>
+  </a>
+  <div class="nav-links" id="navLinks">
+    <a href="index.html" data-es="Inicio" data-en="Home">Inicio</a>
+    <a href="nosotros.html" data-es="Nosotros" data-en="About">Nosotros</a>
+    <a href="proyecto-drones.html" data-es="Proyecto Drones" data-en="Drone Project">Proyecto Drones</a>
+    <a href="proyectos.html" class="activo" data-es="Proyectos" data-en="Projects">Proyectos</a>
+    <a href="transparencia.html" data-es="Transparencia" data-en="Transparency">Transparencia</a>
+    <a href="contacto.html" data-es="Contacto" data-en="Contact">Contacto</a>
+  </div>
+  <a href="dona.html" class="nav-cta" data-es="Dona ahora" data-en="Donate now">Dona ahora</a>
+  <button class="hamburger" id="hamburger" onclick="toggleNav()"><span></span><span></span><span></span></button>
+</nav>
+<div class="nav-overlay" id="navOverlay" onclick="toggleNav()"></div>
+
+<section class="page-hero">
+  <div class="ph-eyebrow" data-es="Lo que hacemos · 4 proyectos activos" data-en="What we do · 4 active projects">Lo que hacemos · 4 proyectos activos</div>
+  <h1 class="ph-titulo"><span data-es="Proyectos que <em>transforman</em> el territorio" data-en="Projects that <em>transform</em> the territory">Proyectos que <em>transforman</em> el territorio</span></h1>
+  <p class="ph-desc" data-es="Kwel opera cuatro líneas de acción en Antioquia: agricultura de precisión con drones, proyectos agroecológicos, arte y cultura, y bienestar animal. Cada proyecto es una apuesta concreta por el desarrollo sostenible." data-en="Kwel operates four lines of action in Antioquia: precision agriculture with drones, agroecological projects, art and culture, and animal welfare. Each project is a concrete bet on sustainable development.">Kwel opera cuatro líneas de acción en Antioquia: agricultura de precisión con drones, proyectos agroecológicos, arte y cultura, y bienestar animal.</p>
+  <div class="proyectos-nav">
+    <button class="pn-btn active" onclick="irA('drones')" data-es="✈ Drones Agrícolas" data-en="✈ Agricultural Drones">✈ Drones Agrícolas</button>
+    <button class="pn-btn" onclick="irA('agroecologia')" data-es="🌱 Agroecología" data-en="🌱 Agroecology">🌱 Agroecología</button>
+    <button class="pn-btn" onclick="irA('arte')" data-es="🎨 Arte y Cultura" data-en="🎨 Art & Culture">🎨 Arte y Cultura</button>
+    <button class="pn-btn" onclick="irA('albergue')" data-es="🐾 Albergue Animal" data-en="🐾 Animal Shelter">🐾 Albergue Animal</button>
+  </div>
+</section>
+
+<!-- DRONES -->
+<div class="proyecto-bloque" id="drones">
+  <div class="pb-inner anim">
+    <div class="pb-img-wrap">
+      <img class="pb-img" src="https://images.unsplash.com/photo-1508444845599-5c89863b1c44?w=900&q=80" alt="Drones agrícolas — referencia">
+      <div class="pb-img-tag tag-dorado">DJI Agras T100</div>
+      <div class="pb-stats">
+        <div class="ps-item"><div class="ps-num">$500M</div><div class="ps-label">COP inversión</div></div>
+        <div class="ps-item"><div class="ps-num">40 Ha/h</div><div class="ps-label" data-es="Capacidad flota" data-en="Fleet capacity">Capacidad flota</div></div>
+        <div class="ps-item"><div class="ps-num">6</div><div class="ps-label" data-es="Empleos directos" data-en="Direct jobs">Empleos directos</div></div>
+      </div>
+    </div>
+    <div>
+      <div class="pb-estado"><span class="estado-dot dot-construccion"></span><span style="color:var(--dorado);font-family:'DM Mono',monospace;font-size:10px;letter-spacing:0.15em;" data-es="En financiación · Banco Agrario" data-en="In financing · Banco Agrario">En financiación · Banco Agrario</span></div>
+      <div class="pb-eyebrow" data-es="Proyecto estrella · 2025" data-en="Flagship project · 2025">Proyecto estrella · 2025</div>
+      <h2 class="pb-titulo" data-es="Drones Agrícolas — <em>DJI Agras T100</em>" data-en="Agricultural Drones — <em>DJI Agras T100</em>">Drones Agrícolas — <em>DJI Agras T100</em></h2>
+      <p class="pb-desc" data-es="Implementación de dos drones DJI Agras T100 para prestar servicios de aspersión y fertilización aérea de precisión a productores agrícolas en Colombia. Con 100 kg de carga útil y operación nocturna, es el proyecto de agricultura de precisión más ambicioso de la corporación." data-en="Deployment of two DJI Agras T100 drones to provide precision aerial spraying and fertilization services to Colombian farmers. With 100 kg payload and night operation, it is the corporation's most ambitious precision agriculture project.">Implementación de dos drones DJI Agras T100 para servicios de aspersión y fertilización aérea de precisión en Colombia. Con 100 kg de carga y operación nocturna.</p>
+      <div class="pb-features">
+        <div class="pb-feat"><span class="pf-ico">🌾</span><span data-es="Cultivos objetivo: arroz, palma, caña, maíz, papa y frutales" data-en="Target crops: rice, palm, sugarcane, corn, potato and fruit trees">Cultivos objetivo: arroz, palma, caña, maíz, papa y frutales</span></div>
+        <div class="pb-feat"><span class="pf-ico">🎯</span><span data-es="Precisión RTK centimétrica — deriva de agroquímicos menor al 5%" data-en="Centimetric RTK precision — less than 5% agrochemical drift">Precisión RTK centimétrica — deriva de agroquímicos menor al 5%</span></div>
+        <div class="pb-feat"><span class="pf-ico">💰</span><span data-es="Tarifa $35.000–$50.000/Ha — hasta 60% más económico que la avioneta" data-en="Rate $35,000–$50,000/Ha — up to 60% cheaper than crop dusters">Tarifa $35.000–$50.000/Ha — hasta 60% más económico que la avioneta</span></div>
+      </div>
+      <a href="proyecto-drones.html" class="pb-btn prim" data-es="Ver proyecto completo →" data-en="See full project →">Ver proyecto completo →</a>
+    </div>
+  </div>
+</div>
+
+<!-- AGROECOLOGÍA -->
+<div class="proyecto-bloque" id="agroecologia">
+  <div class="pb-inner reverse anim">
+    <div class="pb-img-wrap">
+      <img class="pb-img" src="https://images.unsplash.com/photo-1416879595882-3373a0480b5b?w=900&q=80" alt="Agroecología — referencia">
+      <div class="pb-img-tag tag-verde" data-es="Vda. El Aguacate" data-en="El Aguacate">Vda. El Aguacate</div>
+    </div>
+    <div>
+      <div class="pb-estado"><span class="estado-dot dot-construccion"></span><span style="color:var(--dorado);font-family:'DM Mono',monospace;font-size:10px;letter-spacing:0.15em;" data-es="En construcción · Alianza COAS" data-en="Under construction · COAS Alliance">En construcción · Alianza COAS</span></div>
+      <div class="pb-eyebrow" data-es="Desarrollo territorial · Antioquia" data-en="Territorial development · Antioquia">Desarrollo territorial · Antioquia</div>
+      <h2 class="pb-titulo" data-es="Proyectos <em>Agroecológicos</em>" data-en="<em>Agroecological</em> Projects">Proyectos <em>Agroecológicos</em></h2>
+      <p class="pb-desc" data-es="En alianza con la Corporación COAS y Colombia Diving Tours, Kwel desarrolla un proyecto agroecológico en la Vereda El Aguacate. La iniciativa busca involucrar a los nativos del territorio en procesos de siembra y comercialización de verduras, generando autosostenimiento y arraigo comunitario." data-en="In alliance with COAS Corporation and Colombia Diving Tours, Kwel develops an agroecological project in Vereda El Aguacate. The initiative seeks to involve native community members in vegetable growing and marketing processes, generating self-sustainability and community rootedness.">En alianza con COAS y Colombia Diving Tours, Kwel desarrolla un proyecto agroecológico en la Vereda El Aguacate que involucra a los nativos en siembra y venta de verduras, generando autosostenimiento comunitario.</p>
+      <div class="pb-alianza">
+        <div style="font-size:24px;">🤝</div>
+        <div>
+          <div class="pa-label" data-es="Alianza estratégica" data-en="Strategic alliance">Alianza estratégica</div>
+          <div class="pa-nombre">COAS + Colombia Diving Tours + Comunidad nativa · Vda. El Aguacate</div>
+        </div>
+      </div>
+      <div class="pb-features">
+        <div class="pb-feat"><span class="pf-ico">🥬</span><span data-es="Producción y comercialización de verduras con comunidades nativas del territorio" data-en="Vegetable production and marketing with native territorial communities">Producción y comercialización de verduras con comunidades nativas</span></div>
+        <div class="pb-feat"><span class="pf-ico">🏨</span><span data-es="Colombia Diving Tours apoya el desarrollo del proyecto en su hotel y territorio" data-en="Colombia Diving Tours supports project development at its hotel and territory">Colombia Diving Tours integra el proyecto en su hotel y territorio</span></div>
+        <div class="pb-feat"><span class="pf-ico">♻️</span><span data-es="Prácticas sostenibles: producción limpia, seguridad alimentaria y comercio justo" data-en="Sustainable practices: clean production, food security and fair trade">Prácticas sostenibles: producción limpia, seguridad alimentaria y comercio justo</span></div>
+      </div>
+      <a href="contacto.html" class="pb-btn" data-es="Conocer más →" data-en="Learn more →">Conocer más →</a>
+    </div>
+  </div>
+</div>
+
+<!-- ARTE Y CULTURA -->
+<div class="proyecto-bloque" id="arte">
+  <div class="pb-inner anim">
+    <div class="pb-img-wrap">
+      <img class="pb-img" src="https://images.unsplash.com/photo-1460661419201-fd4cecdf8a8b?w=900&q=80" alt="Arte y cultura — referencia">
+      <div class="pb-img-tag tag-tierra" data-es="Arte · Música · Teatro" data-en="Art · Music · Theatre">Arte · Música · Teatro</div>
+    </div>
+    <div>
+      <div class="pb-estado"><span class="estado-dot dot-activo"></span><span style="color:var(--verde-claro);font-family:'DM Mono',monospace;font-size:10px;letter-spacing:0.15em;" data-es="Activo · En desarrollo" data-en="Active · In development">Activo · En desarrollo</span></div>
+      <div class="pb-eyebrow" data-es="Expresión comunitaria · Antioquia" data-en="Community expression · Antioquia">Expresión comunitaria · Antioquia</div>
+      <h2 class="pb-titulo" data-es="Arte y <em>Cultura</em>" data-en="Art and <em>Culture</em>">Arte y <em>Cultura</em></h2>
+      <p class="pb-desc" data-es="Kwel promueve la expresión artística y cultural como motor de cohesión comunitaria. A través del teatro, la música y diversas manifestaciones del arte, la corporación busca abrir espacios de creación, participación y transformación social en Antioquia." data-en="Kwel promotes artistic and cultural expression as a community cohesion driver. Through theatre, music and various art forms, the corporation seeks to open spaces for creation, participation and social transformation in Antioquia.">Kwel promueve el teatro, la música y las artes como motor de cohesión comunitaria. Abrimos espacios de creación, participación y transformación social en Antioquia.</p>
+      <div class="pb-features">
+        <div class="pb-feat"><span class="pf-ico">🎭</span><span data-es="Teatro comunitario — formación y puestas en escena con participación de jóvenes y adultos" data-en="Community theatre — training and performances with youth and adult participation">Teatro comunitario — formación y puestas en escena con jóvenes y adultos</span></div>
+        <div class="pb-feat"><span class="pf-ico">🎵</span><span data-es="Música — promoción de talentos locales y espacios de encuentro cultural" data-en="Music — promotion of local talents and cultural meeting spaces">Música — promoción de talentos locales y espacios de encuentro cultural</span></div>
+        <div class="pb-feat"><span class="pf-ico">🌍</span><span data-es="Arte como herramienta de desarrollo social y fortalecimiento de identidades territoriales" data-en="Art as a social development tool and territorial identity strengthening">Arte como herramienta de desarrollo social e identidad territorial</span></div>
+      </div>
+      <a href="contacto.html" class="pb-btn" data-es="Participar o colaborar →" data-en="Participate or collaborate →">Participar o colaborar →</a>
+    </div>
+  </div>
+</div>
+
+<!-- ALBERGUE ANIMAL -->
+<div class="proyecto-bloque" id="albergue">
+  <div class="pb-inner reverse anim">
+    <div class="pb-img-wrap">
+      <img class="pb-img" src="https://images.unsplash.com/photo-1548199973-03cce0bbc87b?w=900&q=80" alt="Albergue animal — referencia">
+      <div class="pb-img-tag tag-negro">Casa Leo · Yalí</div>
+      <div class="pb-stats">
+        <div class="ps-item"><div class="ps-num">~30</div><div class="ps-label" data-es="Animales activos" data-en="Active animals">Animales activos</div></div>
+        <div class="ps-item"><div class="ps-num">Payuco</div><div class="ps-label" data-es="Vereda, Yalí" data-en="Vereda, Yalí">Vereda, Yalí</div></div>
+        <div class="ps-item"><div class="ps-num">3</div><div class="ps-label" data-es="Líneas de apoyo" data-en="Support lines">Líneas de apoyo</div></div>
+      </div>
+    </div>
+    <div>
+      <div class="pb-estado"><span class="estado-dot dot-activo"></span><span style="color:var(--verde-claro);font-family:'DM Mono',monospace;font-size:10px;letter-spacing:0.15em;" data-es="Activo · Alianza Casa Leo" data-en="Active · Casa Leo Alliance">Activo · Alianza Casa Leo</span></div>
+      <div class="pb-eyebrow" data-es="Bienestar animal · Yalí, Antioquia" data-en="Animal welfare · Yalí, Antioquia">Bienestar animal · Yalí, Antioquia</div>
+      <h2 class="pb-titulo" data-es="Albergue <em>Animal</em>" data-en="<em>Animal</em> Shelter">Albergue <em>Animal</em></h2>
+      <p class="pb-desc" data-es="En alianza con Casa Leo, albergue ubicado en la Vereda Payuco de Yalí, Antioquia, Kwel apoya el desarrollo de infraestructura y servicios que garanticen el bienestar, la salud y la felicidad de aproximadamente 30 animales rescatados, mientras se construye un modelo de autosostenimiento." data-en="In alliance with Casa Leo, a shelter located in Vereda Payuco in Yalí, Antioquia, Kwel supports the development of infrastructure and services that guarantee the wellbeing, health and happiness of approximately 30 rescued animals, while building a self-sustainability model.">En alianza con Casa Leo en la Vereda Payuco, Yalí, Kwel apoya el desarrollo de infraestructura y servicios para ~30 animales rescatados, construyendo un modelo de autosostenimiento.</p>
+      <div class="pb-alianza">
+        <div style="font-size:24px;">🏠</div>
+        <div>
+          <div class="pa-label" data-es="Alianza operativa" data-en="Operational alliance">Alianza operativa</div>
+          <div class="pa-nombre">Casa Leo · Vereda Payuco, Yalí, Antioquia</div>
+        </div>
+      </div>
+      <div class="pb-features">
+        <div class="pb-feat"><span class="pf-ico">🥣</span><span data-es="Máquina de concentrado propio — autosostenimiento y comercialización para generar ingresos" data-en="Own feed machine — self-sustainability and marketing to generate income">Máquina de concentrado propio para autosostenimiento y comercialización</span></div>
+        <div class="pb-feat"><span class="pf-ico">🏃</span><span data-es="Pista de agility — actividad física, salud y bienestar óptimo para los animales del albergue" data-en="Agility track — physical activity, health and optimal wellbeing for shelter animals">Pista de agility para salud física y bienestar óptimo de los animales</span></div>
+        <div class="pb-feat"><span class="pf-ico">🩺</span><span data-es="Servicios veterinarios — atención médica, esterilización y seguimiento a los animales rescatados" data-en="Veterinary services — medical care, sterilization and follow-up for rescued animals">Servicios veterinarios: atención médica, esterilización y seguimiento</span></div>
+      </div>
+      <a href="dona.html?proyecto=albergue" class="pb-btn prim" data-es="Apoyar este proyecto →" data-en="Support this project →">Apoyar este proyecto →</a>
+    </div>
+  </div>
+</div>
+
+<!-- CTA DONA -->
+<div class="dona-cta">
+  <h2 class="dc-titulo"><span data-es="Cada proyecto necesita <em>tu apoyo</em>" data-en="Every project needs <em>your support</em>">Cada proyecto necesita <em>tu apoyo</em></span></h2>
+  <p class="dc-desc" data-es="Como entidad del RTE de la DIAN, tus donaciones tienen beneficio tributario del 25%. Elige el proyecto que más te inspire y haz parte del cambio." data-en="As a DIAN RTE entity, your donations have a 25% tax benefit. Choose the project that inspires you most and be part of the change.">Como entidad del RTE de la DIAN, tus donaciones tienen beneficio tributario del 25%. Elige el proyecto que más te inspire.</p>
+  <div class="dc-btns">
+    <a href="dona.html" class="btn-d" data-es="Dona ahora" data-en="Donate now">Dona ahora</a>
+    <a href="contacto.html" class="btn-d2" data-es="Contactar al equipo →" data-en="Contact the team →">Contactar al equipo →</a>
+  </div>
+</div>
+
+<div class="footer-strip">
+  <div class="fs-left"><strong style="color:rgba(255,255,255,0.55);">Corporación Social Kwel</strong><br>NIT 900.554.556-5 · Régimen Tributario Especial · DIAN<br>Cll 52 Sur N° 43A 20 Of. 1110 · Ed. Scala · Sabaneta, Antioquia</div>
+  <div class="fs-links">
+    <a href="index.html" data-es="Inicio" data-en="Home">Inicio</a>
+    <a href="dona.html" data-es="Dona ahora" data-en="Donate now">Dona ahora</a>
+    <a href="proyecto-drones.html" data-es="Proyecto Drones" data-en="Drone Project">Proyecto Drones</a>
+    <a href="transparencia.html" data-es="Transparencia" data-en="Transparency">Transparencia</a>
+    <a href="contacto.html" data-es="Contacto" data-en="Contact">Contacto</a>
+  </div>
+</div>
+
+<script>
+function setLang(lang){document.querySelectorAll('.lang-btn').forEach(b=>b.classList.toggle('active',b.textContent===lang.toUpperCase()));document.querySelectorAll('[data-'+lang+']').forEach(el=>{const v=el.getAttribute('data-'+lang);if(v)el.innerHTML=v;});document.documentElement.lang=lang;}
+function toggleNav(){const l=document.getElementById('navLinks'),o=document.getElementById('navOverlay'),h=document.getElementById('hamburger');l.classList.toggle('open');o.classList.toggle('open');const open=l.classList.contains('open');h.children[0].style.transform=open?'rotate(45deg) translate(4px,4px)':'';h.children[1].style.opacity=open?'0':'1';h.children[2].style.transform=open?'rotate(-45deg) translate(4px,-4px)':'';}
+function irA(id){document.getElementById(id).scrollIntoView({behavior:'smooth'});document.querySelectorAll('.pn-btn').forEach(b=>b.classList.remove('active'));event.target.classList.add('active');}
+window.addEventListener('scroll',()=>{document.querySelector('nav').style.boxShadow=window.scrollY>10?'0 2px 20px rgba(0,0,0,0.08)':'none';});
+const obs=new IntersectionObserver(entries=>{entries.forEach(e=>{if(e.isIntersecting)e.target.classList.add('visible');});},{threshold:0.08});
+document.querySelectorAll('.anim').forEach(el=>obs.observe(el));
+// Activar botón nav según hash
+if(window.location.hash){const id=window.location.hash.slice(1);setTimeout(()=>{const el=document.getElementById(id);if(el)el.scrollIntoView({behavior:'smooth'});},300);}
+</script>
+</body>
+</html>

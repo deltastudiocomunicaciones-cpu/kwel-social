@@ -1,0 +1,640 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Transparencia — Corporación Social Kwel · NIT 900.554.556-5</title>
+<meta name="description" content="Información institucional, legal y financiera de la Corporación Social Kwel. NIT 900.554.556-5. Régimen Tributario Especial DIAN. Personería jurídica activa.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400&family=DM+Sans:wght@300;400;500&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root{
+  --verde:#1a4a2e;--verde-medio:#2d6e47;--verde-claro:#4a9e6a;
+  --dorado:#c8a86b;--tierra:#8b5e3c;--crema:#f5f0e8;
+  --blanco:#fafaf7;--gris:#6b7280;--gris-claro:#e8e4dc;--negro:#0f1a0f;
+}
+*{margin:0;padding:0;box-sizing:border-box;}
+html{scroll-behavior:smooth;}
+body{font-family:'DM Sans',sans-serif;background:var(--blanco);color:var(--negro);overflow-x:hidden;}
+a{text-decoration:none;color:inherit;}
+
+/* ── TOPBAR ── */
+.topbar{background:var(--verde);padding:8px 48px;display:flex;justify-content:space-between;align-items:center;font-family:'DM Mono',monospace;font-size:11px;color:rgba(255,255,255,0.55);}
+.topbar a{color:rgba(255,255,255,0.55);transition:color .2s;}
+.topbar a:hover{color:var(--dorado);}
+.lang-toggle{display:flex;gap:4px;}
+.lang-btn{padding:3px 10px;border:1px solid rgba(255,255,255,0.2);font-family:'DM Mono',monospace;font-size:10px;cursor:pointer;color:rgba(255,255,255,0.55);background:transparent;letter-spacing:0.1em;transition:all .2s;}
+.lang-btn.active{background:var(--dorado);color:var(--verde);border-color:var(--dorado);}
+.lang-btn:hover:not(.active){color:var(--dorado);border-color:var(--dorado);}
+
+/* ── NAV ── */
+nav{position:sticky;top:0;z-index:100;background:rgba(250,250,247,0.96);backdrop-filter:blur(12px);border-bottom:1px solid var(--gris-claro);padding:0 48px;display:flex;justify-content:space-between;align-items:center;height:68px;}
+.nav-logo{display:flex;align-items:center;gap:12px;}
+.nav-logo img{width:40px;height:40px;object-fit:contain;}
+.nav-logo-text{font-family:'Playfair Display',serif;font-size:17px;font-weight:700;color:var(--verde);}
+.nav-links{display:flex;gap:32px;align-items:center;}
+.nav-links a{font-size:13px;font-weight:500;color:var(--gris);letter-spacing:0.03em;transition:color .2s;position:relative;}
+.nav-links a::after{content:'';position:absolute;bottom:-4px;left:0;right:0;height:1px;background:var(--verde-claro);transform:scaleX(0);transform-origin:left;transition:transform .2s;}
+.nav-links a:hover{color:var(--verde);}
+.nav-links a:hover::after,.nav-links a.activo::after{transform:scaleX(1);}
+.nav-links a.activo{color:var(--verde);}
+.nav-cta{background:var(--dorado);color:var(--verde);padding:9px 22px;font-size:12px;font-weight:500;font-family:'DM Mono',monospace;letter-spacing:0.1em;text-transform:uppercase;transition:all .2s;border:none;cursor:pointer;display:inline-block;}
+.nav-cta:hover{background:var(--verde);color:var(--dorado);}
+.hamburger{display:none;flex-direction:column;gap:5px;cursor:pointer;background:none;border:none;padding:4px;}
+.hamburger span{display:block;width:24px;height:1.5px;background:var(--verde);transition:all .3s;}
+.nav-overlay{display:none;position:fixed;inset:0;z-index:190;}
+.nav-overlay.open{display:block;}
+
+/* ── PAGE HERO ── */
+.page-hero{
+  background:var(--verde);padding:72px 48px 64px;
+  position:relative;overflow:hidden;
+}
+.page-hero::after{content:'';position:absolute;right:-60px;bottom:-60px;width:280px;height:280px;border-radius:50%;border:1px solid rgba(200,168,107,0.1);}
+.page-hero::before{content:'';position:absolute;right:80px;bottom:40px;width:160px;height:160px;border-radius:50%;border:1px solid rgba(200,168,107,0.07);}
+.ph-inner{max-width:820px;position:relative;z-index:2;}
+.ph-eyebrow{font-family:'DM Mono',monospace;font-size:10px;letter-spacing:0.3em;text-transform:uppercase;color:var(--dorado);margin-bottom:16px;display:flex;align-items:center;gap:10px;}
+.ph-eyebrow::before{content:'';display:block;width:24px;height:1px;background:var(--dorado);}
+.ph-titulo{font-family:'Playfair Display',serif;font-size:clamp(32px,4vw,54px);font-weight:900;color:var(--blanco);line-height:1.1;margin-bottom:20px;}
+.ph-titulo em{font-style:italic;color:var(--dorado);}
+.ph-desc{font-size:15px;line-height:1.75;color:rgba(255,255,255,0.62);max-width:580px;margin-bottom:32px;}
+.ph-nit-strip{
+  display:inline-flex;align-items:center;gap:24px;flex-wrap:wrap;
+  border:1px solid rgba(200,168,107,0.25);padding:14px 20px;
+  background:rgba(200,168,107,0.07);
+}
+.ph-nit-item{text-align:center;}
+.ph-nit-label{font-family:'DM Mono',monospace;font-size:9px;letter-spacing:0.15em;text-transform:uppercase;color:rgba(255,255,255,0.35);margin-bottom:3px;}
+.ph-nit-val{font-family:'DM Mono',monospace;font-size:13px;color:var(--dorado);font-weight:500;}
+.ph-nit-sep{width:1px;height:36px;background:rgba(255,255,255,0.1);}
+
+/* ── MAIN ── */
+.main{max-width:1080px;margin:0 auto;padding:72px 48px;}
+.main-grid{display:grid;grid-template-columns:2fr 1fr;gap:64px;align-items:start;}
+
+/* ── SECCIONES DE CONTENIDO ── */
+.bloque{margin-bottom:56px;}
+.bloque-header{display:flex;align-items:center;gap:12px;margin-bottom:24px;padding-bottom:14px;border-bottom:1px solid var(--gris-claro);}
+.bloque-num{font-family:'DM Mono',monospace;font-size:10px;letter-spacing:0.15em;color:var(--verde-claro);background:rgba(74,158,106,0.1);padding:3px 10px;}
+.bloque-titulo{font-family:'Playfair Display',serif;font-size:20px;font-weight:700;color:var(--verde);}
+
+/* TABLA DATOS INSTITUCIONALES */
+.tabla-inst{width:100%;border-collapse:collapse;border:1px solid var(--gris-claro);}
+.tabla-inst tr{border-bottom:1px solid var(--gris-claro);}
+.tabla-inst tr:last-child{border-bottom:none;}
+.tabla-inst tr:nth-child(even){background:rgba(26,74,46,0.03);}
+.tabla-inst td{padding:12px 16px;font-size:13.5px;vertical-align:top;}
+.tabla-inst .td-key{color:var(--gris);font-weight:500;width:38%;font-size:12.5px;}
+.tabla-inst .td-val{color:var(--negro);font-weight:400;}
+.tabla-inst .td-val.mono{font-family:'DM Mono',monospace;font-size:12px;color:var(--verde);}
+.tabla-inst .td-val.badge-rte{
+  display:inline-block;background:rgba(74,158,106,0.1);color:var(--verde-medio);
+  font-family:'DM Mono',monospace;font-size:11px;padding:3px 10px;letter-spacing:0.06em;
+}
+.tabla-inst .td-val.badge-activo{
+  display:inline-block;background:rgba(74,158,106,0.12);color:var(--verde-medio);
+  font-family:'DM Mono',monospace;font-size:11px;padding:3px 10px;
+}
+
+/* OBJETO SOCIAL */
+.objeto-box{
+  background:var(--crema);border-left:3px solid var(--dorado);
+  padding:24px 28px;margin-bottom:16px;font-size:14px;
+  color:var(--negro);line-height:1.75;
+}
+.objeto-box p+p{margin-top:12px;}
+
+/* DIRECTIVOS */
+.directivos-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;}
+.dir-card{border:1px solid var(--gris-claro);padding:18px 20px;transition:border-color .2s;}
+.dir-card:hover{border-color:var(--verde-claro);}
+.dir-inicial{
+  width:40px;height:40px;background:var(--verde);color:var(--dorado);
+  font-family:'Playfair Display',serif;font-size:16px;font-weight:700;
+  display:flex;align-items:center;justify-content:center;margin-bottom:10px;
+}
+.dir-nombre{font-size:13px;font-weight:500;color:var(--negro);margin-bottom:2px;}
+.dir-cargo{font-size:11.5px;color:var(--gris);}
+
+/* PROYECTOS / DESTINO RECURSOS */
+.proyectos-recursos{display:flex;flex-direction:column;gap:10px;}
+.pr-item{
+  display:grid;grid-template-columns:32px 1fr auto;
+  gap:14px;align-items:center;
+  border:1px solid var(--gris-claro);padding:14px 16px;
+  transition:border-color .2s;
+}
+.pr-item:hover{border-color:var(--verde-claro);}
+.pr-ico{font-size:20px;}
+.pr-nombre{font-size:13px;font-weight:500;color:var(--negro);}
+.pr-desc{font-size:11.5px;color:var(--gris);margin-top:2px;}
+.pr-pct{
+  font-family:'Playfair Display',serif;font-size:20px;
+  font-weight:700;color:var(--verde);text-align:right;
+  white-space:nowrap;
+}
+.pr-pct span{display:block;font-family:'DM Mono',monospace;font-size:9px;font-weight:400;color:var(--gris);letter-spacing:0.08em;text-align:right;}
+
+/* DOCUMENTOS */
+.docs-lista{display:flex;flex-direction:column;gap:8px;}
+.doc-item{
+  display:flex;gap:14px;align-items:center;
+  border:1px solid var(--gris-claro);padding:14px 16px;
+  transition:all .2s;cursor:pointer;
+}
+.doc-item:hover{border-color:var(--verde);background:rgba(26,74,46,0.02);}
+.doc-ico{
+  width:36px;height:36px;background:rgba(26,74,46,0.08);
+  display:flex;align-items:center;justify-content:center;
+  font-size:16px;flex-shrink:0;
+}
+.doc-info{flex:1;}
+.doc-nombre{font-size:13px;font-weight:500;color:var(--negro);}
+.doc-estado{font-size:11px;color:var(--gris);margin-top:2px;}
+.doc-badge{font-family:'DM Mono',monospace;font-size:9px;padding:3px 8px;letter-spacing:0.06em;flex-shrink:0;}
+.badge-disponible{background:rgba(74,158,106,0.1);color:var(--verde-medio);}
+.badge-proceso{background:rgba(200,168,107,0.12);color:var(--tierra);}
+.badge-proximo{background:rgba(107,114,128,0.1);color:var(--gris);}
+
+/* SIDEBAR STICKY */
+.sidebar{position:sticky;top:84px;display:flex;flex-direction:column;gap:16px;}
+.side-card{border:1px solid var(--gris-claro);padding:24px;}
+.side-titulo{font-family:'Playfair Display',serif;font-size:15px;font-weight:700;color:var(--verde);margin-bottom:16px;padding-bottom:12px;border-bottom:1px solid var(--gris-claro);}
+.side-row{display:flex;justify-content:space-between;align-items:flex-start;padding:8px 0;border-bottom:1px dashed rgba(0,0,0,0.07);font-size:12.5px;gap:8px;}
+.side-row:last-child{border-bottom:none;}
+.side-key{color:var(--gris);flex-shrink:0;}
+.side-val{font-family:'DM Mono',monospace;font-size:11.5px;color:var(--negro);text-align:right;font-weight:500;}
+.side-val.verde{color:var(--verde-medio);}
+.side-val.dorado{color:var(--tierra);}
+
+.side-dian{
+  background:var(--verde);padding:20px;
+}
+.sd-titulo{font-family:'DM Mono',monospace;font-size:9px;letter-spacing:0.2em;text-transform:uppercase;color:var(--dorado);margin-bottom:12px;}
+.sd-texto{font-size:12.5px;color:rgba(255,255,255,0.65);line-height:1.65;}
+.sd-texto strong{color:var(--dorado);}
+.sd-nit{font-family:'DM Mono',monospace;font-size:16px;font-weight:500;color:var(--blanco);margin:12px 0 4px;}
+.sd-subtexto{font-size:11px;color:rgba(255,255,255,0.35);font-family:'DM Mono',monospace;}
+
+.side-dona{
+  background:var(--dorado);padding:20px;
+  text-align:center;cursor:pointer;transition:background .2s;display:block;
+}
+.side-dona:hover{background:var(--verde);}
+.side-dona:hover .sd-btn-texto{color:var(--dorado);}
+.sd-btn-ico{font-size:24px;margin-bottom:8px;}
+.sd-btn-texto{font-family:'DM Mono',monospace;font-size:11px;letter-spacing:0.12em;text-transform:uppercase;color:var(--verde);font-weight:500;transition:color .2s;}
+
+/* OBLIGACIONES RTE */
+.obligaciones{display:flex;flex-direction:column;gap:10px;}
+.ob-item{
+  display:flex;gap:14px;align-items:flex-start;
+  padding:14px 16px;border-left:2px solid var(--gris-claro);
+  transition:border-color .2s;
+}
+.ob-item:hover{border-left-color:var(--verde-claro);}
+.ob-item.cumplida{border-left-color:var(--verde-claro);}
+.ob-item.pendiente{border-left-color:var(--dorado);}
+.ob-ico{font-size:18px;flex-shrink:0;margin-top:2px;}
+.ob-titulo{font-size:13px;font-weight:500;color:var(--negro);margin-bottom:3px;}
+.ob-desc{font-size:12px;color:var(--gris);line-height:1.5;}
+.ob-estado{font-family:'DM Mono',monospace;font-size:9px;letter-spacing:0.08em;margin-top:5px;display:inline-block;padding:2px 8px;}
+.est-cumplida{background:rgba(74,158,106,0.1);color:var(--verde-medio);}
+.est-pendiente{background:rgba(200,168,107,0.12);color:var(--tierra);}
+
+/* NOTA DIAN */
+.nota-dian{
+  background:var(--crema);border:1px solid var(--gris-claro);
+  border-left:3px solid var(--verde-claro);
+  padding:18px 22px;font-size:13px;color:var(--negro);line-height:1.7;
+}
+.nota-dian strong{color:var(--verde);}
+.nota-dian a{color:var(--verde-medio);text-decoration:underline;}
+
+/* FOOTER */
+.footer-strip{background:var(--negro);padding:40px 48px;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:24px;margin-top:80px;}
+.fs-left{font-family:'DM Mono',monospace;font-size:11px;color:rgba(255,255,255,0.3);line-height:1.8;}
+.fs-links{display:flex;gap:20px;flex-wrap:wrap;}
+.fs-links a{font-size:13px;color:rgba(255,255,255,0.4);transition:color .2s;}
+.fs-links a:hover{color:var(--dorado);}
+
+/* RESPONSIVE */
+@media(max-width:960px){
+  .main{padding:48px 24px;}
+  .main-grid{grid-template-columns:1fr;gap:40px;}
+  .sidebar{position:static;}
+  .page-hero{padding:56px 24px;}
+}
+@media(max-width:768px){
+  .topbar{padding:8px 20px;}
+  nav{padding:0 20px;}
+  .nav-links{display:none;}
+  .hamburger{display:flex;}
+  .nav-links.open{display:flex;flex-direction:column;position:fixed;top:68px;left:0;right:0;bottom:0;background:var(--verde);z-index:200;padding:32px 24px;gap:0;}
+  .nav-links.open a{color:rgba(255,255,255,0.8);font-size:18px;padding:14px 0;border-bottom:1px solid rgba(255,255,255,0.1);}
+  .nav-cta{display:none;}
+  .footer-strip{padding:32px 20px;flex-direction:column;align-items:flex-start;}
+  .directivos-grid{grid-template-columns:1fr;}
+  .ph-nit-strip{flex-direction:column;gap:12px;}
+  .ph-nit-sep{display:none;}
+}
+@media(max-width:480px){
+  .page-hero{padding:40px 16px;}
+  .main{padding:40px 16px;}
+}
+
+/* Animaciones */
+.anim{opacity:0;transform:translateY(20px);transition:opacity .6s ease,transform .6s ease;}
+.anim.visible{opacity:1;transform:translateY(0);}
+</style>
+</head>
+<body>
+
+<!-- TOPBAR -->
+<div class="topbar">
+  <span>📍 Ed. Scala Of. 1110, Sabaneta &nbsp;·&nbsp; <a href="mailto:kwelsocial@gmail.com">kwelsocial@gmail.com</a> &nbsp;·&nbsp; <a href="tel:+573008561465">300 856 1465</a></span>
+  <div class="lang-toggle">
+    <button class="lang-btn active" onclick="setLang('es')">ES</button>
+    <button class="lang-btn" onclick="setLang('en')">EN</button>
+  </div>
+</div>
+
+<!-- NAV -->
+<nav>
+  <a href="index.html" class="nav-logo">
+    <img src="https://kwelsocial.com/wp-content/uploads/2023/11/KWEL-SOCIAL.png" alt="Kwel Social">
+    <span class="nav-logo-text">Kwel Social</span>
+  </a>
+  <div class="nav-links" id="navLinks">
+    <a href="index.html" data-es="Inicio" data-en="Home">Inicio</a>
+    <a href="nosotros.html" data-es="Nosotros" data-en="About">Nosotros</a>
+    <a href="proyecto-drones.html" data-es="Proyecto Drones" data-en="Drone Project">Proyecto Drones</a>
+    <a href="proyectos.html" data-es="Proyectos" data-en="Projects">Proyectos</a>
+    <a href="transparencia.html" class="activo" data-es="Transparencia" data-en="Transparency">Transparencia</a>
+    <a href="contacto.html" data-es="Contacto" data-en="Contact">Contacto</a>
+  </div>
+  <a href="dona.html" class="nav-cta" data-es="Dona ahora" data-en="Donate now">Dona ahora</a>
+  <button class="hamburger" id="hamburger" onclick="toggleNav()"><span></span><span></span><span></span></button>
+</nav>
+<div class="nav-overlay" id="navOverlay" onclick="toggleNav()"></div>
+
+<!-- PAGE HERO -->
+<section class="page-hero">
+  <div class="ph-inner">
+    <div class="ph-eyebrow" data-es="Rendición de cuentas · Cumplimiento DIAN" data-en="Accountability · DIAN Compliance">Rendición de cuentas · Cumplimiento DIAN</div>
+    <h1 class="ph-titulo">
+      <span data-es="Información institucional y <em>rendición de cuentas</em>" data-en="Institutional information and <em>accountability</em>">Información institucional y <em>rendición de cuentas</em></span>
+    </h1>
+    <p class="ph-desc" data-es="La Corporación Social Kwel publica esta información en cumplimiento de las obligaciones del Régimen Tributario Especial (RTE) de la DIAN y en ejercicio de su compromiso con la transparencia ante donantes, aliados y comunidad." data-en="Corporación Social Kwel publishes this information in compliance with DIAN's Special Tax Regime (RTE) obligations and in exercise of its commitment to transparency with donors, partners and community.">La Corporación Social Kwel publica esta información en cumplimiento de las obligaciones del Régimen Tributario Especial (RTE) de la DIAN y en ejercicio de su compromiso con la transparencia ante donantes, aliados y comunidad.</p>
+    <div class="ph-nit-strip">
+      <div class="ph-nit-item">
+        <div class="ph-nit-label">NIT</div>
+        <div class="ph-nit-val">900.554.556-5</div>
+      </div>
+      <div class="ph-nit-sep"></div>
+      <div class="ph-nit-item">
+        <div class="ph-nit-label" data-es="Régimen" data-en="Regime">Régimen</div>
+        <div class="ph-nit-val" data-es="Tributario Especial" data-en="Special Tax">Tributario Especial</div>
+      </div>
+      <div class="ph-nit-sep"></div>
+      <div class="ph-nit-item">
+        <div class="ph-nit-label" data-es="Tipo entidad" data-en="Entity type">Tipo entidad</div>
+        <div class="ph-nit-val" data-es="Sin ánimo de lucro" data-en="Nonprofit">Sin ánimo de lucro</div>
+      </div>
+      <div class="ph-nit-sep"></div>
+      <div class="ph-nit-item">
+        <div class="ph-nit-label" data-es="Fundación" data-en="Founded">Fundación</div>
+        <div class="ph-nit-val">2012</div>
+      </div>
+      <div class="ph-nit-sep"></div>
+      <div class="ph-nit-item">
+        <div class="ph-nit-label" data-es="Sede" data-en="Location">Sede</div>
+        <div class="ph-nit-val">Sabaneta, Ant.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- MAIN -->
+<div class="main">
+  <div class="main-grid">
+
+    <!-- COLUMNA PRINCIPAL -->
+    <div>
+
+      <!-- 1. DATOS INSTITUCIONALES -->
+      <div class="bloque anim">
+        <div class="bloque-header">
+          <span class="bloque-num">01</span>
+          <span class="bloque-titulo" data-es="Datos institucionales" data-en="Institutional data">Datos institucionales</span>
+        </div>
+        <table class="tabla-inst">
+          <tr><td class="td-key" data-es="Nombre completo" data-en="Full name">Nombre completo</td><td class="td-val">Corporación Social Kwel</td></tr>
+          <tr><td class="td-key">NIT</td><td class="td-val mono">900.554.556-5</td></tr>
+          <tr><td class="td-key" data-es="Naturaleza jurídica" data-en="Legal nature">Naturaleza jurídica</td><td class="td-val"><span class="badge-rte" data-es="Entidad sin ánimo de lucro" data-en="Nonprofit entity">Entidad sin ánimo de lucro</span></td></tr>
+          <tr><td class="td-key" data-es="Régimen tributario" data-en="Tax regime">Régimen tributario</td><td class="td-val"><span class="badge-rte" data-es="Especial (RTE) · DIAN" data-en="Special (RTE) · DIAN">Especial (RTE) · DIAN</span></td></tr>
+          <tr><td class="td-key" data-es="Estado personería" data-en="Legal status">Estado personería</td><td class="td-val"><span class="badge-activo" data-es="Activa · Vigente" data-en="Active · Current">Activa · Vigente</span></td></tr>
+          <tr><td class="td-key" data-es="Número personería" data-en="Legal entity number">Número personería</td><td class="td-val mono" data-es="[Por completar con número oficial]" data-en="[To be completed with official number]">[Por completar con número oficial]</td></tr>
+          <tr><td class="td-key" data-es="Fecha constitución" data-en="Incorporation date">Fecha constitución</td><td class="td-val">2012</td></tr>
+          <tr><td class="td-key" data-es="Sede principal" data-en="Main office">Sede principal</td><td class="td-val">Cll 52 Sur N° 43A 20 Of. 1110, Ed. Scala, Sabaneta, Antioquia</td></tr>
+          <tr><td class="td-key" data-es="Correo oficial" data-en="Official email">Correo oficial</td><td class="td-val"><a href="mailto:kwelsocial@gmail.com" style="color:var(--verde-medio);text-decoration:underline;">kwelsocial@gmail.com</a></td></tr>
+          <tr><td class="td-key" data-es="Teléfono" data-en="Phone">Teléfono</td><td class="td-val mono">300 856 1465</td></tr>
+          <tr><td class="td-key" data-es="Ámbito de operación" data-en="Operating scope">Ámbito de operación</td><td class="td-val" data-es="Nacional — Antioquia y regiones agrícolas de Colombia" data-en="National — Antioquia and agricultural regions of Colombia">Nacional — Antioquia y regiones agrícolas de Colombia</td></tr>
+        </table>
+      </div>
+
+      <!-- 2. OBJETO SOCIAL -->
+      <div class="bloque anim">
+        <div class="bloque-header">
+          <span class="bloque-num">02</span>
+          <span class="bloque-titulo" data-es="Objeto social" data-en="Social purpose">Objeto social</span>
+        </div>
+        <div class="objeto-box">
+          <p data-es="La Corporación Social Kwel tiene como objeto social el impulso del desarrollo rural, la innovación agrotecnológica, la educación, el arte, la cultura y el bienestar comunitario en Antioquia y las regiones agrícolas de Colombia, con especial énfasis en comunidades rurales de pequeños y medianos productores." data-en="Corporación Social Kwel's social purpose is to drive rural development, agrotechnological innovation, education, art, culture and community wellbeing in Antioquia and the agricultural regions of Colombia, with special emphasis on rural communities of small and medium producers.">La Corporación Social Kwel tiene como objeto social el impulso del desarrollo rural, la innovación agrotecnológica, la educación, el arte, la cultura y el bienestar comunitario en Antioquia y las regiones agrícolas de Colombia, con especial énfasis en comunidades rurales de pequeños y medianos productores.</p>
+          <p data-es="Para el cumplimiento de su objeto, la corporación presta servicios de agricultura de precisión mediante tecnología drone, ejecuta proyectos agroecológicos, desarrolla iniciativas artísticas y culturales, y opera programas de bienestar y protección animal — reinvirtiendo la totalidad de los excedentes operativos en la expansión de estos programas." data-en="To fulfill its purpose, the corporation provides precision agriculture services using drone technology, executes agroecological projects, develops artistic and cultural initiatives, and operates animal welfare and protection programs — reinvesting all operating surpluses in the expansion of these programs.">Para el cumplimiento de su objeto, la corporación presta servicios de agricultura de precisión mediante tecnología drone, ejecuta proyectos agroecológicos, desarrolla iniciativas artísticas y culturales, y opera programas de bienestar y protección animal — reinvirtiendo la totalidad de los excedentes operativos en la expansión de estos programas.</p>
+        </div>
+      </div>
+
+      <!-- 3. EQUIPO DIRECTIVO -->
+      <div class="bloque anim">
+        <div class="bloque-header">
+          <span class="bloque-num">03</span>
+          <span class="bloque-titulo" data-es="Equipo directivo" data-en="Leadership team">Equipo directivo</span>
+        </div>
+        <div class="directivos-grid">
+          <div class="dir-card">
+            <div class="dir-inicial">RL</div>
+            <div class="dir-nombre" data-es="[Representante Legal]" data-en="[Legal Representative]">[Representante Legal]</div>
+            <div class="dir-cargo" data-es="Representante Legal · Corporación Social Kwel" data-en="Legal Representative · Corporación Social Kwel">Representante Legal · Corporación Social Kwel</div>
+          </div>
+          <div class="dir-card">
+            <div class="dir-inicial">PD</div>
+            <div class="dir-nombre" data-es="[Presidente de Junta]" data-en="[Board President]">[Presidente de Junta]</div>
+            <div class="dir-cargo" data-es="Presidente · Junta Directiva" data-en="President · Board of Directors">Presidente · Junta Directiva</div>
+          </div>
+          <div class="dir-card">
+            <div class="dir-inicial">LC</div>
+            <div class="dir-nombre">Lina M. Cardona</div>
+            <div class="dir-cargo" data-es="Comunicaciones" data-en="Communications">Comunicaciones</div>
+          </div>
+          <div class="dir-card">
+            <div class="dir-inicial">DL</div>
+            <div class="dir-nombre">Diana López S.</div>
+            <div class="dir-cargo" data-es="Coordinación" data-en="Coordination">Coordinación</div>
+          </div>
+        </div>
+        <div class="nota-dian" style="margin-top:14px;">
+          <strong data-es="Nota:" data-en="Note:">Nota:</strong> <span data-es="Los campos marcados con [por completar] deben ser llenados con la información oficial según los estatutos y el certificado de existencia vigente de la Cámara de Comercio." data-en="Fields marked with [to be completed] must be filled with official information according to the bylaws and current certificate of existence from the Chamber of Commerce.">Los campos marcados con [por completar] deben ser llenados con la información oficial según los estatutos y el certificado de existencia vigente de la Cámara de Comercio.</span>
+        </div>
+      </div>
+
+      <!-- 4. DESTINO DE RECURSOS -->
+      <div class="bloque anim">
+        <div class="bloque-header">
+          <span class="bloque-num">04</span>
+          <span class="bloque-titulo" data-es="Destino de los recursos" data-en="Resource allocation">Destino de los recursos</span>
+        </div>
+        <p style="font-size:14px;color:var(--gris);line-height:1.7;margin-bottom:20px;" data-es="Como entidad sin ánimo de lucro, el 100% de los excedentes operativos de Kwel se reinvierte en sus proyectos misionales. A continuación se presenta la distribución proyectada de recursos por línea de acción." data-en="As a nonprofit entity, 100% of Kwel's operating surpluses are reinvested in its mission projects. The projected distribution of resources by line of action is presented below.">Como entidad sin ánimo de lucro, el 100% de los excedentes operativos de Kwel se reinvierte en sus proyectos misionales.</p>
+        <div class="proyectos-recursos">
+          <div class="pr-item">
+            <div class="pr-ico">✈️</div>
+            <div>
+              <div class="pr-nombre" data-es="Drones Agrícolas — DJI Agras T100" data-en="Agricultural Drones — DJI Agras T100">Drones Agrícolas — DJI Agras T100</div>
+              <div class="pr-desc" data-es="Adquisición, operación y expansión de flota de aspersión agrícola de precisión" data-en="Acquisition, operation and expansion of precision agricultural spraying fleet">Adquisición, operación y expansión de flota de aspersión agrícola de precisión</div>
+            </div>
+            <div class="pr-pct">70%<span data-es="inversión inicial" data-en="initial investment">inversión inicial</span></div>
+          </div>
+          <div class="pr-item">
+            <div class="pr-ico">🌱</div>
+            <div>
+              <div class="pr-nombre" data-es="Proyectos Agroecológicos" data-en="Agroecological Projects">Proyectos Agroecológicos</div>
+              <div class="pr-desc" data-es="Prácticas sostenibles, seguridad alimentaria y producción limpia en Antioquia" data-en="Sustainable practices, food security and clean production in Antioquia">Prácticas sostenibles, seguridad alimentaria y producción limpia en Antioquia</div>
+            </div>
+            <div class="pr-pct">—<span data-es="en desarrollo" data-en="in development">en desarrollo</span></div>
+          </div>
+          <div class="pr-item">
+            <div class="pr-ico">🎨</div>
+            <div>
+              <div class="pr-nombre" data-es="Arte y Cultura" data-en="Art & Culture">Arte y Cultura</div>
+              <div class="pr-desc" data-es="Murales, concursos artísticos y expresión cultural comunitaria en Antioquia" data-en="Murals, artistic competitions and community cultural expression in Antioquia">Murales, concursos artísticos y expresión cultural comunitaria en Antioquia</div>
+            </div>
+            <div class="pr-pct">—<span data-es="activo" data-en="active">activo</span></div>
+          </div>
+          <div class="pr-item">
+            <div class="pr-ico">🐾</div>
+            <div>
+              <div class="pr-nombre" data-es="Albergue Animal" data-en="Animal Shelter">Albergue Animal</div>
+              <div class="pr-desc" data-es="Rescate, protección y adopción responsable de animales en Antioquia" data-en="Rescue, protection and responsible adoption of animals in Antioquia">Rescate, protección y adopción responsable de animales en Antioquia</div>
+            </div>
+            <div class="pr-pct">—<span data-es="activo" data-en="active">activo</span></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- 5. OBLIGACIONES RTE -->
+      <div class="bloque anim">
+        <div class="bloque-header">
+          <span class="bloque-num">05</span>
+          <span class="bloque-titulo" data-es="Cumplimiento obligaciones RTE · DIAN" data-en="RTE obligations compliance · DIAN">Cumplimiento obligaciones RTE · DIAN</span>
+        </div>
+        <div class="obligaciones">
+          <div class="ob-item cumplida">
+            <div class="ob-ico">✅</div>
+            <div>
+              <div class="ob-titulo" data-es="Publicación de información institucional en sitio web" data-en="Publication of institutional information on website">Publicación de información institucional en sitio web</div>
+              <div class="ob-desc" data-es="NIT, objeto social, equipo directivo, régimen tributario y datos de contacto publicados en esta página." data-en="NIT, social purpose, leadership team, tax regime and contact details published on this page.">NIT, objeto social, equipo directivo, régimen tributario y datos de contacto publicados en esta página.</div>
+              <span class="ob-estado est-cumplida" data-es="Cumplida" data-en="Complied">Cumplida</span>
+            </div>
+          </div>
+          <div class="ob-item cumplida">
+            <div class="ob-ico">✅</div>
+            <div>
+              <div class="ob-titulo" data-es="Mecanismo de donación publicado y accesible" data-en="Published and accessible donation mechanism">Mecanismo de donación publicado y accesible</div>
+              <div class="ob-desc" data-es="Portal de donaciones con PSE, transferencia y datos bancarios disponible en /dona.html. Certificado de donación Art. 257 E.T. garantizado." data-en="Donation portal with PSE, transfer and bank details available at /dona.html. Art. 257 E.T. donation certificate guaranteed.">Portal de donaciones activo en <a href="dona.html" style="color:var(--verde-medio);">dona.html</a>. Certificado Art. 257 E.T. garantizado en 5 días hábiles.</div>
+              <span class="ob-estado est-cumplida" data-es="Cumplida" data-en="Complied">Cumplida</span>
+            </div>
+          </div>
+          <div class="ob-item pendiente">
+            <div class="ob-ico">⏳</div>
+            <div>
+              <div class="ob-titulo" data-es="Informe de gestión anual" data-en="Annual management report">Informe de gestión anual</div>
+              <div class="ob-desc" data-es="Publicación del informe de gestión y actividades correspondiente al año fiscal. Incluirá resumen de proyectos ejecutados, recursos recibidos y beneficiarios." data-en="Publication of the management and activities report for the fiscal year. Will include summary of executed projects, resources received and beneficiaries.">Informe de gestión anual con proyectos ejecutados, recursos y beneficiarios. Se publicará en esta sección al cierre del año fiscal.</div>
+              <span class="ob-estado est-pendiente" data-es="En preparación · 2025" data-en="In preparation · 2025">En preparación · 2025</span>
+            </div>
+          </div>
+          <div class="ob-item pendiente">
+            <div class="ob-ico">⏳</div>
+            <div>
+              <div class="ob-titulo" data-es="Estados financieros resumidos" data-en="Summary financial statements">Estados financieros resumidos</div>
+              <div class="ob-desc" data-es="Publicación de balance general y estado de resultados en formato comprensible para donantes y aliados. Se publicará una vez aprobados por la junta directiva." data-en="Publication of balance sheet and income statement in a format understandable to donors and partners. Will be published once approved by the board of directors.">Balance y estado de resultados para donantes. Se publicará una vez aprobados por junta directiva.</div>
+              <span class="ob-estado est-pendiente" data-es="En preparación · 2025" data-en="In preparation · 2025">En preparación · 2025</span>
+            </div>
+          </div>
+          <div class="ob-item pendiente">
+            <div class="ob-ico">⏳</div>
+            <div>
+              <div class="ob-titulo" data-es="Declaración de renta RTE ante la DIAN" data-en="RTE income tax return with DIAN">Declaración de renta RTE ante la DIAN</div>
+              <div class="ob-desc" data-es="Presentación oportuna de la declaración de renta bajo el formulario del RTE según el calendario tributario de la DIAN." data-en="Timely filing of the income tax return under the RTE form according to DIAN's tax calendar.">Presentación oportuna según el calendario tributario DIAN.</div>
+              <span class="ob-estado est-pendiente" data-es="Según calendario DIAN" data-en="Per DIAN calendar">Según calendario DIAN</span>
+            </div>
+          </div>
+        </div>
+        <div class="nota-dian" style="margin-top:20px;">
+          <strong data-es="Referencia normativa:" data-en="Regulatory reference:">Referencia normativa:</strong> <span data-es="Las obligaciones del RTE están establecidas en los artículos 19, 356 a 364 del Estatuto Tributario y el Decreto 2150 de 2017. Para más información consulte " data-en="RTE obligations are established in articles 19, 356 to 364 of the Tax Statute and Decree 2150 of 2017. For more information visit ">Las obligaciones del RTE están en los Arts. 19 y 356–364 del E.T. y el Decreto 2150 de 2017. Más información en </span><a href="https://www.dian.gov.co" target="_blank" rel="noopener">www.dian.gov.co</a>.
+        </div>
+      </div>
+
+      <!-- 6. DOCUMENTOS -->
+      <div class="bloque anim">
+        <div class="bloque-header">
+          <span class="bloque-num">06</span>
+          <span class="bloque-titulo" data-es="Documentos institucionales" data-en="Institutional documents">Documentos institucionales</span>
+        </div>
+        <div class="docs-lista">
+          <div class="doc-item" onclick="solicitarDoc('RUT')">
+            <div class="doc-ico">📄</div>
+            <div class="doc-info">
+              <div class="doc-nombre" data-es="RUT — Registro Único Tributario" data-en="RUT — Unified Tax Registry">RUT — Registro Único Tributario</div>
+              <div class="doc-estado" data-es="NIT 900.554.556-5 · Régimen Tributario Especial" data-en="NIT 900.554.556-5 · Special Tax Regime">NIT 900.554.556-5 · Régimen Tributario Especial</div>
+            </div>
+            <span class="doc-badge badge-proceso" data-es="Solicitar" data-en="Request">Solicitar</span>
+          </div>
+          <div class="doc-item" onclick="solicitarDoc('Certificado Cámara de Comercio')">
+            <div class="doc-ico">🏛️</div>
+            <div class="doc-info">
+              <div class="doc-nombre" data-es="Certificado de existencia y representación legal" data-en="Certificate of existence and legal representation">Certificado de existencia y representación legal</div>
+              <div class="doc-estado" data-es="Cámara de Comercio · Personería jurídica vigente" data-en="Chamber of Commerce · Current legal status">Cámara de Comercio · Personería jurídica vigente</div>
+            </div>
+            <span class="doc-badge badge-proceso" data-es="Solicitar" data-en="Request">Solicitar</span>
+          </div>
+          <div class="doc-item" onclick="solicitarDoc('Estatutos')">
+            <div class="doc-ico">📋</div>
+            <div class="doc-info">
+              <div class="doc-nombre" data-es="Estatutos de la corporación" data-en="Corporation bylaws">Estatutos de la corporación</div>
+              <div class="doc-estado" data-es="Objeto social, estructura de gobierno y disposiciones generales" data-en="Social purpose, governance structure and general provisions">Objeto social, estructura de gobierno y disposiciones generales</div>
+            </div>
+            <span class="doc-badge badge-proceso" data-es="Solicitar" data-en="Request">Solicitar</span>
+          </div>
+          <div class="doc-item">
+            <div class="doc-ico">📊</div>
+            <div class="doc-info">
+              <div class="doc-nombre" data-es="Informe de gestión anual 2025" data-en="2025 Annual management report">Informe de gestión anual 2025</div>
+              <div class="doc-estado" data-es="Proyectos ejecutados, recursos y beneficiarios · En preparación" data-en="Executed projects, resources and beneficiaries · In preparation">Proyectos ejecutados, recursos y beneficiarios · En preparación</div>
+            </div>
+            <span class="doc-badge badge-proximo" data-es="Disponible dic. 2025" data-en="Available Dec. 2025">Disponible dic. 2025</span>
+          </div>
+          <div class="doc-item">
+            <div class="doc-ico">💰</div>
+            <div class="doc-info">
+              <div class="doc-nombre" data-es="Estados financieros 2024–2025" data-en="Financial statements 2024–2025">Estados financieros 2024–2025</div>
+              <div class="doc-estado" data-es="Balance general y estado de resultados · En preparación" data-en="Balance sheet and income statement · In preparation">Balance general y estado de resultados · En preparación</div>
+            </div>
+            <span class="doc-badge badge-proximo" data-es="En preparación" data-en="In preparation">En preparación</span>
+          </div>
+          <div class="doc-item" onclick="window.open('propuesta-kwel-drones.html','_blank')">
+            <div class="doc-ico">✈️</div>
+            <div class="doc-info">
+              <div class="doc-nombre" data-es="Propuesta técnica — Proyecto Drones Agrícolas" data-en="Technical proposal — Agricultural Drone Project">Propuesta técnica — Proyecto Drones Agrícolas</div>
+              <div class="doc-estado" data-es="Especificaciones, presupuesto y proyección financiera · DJI Agras T100" data-en="Specifications, budget and financial projection · DJI Agras T100">Especificaciones, presupuesto y proyección financiera · DJI Agras T100</div>
+            </div>
+            <span class="doc-badge badge-disponible" data-es="Disponible" data-en="Available">Disponible</span>
+          </div>
+        </div>
+        <div class="nota-dian" style="margin-top:16px;">
+          <strong data-es="Solicitud de documentos:" data-en="Document requests:">Solicitud de documentos:</strong> <span data-es="Haz clic en cualquier documento marcado como 'Solicitar' para enviar la solicitud por WhatsApp. También puedes escribir directamente a " data-en="Click on any document marked 'Request' to send the request via WhatsApp. You can also write directly to ">Haz clic en cualquier documento marcado 'Solicitar' para enviar la solicitud por WhatsApp. También puedes escribir a </span><a href="mailto:kwelsocial@gmail.com">kwelsocial@gmail.com</a>.
+        </div>
+      </div>
+
+    </div>
+
+    <!-- SIDEBAR -->
+    <div class="sidebar">
+
+      <div class="side-dian">
+        <div class="sd-titulo" data-es="Entidad habilitada DIAN" data-en="DIAN authorized entity">Entidad habilitada DIAN</div>
+        <div class="sd-nit">900.554.556-5</div>
+        <div class="sd-subtexto" data-es="NIT Corporación Social Kwel" data-en="NIT Corporación Social Kwel">NIT Corporación Social Kwel</div>
+        <div class="sd-texto" style="margin-top:12px;" data-es="Entidad del <strong>Régimen Tributario Especial</strong> de la DIAN. Las donaciones a Kwel generan <strong>beneficio tributario del 25%</strong> sobre el valor donado (Art. 257 E.T.)." data-en="Entity of the DIAN's <strong>Special Tax Regime</strong>. Donations to Kwel generate a <strong>25% tax benefit</strong> on the donated value (Art. 257 E.T.).">Entidad del <strong>Régimen Tributario Especial</strong> de la DIAN. Las donaciones a Kwel generan <strong>beneficio tributario del 25%</strong> sobre el valor donado (Art. 257 E.T.).</div>
+      </div>
+
+      <div class="side-card">
+        <div class="side-titulo" data-es="Datos de contacto oficial" data-en="Official contact details">Datos de contacto oficial</div>
+        <div class="side-row"><span class="side-key" data-es="Dirección" data-en="Address">Dirección</span><span class="side-val" style="font-size:10.5px;">Cll 52 Sur N° 43A 20<br>Of. 1110, Ed. Scala<br>Sabaneta, Ant.</span></div>
+        <div class="side-row"><span class="side-key">Email</span><span class="side-val"><a href="mailto:kwelsocial@gmail.com" style="color:var(--verde-medio);font-size:10.5px;">kwelsocial@gmail.com</a></span></div>
+        <div class="side-row"><span class="side-key" data-es="Teléfono" data-en="Phone">Teléfono</span><span class="side-val">300 856 1465</span></div>
+        <div class="side-row"><span class="side-key">Instagram</span><span class="side-val"><a href="https://www.instagram.com/kwelsocialorg/" target="_blank" style="color:var(--verde-medio);font-size:10.5px;">@kwelsocialorg</a></span></div>
+      </div>
+
+      <div class="side-card">
+        <div class="side-titulo" data-es="Ficha rápida" data-en="Quick facts">Ficha rápida</div>
+        <div class="side-row"><span class="side-key">NIT</span><span class="side-val verde">900.554.556-5</span></div>
+        <div class="side-row"><span class="side-key" data-es="Fundada" data-en="Founded">Fundada</span><span class="side-val">2012</span></div>
+        <div class="side-row"><span class="side-key" data-es="Régimen" data-en="Regime">Régimen</span><span class="side-val verde" data-es="Especial RTE" data-en="Special RTE">Especial RTE</span></div>
+        <div class="side-row"><span class="side-key" data-es="Proyectos activos" data-en="Active projects">Proyectos activos</span><span class="side-val">4</span></div>
+        <div class="side-row"><span class="side-key" data-es="Empleos proyectados" data-en="Projected jobs">Empleos proyectados</span><span class="side-val">6</span></div>
+        <div class="side-row"><span class="side-key" data-es="Inversión activa" data-en="Active investment">Inversión activa</span><span class="side-val dorado">$500M COP</span></div>
+      </div>
+
+      <a href="dona.html" class="side-dona">
+        <div class="sd-btn-ico">💚</div>
+        <div class="sd-btn-texto" data-es="Apoya a Kwel — Dona ahora" data-en="Support Kwel — Donate now">Apoya a Kwel — Dona ahora</div>
+      </a>
+
+    </div>
+  </div>
+</div>
+
+<!-- FOOTER -->
+<div class="footer-strip">
+  <div class="fs-left">
+    <strong style="color:rgba(255,255,255,0.55);">Corporación Social Kwel</strong><br>
+    NIT 900.554.556-5 · Régimen Tributario Especial · DIAN<br>
+    Cll 52 Sur N° 43A 20 Of. 1110 · Ed. Scala · Sabaneta, Antioquia<br>
+    kwelsocial@gmail.com · 300 856 1465
+  </div>
+  <div class="fs-links">
+    <a href="index.html" data-es="Inicio" data-en="Home">Inicio</a>
+    <a href="dona.html" data-es="Dona ahora" data-en="Donate now">Dona ahora</a>
+    <a href="proyecto-drones.html" data-es="Proyecto Drones" data-en="Drone Project">Proyecto Drones</a>
+    <a href="nosotros.html" data-es="Nosotros" data-en="About">Nosotros</a>
+    <a href="contacto.html" data-es="Contacto" data-en="Contact">Contacto</a>
+  </div>
+</div>
+
+<script>
+function setLang(lang) {
+  document.querySelectorAll('.lang-btn').forEach(b => b.classList.toggle('active', b.textContent === lang.toUpperCase()));
+  document.querySelectorAll('[data-' + lang + ']').forEach(el => {
+    const v = el.getAttribute('data-' + lang);
+    if (v) el.innerHTML = v;
+  });
+  document.documentElement.lang = lang;
+}
+
+function toggleNav() {
+  const l = document.getElementById('navLinks');
+  const o = document.getElementById('navOverlay');
+  const h = document.getElementById('hamburger');
+  l.classList.toggle('open'); o.classList.toggle('open');
+  const open = l.classList.contains('open');
+  h.children[0].style.transform = open ? 'rotate(45deg) translate(4px,4px)' : '';
+  h.children[1].style.opacity   = open ? '0' : '1';
+  h.children[2].style.transform = open ? 'rotate(-45deg) translate(4px,-4px)' : '';
+}
+
+function solicitarDoc(doc) {
+  const msg = encodeURIComponent('Hola Kwel, solicito el siguiente documento institucional: ' + doc + '. Por favor indíquenme el procedimiento para obtenerlo.');
+  window.open('https://wa.me/573008561465?text=' + msg, '_blank');
+}
+
+window.addEventListener('scroll', () => {
+  document.querySelector('nav').style.boxShadow = window.scrollY > 10 ? '0 2px 20px rgba(0,0,0,0.08)' : 'none';
+});
+
+const obs = new IntersectionObserver(entries => {
+  entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
+}, { threshold: 0.08 });
+document.querySelectorAll('.anim').forEach(el => obs.observe(el));
+</script>
+</body>
+</html>
