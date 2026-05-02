@@ -58,7 +58,7 @@ nav{
   height:68px;
 }
 .nav-logo{display:flex;align-items:center;gap:12px;}
-.nav-logo img{width:40px;height:40px;object-fit:contain;}
+.nav-logo img{width:56px;height:56px;object-fit:contain;}
 .nav-logo-text{font-family:'Playfair Display',serif;font-size:17px;font-weight:700;color:var(--verde);}
 .nav-links{display:flex;gap:32px;align-items:center;}
 .nav-links a{
@@ -214,9 +214,9 @@ nav{
 }
 .drone-feat:hover{border-color:var(--dorado);}
 .df-ico{
-  width:36px;height:36px;background:rgba(200,168,107,0.15);
+  width:40px;height:40px;background:rgba(200,168,107,0.12);
   display:flex;align-items:center;justify-content:center;
-  font-size:18px;flex-shrink:0;
+  font-size:18px;flex-shrink:0;border:1px solid rgba(200,168,107,0.2);
 }
 .df-titulo{font-size:13px;font-weight:500;color:var(--blanco);margin-bottom:3px;}
 .df-desc{font-size:12px;color:rgba(255,255,255,0.5);}
@@ -345,9 +345,9 @@ nav{
   font-size:14px;color:var(--gris);line-height:1.5;
 }
 .lista-ico{
-  width:32px;height:32px;background:rgba(74,158,106,0.12);
+  width:36px;height:36px;background:rgba(74,158,106,0.1);
   display:flex;align-items:center;justify-content:center;
-  font-size:16px;flex-shrink:0;border-radius:2px;
+  flex-shrink:0;border:1px solid rgba(74,158,106,0.2);
 }
 
 /* ── TRANSPARENCIA STRIP ── */
@@ -483,7 +483,7 @@ footer{
 
 <!-- TOPBAR -->
 <div class="topbar">
-  <span>📍 Ed. Scala Of. 1110, Sabaneta &nbsp;·&nbsp; <a href="mailto:gerenciakwel@gmail.com">gerenciakwel@gmail.com</a> &nbsp;·&nbsp; <a href="tel:+573021011871">302 101 1871</a></span>
+  <span>📍 Ed. Scala Of. 1110, Sabaneta &nbsp;·&nbsp; <a href="mailto:kwelsocial@gmail.com">kwelsocial@gmail.com</a> &nbsp;·&nbsp; <a href="tel:+573008561465">300 856 1465</a></span>
   <div class="topbar-right">
     <div class="lang-toggle">
       <button class="lang-btn active" onclick="setLang('es')">ES</button>
@@ -583,15 +583,35 @@ footer{
     <p class="sec-desc" data-es="Kwel implementa dos drones DJI Agras T100 para prestar servicios de aspersión y fertilización aérea de precisión a productores agrícolas en Colombia. Un proyecto de $500 millones que generará 6 empleos directos y cubrirá miles de hectáreas al año." data-en="Kwel deploys two DJI Agras T100 drones to provide precision aerial spraying and fertilization services to Colombian farmers. A $500M project creating 6 direct jobs and covering thousands of hectares per year.">Kwel implementa dos drones DJI Agras T100 para prestar servicios de aspersión y fertilización aérea de precisión a productores agrícolas en Colombia. Un proyecto de $500 millones que generará 6 empleos directos y cubrirá miles de hectáreas al año.</p>
     <div class="drones-features">
       <div class="drone-feat">
-        <div class="df-ico">🌾</div>
+        <div class="df-ico">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" style="color:var(--dorado)">
+            <path d="M12 2C6.5 2 2 6.5 2 12s4.5 10 10 10 10-4.5 10-10S17.5 2 12 2z"/>
+            <path d="M12 2c0 0-4 5-4 10s4 10 4 10"/>
+            <path d="M12 2c0 0 4 5 4 10s-4 10-4 10"/>
+            <path d="M2 12h20"/>
+            <path d="M4.93 7h14.14M4.93 17h14.14"/>
+          </svg>
+        </div>
         <div><div class="df-titulo" data-es="Cultivos extensivos y de ladera" data-en="Extensive and hillside crops">Cultivos extensivos y de ladera</div><div class="df-desc" data-es="Arroz, palma, caña, papa, frutales y más" data-en="Rice, palm, sugarcane, potato, fruit trees and more">Arroz, palma, caña, papa, frutales y más</div></div>
       </div>
       <div class="drone-feat">
-        <div class="df-ico">⚖️</div>
+        <div class="df-ico">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" style="color:var(--dorado)">
+            <circle cx="12" cy="12" r="3"/>
+            <path d="M3 12h4M17 12h4M12 3v4M12 17v4"/>
+            <path d="M5.6 5.6l2.8 2.8M15.6 15.6l2.8 2.8M5.6 18.4l2.8-2.8M15.6 8.4l2.8-2.8"/>
+          </svg>
+        </div>
         <div><div class="df-titulo" data-es="100 kg de carga útil por dron" data-en="100 kg payload per drone">100 kg de carga útil por dron</div><div class="df-desc" data-es="Mayor autonomía, menos recargas, más hectáreas por jornada" data-en="More autonomy, fewer recharges, more hectares per day">Mayor autonomía, menos recargas, más hectáreas por jornada</div></div>
       </div>
       <div class="drone-feat">
-        <div class="df-ico">📍</div>
+        <div class="df-ico">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" style="color:var(--dorado)">
+            <path d="M12 2a7 7 0 0 1 7 7c0 5-7 13-7 13S5 14 5 9a7 7 0 0 1 7-7z"/>
+            <circle cx="12" cy="9" r="2.5"/>
+            <path d="M12 2v2M12 16v2M2 9h2M20 9h2"/>
+          </svg>
+        </div>
         <div><div class="df-titulo" data-es="Precisión RTK centimétrica" data-en="Centimetric RTK precision">Precisión RTK centimétrica</div><div class="df-desc" data-es="Reduce deriva de agroquímicos a menos del 5%" data-en="Reduces agrochemical drift to less than 5%">Reduce deriva de agroquímicos a menos del 5%</div></div>
       </div>
     </div>
@@ -667,9 +687,27 @@ footer{
     <h2 class="sec-titulo" data-es="Tu donación tiene beneficio tributario" data-en="Your donation has a tax benefit">Tu donación tiene beneficio tributario</h2>
     <p class="sec-desc" data-es="Como entidad del Régimen Tributario Especial (RTE) de la DIAN, tus donaciones a Kwel son deducibles de renta. Las personas jurídicas pueden descontar hasta el 25% del valor donado de su impuesto de renta (Art. 257 E.T.)." data-en="As an entity under DIAN's Special Tax Regime (RTE), your donations to Kwel are tax-deductible. Legal entities can deduct up to 25% of the donated amount from their income tax (Art. 257 E.T.).">Como entidad del Régimen Tributario Especial (RTE) de la DIAN, tus donaciones a Kwel son deducibles de renta. Las personas jurídicas pueden descontar hasta el 25% del valor donado de su impuesto de renta (Art. 257 E.T.).</p>
     <ul class="sec-lista">
-      <li><div class="lista-ico">📄</div><span data-es="Emitimos certificado de donación con validez tributaria ante la DIAN" data-en="We issue a tax-valid donation certificate for DIAN">Emitimos certificado de donación con validez tributaria ante la DIAN</span></li>
-      <li><div class="lista-ico">💼</div><span data-es="Aplica para personas naturales y jurídicas — empresas, fondos y entidades" data-en="Applies to individuals and legal entities — companies, funds and organizations">Aplica para personas naturales y jurídicas — empresas, fondos y entidades</span></li>
-      <li><div class="lista-ico">🌱</div><span data-es="Tus recursos van directo al proyecto que eliges: drones, agroecología, arte o albergue animal" data-en="Your resources go directly to the project you choose: drones, agroecology, art or animal shelter">Tus recursos van directo al proyecto que eliges</span></li>
+      <li><div class="lista-ico">
+  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" style="color:var(--verde-claro)">
+    <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/>
+    <polyline points="14 2 14 8 20 8"/>
+    <polyline points="9 15 11 17 15 13"/>
+  </svg>
+</div><span data-es="Emitimos certificado de donación con validez tributaria ante la DIAN" data-en="We issue a tax-valid donation certificate for DIAN">Emitimos certificado de donación con validez tributaria ante la DIAN</span></li>
+      <li><div class="lista-ico">
+  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" style="color:var(--verde-claro)">
+    <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/>
+    <circle cx="9" cy="7" r="4"/>
+    <path d="M23 21v-2a4 4 0 0 0-3-3.87"/>
+    <path d="M16 3.13a4 4 0 0 1 0 7.75"/>
+  </svg>
+</div><span data-es="Aplica para personas naturales y jurídicas — empresas, fondos y entidades" data-en="Applies to individuals and legal entities — companies, funds and organizations">Aplica para personas naturales y jurídicas — empresas, fondos y entidades</span></li>
+      <li><div class="lista-ico">
+  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" style="color:var(--verde-claro)">
+    <line x1="12" y1="1" x2="12" y2="23"/>
+    <path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/>
+  </svg>
+</div><span data-es="Tus recursos van directo al proyecto que eliges: drones, agroecología, arte o albergue animal" data-en="Your resources go directly to the project you choose: drones, agroecology, art or animal shelter">Tus recursos van directo al proyecto que eliges</span></li>
     </ul>
   </div>
   <div class="dona-right">
@@ -728,11 +766,14 @@ footer{
   <div class="sec-eyebrow" data-es="Quienes nos acompañan" data-en="Our partners">Quienes nos acompañan</div>
   <h2 class="sec-titulo" data-es="Aliados Kwel" data-en="Kwel Partners">Aliados Kwel</h2>
   <div class="aliados-grid">
-    <div class="aliado-item">Refugio Selma</div>
+    <div class="aliado-item" style="flex-direction:column;gap:8px;">
+      <img src="data:image/png;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/4gHYSUNDX1BST0ZJTEUAAQEAAAHIAAAAAAQwAABtbnRyUkdCIFhZWiAH4AABAAEAAAAAAABhY3NwAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAQAA9tYAAQAAAADTLQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAlkZXNjAAAA8AAAACRyWFlaAAABFAAAABRnWFlaAAABKAAAABRiWFlaAAABPAAAABR3dHB0AAABUAAAABRyVFJDAAABZAAAAChnVFJDAAABZAAAAChiVFJDAAABZAAAAChjcHJ0AAABjAAAADxtbHVjAAAAAAAAAAEAAAAMZW5VUwAAAAgAAAAcAHMAUgBHAEJYWVogAAAAAAAAb6IAADj1AAADkFhZWiAAAAAAAABimQAAt4UAABjaWFlaIAAAAAAAACSgAAAPhAAAts9YWVogAAAAAAAA9tYAAQAAAADTLXBhcmEAAAAAAAQAAAACZmYAAPKnAAANWQAAE9AAAApbAAAAAAAAAABtbHVjAAAAAAAAAAEAAAAMZW5VUwAAACAAAAAcAEcAbwBvAGcAbABlACAASQBuAGMALgAgADIAMAAxADb/2wBDAAUDBAQEAwUEBAQFBQUGBwwIBwcHBw8LCwkMEQ8SEhEPERETFhwXExQaFRERGCEYGh0dHx8fExciJCIeJBweHx7/2wBDAQUFBQcGBw4ICA4eFBEUHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh7/wAARCACbARUDASIAAhEBAxEB/8QAHQABAAEEAwEAAAAAAAAAAAAAAAcEBQYIAQMJAv/EAEEQAAEEAgEDAgMFBQYDCAMAAAEAAgMEBREGBxIhEzFBUWEIFCIycRVCUoGRFiMkYnKhM5OiFzREU2ODscGSw9H/xAAaAQEAAgMBAAAAAAAAAAAAAAAABAUBAwYC/8QANBEAAgEDAgQEAwcEAwAAAAAAAAECAwQRITEFEkFRMmFxgRORwRQiQnKhsfAGM1JigtHx/9oADAMBAAIRAxEAPwC+9HPs2dLuO9NKHMOp5jvWrFSO5Ydctur1KYkALWaa5vcR3Bp7idn2HspQ4/P0awzGHjHT6Zx8dk2P4RbcH/Hfr/d+0/A7Lvlr4LD+jPLH9Svs88byGLhbkuQcLtVnXMY4jutGu0sAG/Hc+IlzHHx6jQP3SRPfFs/ieTYKtm8JbbapWW7Y8AgtIOnNc0+WuaQQWnRBBB8oDHI+oWHgjaxvGuYwwt8fg4xcIaP9LYyf5AEqlyvUDprdhMXI5PukIB7hn8LYpsaPc7+8xNAHt7/T5hSAiAhXkPQroV1Kxr7mLxOIjMn5chx2wyMNJ+Oo9xOP+ppWp/X37MPLenNafO4SV3I+ORAvlmij1YqtHxljG9tH8bdjwSQ1b353p3w7L2zfkw0VHJ/u5LGudTtt+X99EWvI+hJHzBVmkymc4Fajr8uyRznE7BEMeZnia2eg8+Gtt9gDHRO2AJg1vafDxo96A8q0Wxn21OisfAOTM5dxij6fF8s/8ccQ/BSsnZLAPgxw/E34A9zfADd65oAiIgCIiAIiIAiIgCIiAIiIAiIgCIiAIiIAiIgCIiAIiIAiIgCIiA39+y90yq9Gem8vUjkNzJzZbKUYnS46sdsa2RzfRhDP35i5zRtxAaXkeBtxkHFcY6inldvkuFh49wlmS2+/RlkkybLMmtCaSJnosjmAGiY5CHeO4u0NVPSblXE+svRqvA23HZMtCKrlqsb+yarOGDft5aQ4dzHj5Aj28V+P5ZkOHWIcH1FmDa7nCKhyUtDatv8AhZY14rz+w86Y8+WkE9gArv7Mc2sebnUy9AT7/s3EVIgP09Zk3++1yeHclb5Z1X5eXD2ElPFFp/UCmDr9CFmYII2DsFEBhBxvU7GO76XJsDn4h/4fJ451SV3/AL8Li0f8k/8A0qnjfLaPILVnjHIMS/D50QuNnEXu2Rs8J8GSJ4/BPEd6JHkb05rSdLLlY+Z8VxXK8ayrkWSxTwP9WndrP9OzTmHtLFIPLXD+hGw4EEggR7lsBj8PSn6ZcuikyHAuQf4TE2ZXbdj5XH8NOR59m93b6D/cEBh8hnd5+9bunGX6W8/ucYym5Ym/3tG126barknskHyPggj4OBHn3PoxFkHWfU6bdUq9WzJko3QUsh2+nWzLAN6AH/BstADjGD7jvjOgQ2Oer/Tp/UDjc3TLk1lr+WYyGS5xHNzaByMLdB0Uh/8AMA7WyD4/glAPkADz1RVWWx93E5O1jMlVlqXakroZ4JW6dG9p0WkfMEKlQBERAEREARFyRr4oDhERAEREAREQBERAEREAREQBERAEREAREQBERAX7gvMOScH5DDnuLZaxjL8XjviP4Xt+LHtPh7TofhcCFu10Y+1dw7mlJnHOpVapg8jOz0ZJpW92OtbGiHF2/T358P23/N50tB0QHqpV4jl+Nwx3OmWaruxTwHtwORldLQc0+f8ADTN2+vv4Ad8fnwwe6ueC6g4uzk48JnqlvjGckd2R0sm0MbYd/wChMCY5vY+GOLte7QvOHpJ1u6h9MpWR8fzTpsYHbfjLu5arvnpu9sJ+bC0n47W1/DPtXdK+cYg4TqLh/wBjOsAMnitwffKMv8w0kef4m6Hjz8UBtAijLjmNlGObkukvO6WTxQ/Ljb9o5Clv+GOdrjNB+m3tGtBgV0j6jVcXI2tzvE2uIzE9os2nCXHyH/Lbb+Bu/gJRG4/woDJ+TYLF8kws+HzFVtmpMBsbLXMcDtr2OHlj2kAtcCCCAQdqNMzUyBbV4PzfJubcM4l4nyyOMNf95YD6bJR+VtkDYI8MnYXgAEuapahlinhZNDIySN4DmPY4FrgfYgj3Co+RYbGchwtnD5inHbo2WdssT9j47BBHlrgQCHDRBAIIIQGmP2q+nU/NcLf5/j8XHS5nx0Nr8uxcI2JYw3bLkXxcwt8g/FmwdOjcFqIvSfkkHIuMchxrbcn7QzNZrq2Fyc5DWZ+ofxPxdt35W2dAujefD3N2NEyNOn/2m+meP4xkanNuGse/hXIXOfUBYWmhYBPqVZB+4WuDgGnyO1zfdhJAhhERAEREByPA2gG0PyQnXgLJkEaXCIsGAiIgCIiAIiIAiIgCIiAIiIAiIgCIiAIiIAiIgCIiAuPHs7muPZFmSwOWvYq4z8s9Ow6J4+m2kHX0U88B+131Iwkf3LlFfH8ux7m9j2WoxDMW+3b6jB2ka3+ZjiVrqiA3g4H1s6OZeX1MBnsz0ny0ji51csEmLleffcOnQgHztwbC7/MpyxHNuS1aEd3KYanyjEPALM3xKT7yxw+LnVS4yD9InTHyvK1XrifK+TcTvi9xnPZLEWNjb6lh0ff9HAHTh9DsID1UgyfCOpOAu4qG7RzNORvZbq95bNCdgjvYdSRPB0RsNc0gEaIUFc8wzOHZO/xLqKZMlwHlrvRlyzgA6GzoenakOtMsN7R6jtdsga2X3bKDAWF+0vl701b/ALRuLYrlL4B2xZSsTjspB9Y7MOi3W/YAb+al/EdZ+Gc44/Y41LzCvboXW9kuF51H93ePOx6WRgBa0tOi10jXP2AdjSA1R6t8CzPTbnN7i2aZuSB3fXsNGmWYT+SVv0I+HwII9wsSW42e4DnOofBh09z+HvQ5vDsfNwjPyujngyFYN7nUZLERMZcGtPadt2GA9rO1zTp7ZgmrWZa1iN0U0TyyRjhotcDogj5goCpw9ihVtmbIY85CNrD2Q+uYmF/w7y0dxb8w0tJ/iCymjJwrksBx8+Nh4llj/wB1uQWZZKEjvOmTtlc98e/AEjXlrf3m624YSiA77taxRuz07cTobEEjo5Y3e7XA6IP810L6e973dz3Oc7QGydnx4C+UAREQBERAEREAREQBERAEREAREQBERAEREAREQBERAEREAREQBERAEVx49hMtyHKR4vC0Jr1yTy2OIew+JJ9gPqdBZ5d6FdR61I2Ria85a3uMUNphkH8tgE/QE/TahXPErS1moVqsYt9G0iRStK9aLlTg2l2Rm3Bc3J0h6Ix8hY+efL8kl/w1OSZ4gDBvTnMBAI0O4n3Pc0eArTQ6l8b6hObg+pmEo1Xzfgr5ik0sfXd7Du2SQN/Hfb8268j4+1EHY+PhnHgO1mPxAAbr2J7Wf/rCinE4WW/SmuyXadGtE8RCW09wEkhBIY3tBJOhsnQaPGyNjfN2Fhb39s7+u2qk22pJvMVlqKj5YxpjXrktrm5q21b7NTS5YpJrGj0y2y4dR+H5HhPJpsNkCJW6Elaw0aZPEfZw/wDgj4EH391jamrBRz9QuBWeB5ho/tVx6I2MNKXBxsQgDcIcNhw129pB0R2EeASYWe1zHFrmlrgdEEaIKveF3k60ZUq39yGjxs09pLykvk8roVt5QjTanT8MtvLun5r9sM4REVoQwiIgCIiAIiIAiIgCIiAIiIAiIgCIiAIiIAiIgCIiAIiIAiIgCIiA2Q6ExU+D9FMz1DnrMkuTiQwud8WMd6bGfQGXe9e/j5BRzjeuHUSpmTkJcwy3G5231JoG+iRv8oAALf1B3+qkPLCQfY3rCIab2x+pr5ffP/7pa5LjeDWNtxCrd17mCm3UlHVZxGOMJdvbyL+/uatrChToycVyp6aavc3G6pcCx/U3iVLIQmGrmxUbNTm7ttLXAO9N2vdpJ9/gTv4kHWXk2OuY3hOLpW4JK89XL34bUTveOUMreD/IDRHg6Uz8x5Vk+OdOemXNMa9zzWgZUsxk6bOx0LO9jv1MJI8eCAR7LJepXFsV1K6dyZ/jz4/vF6OK3XJ0PUlZtoa75OIc6M/UM/hVBwi/rcJVKFw80XOST/xkm4tPyw+b+Msr62p3vPKksVFFN/7JpPPrnQ1k4zya9gctisnV82cZOJIH78mMk90R/wAp2f07nfNZB13xdOhz+XIY0AY/N1osrV1/DMNn/qDj+hCwazBNVsSVrMUkM0TyySN7S1zHA6IIPsQVn3Vdz/7J8AbY0LIweyPj6Zld6f8AsF3daEad9Rqw/EpRfmscyfs1+r7nOU5OVvUhLphr9vr+hHqIitiCEREAREQBERAEREAREQBERAEREAREQBERAEREAREQBERAEREAWW9JuGTc65lBhWSugrBhmtzNGzHE3W9fUkgD6lYkp2+zM/8AZHC+e8na3++qUh6Tte3ZHI8gfqe3+gVRx28qWlhOpS8eiXrJpL5ZyTuG0IV7mMJ+HVv0SyS/jeN8MzfTG/wfD3ZHYWpK+nNKyTudHK14lce5w0SHOB37fJaxdVumub4BfaLereNmcW17sbdNcfftcP3XfT4/AnR1KP2R7seRw3KeM23lzJu2btJ8uEjXMkP+zP6r66R8rg5DXv8ASPqD/intc+tVmmd+JxYSPTJPkPaRtp9/GvgN8TZTveC3lyoydSEGpTT8TUllzT7rqjobiNvxChRbXLKSai+iafhfk+hbA3+0H2RQGj1JsHdJI+I1Kf8A4jm/oFVfZR5BDfp5ngOTcZK9iJ1iuwn90jtlaD8Pdrhr/MVe+kXG5sFkubdKM08vhuVjZpy9uhNC9pjdIPr5j9vYtPyUFcKydvhHUmjcstdDLjL3pW2A+Q0OLJW/07gp1O3p8Qt720pvOZfEg/zLmWPdNP1I0qsrWrb15rGnJL2eHn21Mq5bnsdS5JawvUDijc7k8XYMIyMNt1SazG38nraaRJsdp7vDtH3Kwjm3JbvKs67KXI4YA2NsFevCNR14WDTI2j5Af7kqUvtd4VlPmeNzsLQGZOoWvI/ekiIG/wD8XMH8lCS6DgEbe4tKV3BauPd4T/FyrOFquiRWcTdWlWnQk9E/LL7Ze70fUIi7hVsGm64IJDXa8Rul7fwhxBIG/noK+bS3KttLc6URFkyEREARd9GpYvWRWqxGWVzXODQQPDWlx9/oCV0LGVnBjKzgIiLJkIiIAiIgCIiAIiIAi7rtaenblqWYzHNE4skYTvtI9x4SzWnrCIzxlgmjEsez+ZpJAP8AsV5UovGHuYUk8a7nSiIvRkIiIAiIgCIiAKb+irg7oZ1GjadvbXc4gfAGF3n/AGP9FCC2B+ypjJcpxXmtC5DP+y78LKrpIiA8uMcge1u/3u17ffwPHzXO/wBUzjT4c6kvwyg/lJFrwaLldKK6qS/RmD/ZszzcH1Wx7JXhsGRY6jISfi/RZ/1tYP5rv+0TiLPF+r1nJUnPri65mQrSsOi15P4iD8+9rj/MKod0/wADnMZNnOledv3buMImmxl5jW22gaIewtADiD8APpvegZC6n02dV+i2P5fi4Q7LY1rpJoWDbhoanjA9/BAcPmB9VU17+jS4rTu1pGa+HNNYcXvFtPv32wTadtUnZSoPeP34ta5Wzw/LtvkvcXIo+RcH491VqxgZDCOLcpHEPLoD+CyzXyA1K0H2A+qjX7TvDDXy8XO8O0T4nLNY6eSIbbHKWjtf/peNHfz38wqv7JGdZ+1Mxw67qSpkIDPHG78pc0dr26/zMI3/AKFT4TqXluluWyvBM1jRm8TRsyRV2SydkjI97bokEFpBB0R437/BV1tZ3XDuJ1IWi5nT1UW8c1OTzhN9YS2z39iVWr0bq0jKu8KW73xNaZ/5IvH2mg4dL+E/fARdDWB4cBvfoN79/wA9LXlZr1b6iZHqFmobdmu2lTqsLKtVr+/s3rucXaG3HQ86HgD+eFLrv6esa1lYRpVliWW2u2W3j2KPilxC4uXOntovXCwcgEnQ8lSJBVmgbBwt9aUVp6xFiX0j2tuP09rt69mkMZ/VYJibbaGSr3XQMn9CQSCN5/C4jyN/Ta67Fmee5Jclkc6eSQyOf8S4nZP9VPuaEq7SzhLX36P2KW4oyrNLZL9+nyL+2vi8Liqk2Uxb8hctmQmJ8zomwNY8s1+HyXFzXe/gaHhXe5j+K1a9u+MbYkrxUqk0ETp3Bz3yd2+4/LWt6/h8a2qOtyOvmLros3Txv3ckzMdP6oEchA7yPT8kOI7i322VT8u5FDkLV2GlG11aaOCMSdnp/wDCB8tZ+6Ds6HyAUHkrzqKMlJPd6vGMrReiyuj9dyHyVpzUXlPd6vGMrRe2n/Zc7FTGWuO0MvYqSR0atOaX7pHM4gudZLGsDnbIbs7J91bqbOP5Wlk5oMTJTs1qEkoY2dz4th8Ya4bPdv8AE4EHYVDT5LZq1adVtaCSCvBJXkjlBc2dj3l5Dh8NEjRHyC7Wcm+7ysbQw+Pq1A17JK5a6QTNfruD3OPcfYa0RrS9q3rxylndtfe0xnOHrq39d9D2qFaOUs7trXpnZ92/qXLp5Vr9rLpiH3gTzRB/cfDPukpI1vXuB8Nqsmfh8gMPTkwULS/ETSxyCxLuPs9dwAHd5/E3fn5/JWOLlJrTwDH4urTqQ+q4QMc53e98ZYXOc4knQcdLqo8lmq1abRRrPtUgWV7Lu7uEZJLmObvtc09zh5HsSvNW1r1KjqYeXtrjHi7Ppld/LJ5qW9ac3Uw/LXbxdn5o7eEYyjkppG3YPVAsVWD8Zb+F87WuHgj3BIVa6LjRiyN2LDyGrjJGxNabL++055IaXn2a0Bjj+HR8gbVDHycVXwDG4ipRiZZiszMjc9xmdG7bQS4khu/gFQYrMSUZ7JfWhtVrY7bFeXfa8b2PIIIIPkELdKjXqSlN5W2Fn0zs8Zazj17m2VKtOUp6rbCz89nj/wBLlyKDDycZxuUxmPdSlnnmjmYZnPALQ3QaT8PO/n5Pkql4hWxlq9O3I+i5zYS6vFNY9GOWTY/C5/w8bPw2QBsLjO54ZPGVMdFjq1GtUe90TIS4+Ha9y4kk+Pf6qmwuU/ZxnjlpwXK1hoZNDNsBwB2CC0ggj5hbIU6v2dxec5fXXGe/p5+/U2RhU+A4651664z39PP36mTXcNi6jLGVvYS3Ujqws76PrkxyyvcQwtk8ks0CTo+/ja68Zj+OZKODKugGPh9SSB9V9lwiklDO6P8AvDstafIOz40PmqA8tmAZVixlJmLbE6I0T3OY5riHElxPd3bAIdvxr9V8DlD4yyvXxVGLGhj2Opac5knfrbnOJ7i78LdHfjQ0oqoXXLh5z+bp23evz/NoR1RuOXXOfXp233/nMZLja2OxuXgfLxp1aeera8feXyQFrYXncbw477htpBJ14I0VT1cFSmxtXKV+OQWReBf6DsmIWV2A9oDS5wc5xIJ2dgb1pWMcpkhlqNoY2pUqVnSPFbb3tkMjex/cXEk7b49xpcf2iqOjbWnwFKalC4uqwvll3ATruAcHbLSdu0d+SvDtrlPmWc9dXtl6eJa6rr316Px9nrp5WfPV+f8At5rr3173vK4jj+Axdm3Pjv2k83GRwNdaI7GuiDy15jOiWnY8e/v7KnNGlDjsrZoCWOvbw8dmOJ0hJjJnDHNJ8dwBadb+isOTzs1/Hy1JK1eISW/vP9y3sa3TOwNDflofqvsZ+YY51L7vH2mgKXds77RMZe79dnS3RtbhRXM23lZ10xp09jZG3rqKy23lZ16aGTcjPHLfOLWIkxc3qWLZjfeE7u9krj7hn5S0E617kfFfbePttiOWeuLv7Px0MYr/AHhsLZXukkA29xGmgNcfHk+FZ7vMjYyEmVGEx8eTJPp2h3ks+R7d9pcB7OI+AVFDySw1zGTVYbNc1W1p4ZSS2YNcXBxIIIcCdggrTG1uVTio5WEt3nXrjXTK03Xtua429woJRysJbvPrjXqtN17F6ynE47EMFitHVxMzi5stZ15kzPGtOa4OJ0dnwT8EWN5fKsusghrY2pQrwd3ZHE0uJLtbLnO2XHwP0RTKNG6UFmePbP1f7v1JNKlcKOs8e2fq/wB2WxERWBOCIiAIiIAp/wCmvKG8KwPTas9/o1Mzauy5EfA9z/Ricf00Dv5BQLUrz27UVWtE+aeZ4ZHGwbc5xOgAPmSpb5Hx/FX+IcGxmR5HFVu+laoQyV6/r1PWE++2SUPBb/xGNLmteN7O9eTz/H4Ua8aVCt4ZN5wm34J64XZ6+qLThkqlNzqU90ljp+KJa+ew5Tpb1rsX8Z3RNbZ++VfgyWCQ7MZ+bfzMP6KS7vMaPTnqdBlIe7+yfL6kWRlYwb+7yuHmVrfr4LgPfu/ygLGGcr4fyrAR8S6tPuYzM4OR1ePJ14y97gw9pY7ta478aOwQdb2CsP63ctw/J83jqnHIpGYbD0mUqjpG6Mgb+9o+QNBoG/PjfjelTQs6nEKlO3uqT0i4zl+GS05ZKXV51XVa5J8q8bWM6tGa1acV1T6prtjR99CbK3S6Kl1VwnPeE2KrsNPK6azCyQdsbXscC+LXgsd3fl+BPjx7Q/8AabfWf1iyhrkFwigExGvziJv/ANdqxnjHPeYcZoSUMHn7VOq8kmIdrmtJ9y0OB7T9RpY/dtWbtua5cnknsTPL5ZZHFznuJ2SSfcqw4VwW8tr349zVU1GHJH/JrOfvehFveIUK1v8ACpQcW5cz7ZxjQ6URF1JTBERAEREAREQBERAEREAREQBERAEREAREQBERAEREAREQBERAEREBdeOTuqOv3YndtiCm/wBE78gvc2MkfUNe4j5EA/BXviHL6GMw8eIzuDOXqVrwyFINs+k6KbQBaT2u7o3drdt8e29rGcY4tsP0feCUH/luVKola1p1+aNRdurT+a17/Nm+nWnTw4/z+fQq81kJ8tmLuVtdv3i5YksS9o0O57i46/mVSIikxiopRjsjS228sIiL0YCIiAIiIAiIgCIiAIiIAiIgCIiAIiIAiIgCIiAIiIAiIgP/2Q==" alt="Corporación COAS" style="width:auto;height:48px;object-fit:contain;filter:none;">
+      <span style="font-size:10px;letter-spacing:0.05em;">Corporación COAS</span>
+    </div>
+    <div class="aliado-item">Casa Leo</div>
+    <div class="aliado-item">Colombia Diving Tours</div>
+    <div class="aliado-item">Banco Agrario</div>
     <div class="aliado-item">Casa Kwel</div>
-    <div class="aliado-item">Orama</div>
-    <div class="aliado-item">Carisma</div>
-    <div class="aliado-item">Comenzar</div>
     <div class="aliado-item" style="color:var(--verde-claro);cursor:pointer;" onclick="location.href='./contacto.html'" data-es="+ Sé aliado" data-en="+ Become a partner">+ Sé aliado</div>
   </div>
 </section>
@@ -769,13 +810,13 @@ footer{
       <div class="footer-heading" data-es="Contacto" data-en="Contact">Contacto</div>
       <ul class="footer-links">
         <li><a href="mailto:kwelsocial@gmail.com">kwelsocial@gmail.com</a></li>
-        <li><a href="tel:+573021011871">302 101 1871</a></li>
+        <li><a href="tel:+573008561465">300 856 1465</a></li>
         <li><span style="color:rgba(255,255,255,0.4);">Cl 52 Sur N° 43A 20 Of. 1110</span></li>
         <li><span style="color:rgba(255,255,255,0.4);">Ed. Scala, Sabaneta — Antioquia</span></li>
       </ul>
       <div class="footer-social" style="margin-top:20px;">
         <a href="https://www.instagram.com/kwelsocialorg/" class="soc-btn" target="_blank" rel="noopener" aria-label="Instagram">📸</a>
-        <a href="https://wa.me/573021011871" class="soc-btn" target="_blank" rel="noopener" aria-label="WhatsApp">💬</a>
+        <a href="https://wa.me/573008561465" class="soc-btn" target="_blank" rel="noopener" aria-label="WhatsApp">💬</a>
         <a href="mailto:kwelsocial@gmail.com" class="soc-btn" aria-label="Email">✉️</a>
       </div>
     </div>
