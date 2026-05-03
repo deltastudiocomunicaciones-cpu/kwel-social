@@ -477,8 +477,9 @@ footer{
 }
 
 /* Mobile nav overlay close */
-.nav-overlay{display:none;position:fixed;inset:0;z-index:190;background:rgba(0,0,0,0.3);}
+.nav-overlay{display:none;position:fixed;inset:0;z-index:8888;background:rgba(0,0,0,0.5);}
 .nav-overlay.open{display:block;}
+#navLinks.open{z-index:9999 !important;pointer-events:all !important;}
 </style>
 </head>
 <body>
@@ -513,7 +514,11 @@ footer{
     <span></span><span></span><span></span>
   </button>
 </nav>
-<div class="nav-overlay" id="navOverlay" onclick="toggleNav()"></div>
+...todo el contenido...
+
+ <div class="nav-overlay" id="navOverlay" onclick="toggleNav()"></div>
+</body>
+</html>
 
 <!-- HERO -->
 <section class="hero" id="inicio">
