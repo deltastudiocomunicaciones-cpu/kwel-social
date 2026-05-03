@@ -58,7 +58,7 @@ nav{
   height:68px;
 }
 .nav-logo{display:flex;align-items:center;gap:12px;}
-.nav-logo img{width:76px;height:76px;object-fit:contain;}
+.nav-logo img{width:56px;height:56px;object-fit:contain;}
 .nav-logo-text{font-family:'Playfair Display',serif;font-size:17px;font-weight:700;color:var(--verde);}
 .nav-links{display:flex;gap:32px;align-items:center;}
 .nav-links a{
@@ -87,13 +87,12 @@ nav{
 .hero{
   min-height:92vh;display:grid;grid-template-columns:1fr 1fr;
   position:relative;overflow:hidden;
-  z-index:1;
 }
 .hero-left{
   background:var(--verde);
   padding:80px 64px 80px 48px;
   display:flex;flex-direction:column;justify-content:center;
-  position:relative;z-index:1;
+  position:relative;z-index:2;
 }
 .hero-left::after{
   content:'';position:absolute;right:-40px;top:0;bottom:0;
@@ -442,38 +441,34 @@ footer{
 }
 @media(max-width:768px){
   .topbar{padding:8px 20px;font-size:10px;}
-  nav{padding:0 20px;}
+  nav{padding:0 20px;position:relative;z-index:500;}
   .nav-links{display:none;}
   .hamburger{display:flex;}
   .nav-links.open{
-    display:flex !important;
+    display:flex;
     flex-direction:column;
-    gap:0;
-    position:fixed !important;
-    top:0 !important;
-    left:0 !important;
-    right:0 !important;
-    bottom:0 !important;
-    background:var(--verde) !important;
-    z-index:99999 !important;
-    padding:96px 32px 32px !important;
-    pointer-events:all !important;
-    overflow-y:auto;
+    position:absolute;
+    top:68px;
+    left:0;
+    right:0;
+    background:#1a4a2e;
+    z-index:500;
+    padding:16px 0;
+    box-shadow:0 8px 32px rgba(0,0,0,0.3);
   }
   .nav-links.open a{
-    color:rgba(255,255,255,0.8) !important;
-    font-size:18px;
-    padding:14px 0;
-    border-bottom:1px solid rgba(255,255,255,0.1);
-    position:relative;
-    z-index:99999 !important;
-    pointer-events:all !important;
-    display:block !important;
+    color:rgba(255,255,255,0.85);
+    font-size:16px;
+    padding:14px 24px;
+    border-bottom:1px solid rgba(255,255,255,0.08);
+    display:block;
+    width:100%;
   }
+  .nav-links.open a:last-child{border-bottom:none;}
+  .nav-links.open a:active{background:rgba(255,255,255,0.1);}
   .nav-cta{display:none;}
-  .hero{z-index:1 !important;}
-  .hero-left{z-index:1 !important;}
-  .hero-right{z-index:1 !important;}
+  .hero{z-index:1;}
+  .hero-left{z-index:1;}
   .seccion{padding:64px 20px;}
   .impacto-strip{grid-template-columns:repeat(2,1fr);}
   .proyectos-grid{grid-template-columns:1fr;}
@@ -495,16 +490,15 @@ footer{
 }
 
 /* Mobile nav overlay close */
-.nav-overlay{display:none;position:fixed;inset:0;z-index:8888;background:rgba(0,0,0,0.5);}
+.nav-overlay{display:none;position:fixed;inset:0;z-index:190;}
 .nav-overlay.open{display:block;}
-#navLinks.open{z-index:9999 !important;pointer-events:all !important;}
 </style>
 </head>
 <body>
 
 <!-- TOPBAR -->
 <div class="topbar">
-  <span> Ed. Scala Of. 1110, Sabaneta &nbsp;·&nbsp; <a href="mailto:gerenciakwel@gmail.com">gerenciakwel@gmail.com</a> &nbsp;·&nbsp; <a href="tel:+573021011871">302 101 1871</a></span>
+  <span>📍 Ed. Scala Of. 1110, Sabaneta &nbsp;·&nbsp; <a href="mailto:kwelsocial@gmail.com">kwelsocial@gmail.com</a> &nbsp;·&nbsp; <a href="tel:+573008561465">300 856 1465</a></span>
   <div class="topbar-right">
     <div class="lang-toggle">
       <button class="lang-btn active" onclick="setLang('es')">ES</button>
@@ -515,12 +509,12 @@ footer{
 
 <!-- NAV -->
 <nav>
-  <a href="./index.html" class="nav-logo">
+  <div class="nav-logo">
     <img src="https://kwelsocial.com/wp-content/uploads/2023/11/KWEL-SOCIAL.png" alt="Kwel Social Logo">
     <span class="nav-logo-text">Kwel Social</span>
- </a>
+  </div>
   <div class="nav-links" id="navLinks">
-    <a href="./index.html" class="activo" data-es="Inicio" data-en="Home">Inicio</a>
+    <a href="#inicio" class="activo" data-es="Inicio" data-en="Home">Inicio</a>
     <a href="./nosotros.html" data-es="Nosotros" data-en="About">Nosotros</a>
     <a href="./proyecto-drones.html" data-es="Proyecto Drones" data-en="Drone Project">Proyecto Drones</a>
     <a href="./proyectos.html" data-es="Proyectos" data-en="Projects">Proyectos</a>
@@ -532,10 +526,6 @@ footer{
     <span></span><span></span><span></span>
   </button>
 </nav>
-
- <div class="nav-overlay" id="navOverlay" onclick="toggleNav()"></div>
-</body>
-</html>
 
 <!-- HERO -->
 <section class="hero" id="inicio">
@@ -600,7 +590,7 @@ footer{
 <!-- PROYECTO DRONES -->
 <section class="drones-section">
   <div class="drones-left">
-    <div class="sec-eyebrow" data-es="Proyecto Estrella · 2026" data-en="Flagship Project · 2026">Proyecto Estrella · 2026</div>
+    <div class="sec-eyebrow" data-es="Proyecto Estrella · 2025" data-en="Flagship Project · 2025">Proyecto Estrella · 2025</div>
     <h2 class="sec-titulo" style="color:var(--blanco);">
       <span data-es="Agricultura de <em style='color:var(--dorado);font-style:italic;'>precisión</em> con drones" data-en="<em style='color:var(--dorado);font-style:italic;'>Precision</em> agriculture with drones">Agricultura de <em style="color:var(--dorado);font-style:italic;">precisión</em> con drones</span>
     </h2>
@@ -791,7 +781,7 @@ footer{
   <h2 class="sec-titulo" data-es="Aliados Kwel" data-en="Kwel Partners">Aliados Kwel</h2>
   <div class="aliados-grid">
     <div class="aliado-item" style="flex-direction:column;gap:8px;">
-  <img src="https://i.imgur.com/XXXXXXX.png" alt="Corporación COAS" style="width:auto;height:48px;object-fit:contain;">
+      <img src="data:image/png;base64,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" alt="Corporación COAS" style="width:auto;height:48px;object-fit:contain;filter:none;">
       <span style="font-size:10px;letter-spacing:0.05em;">Corporación COAS</span>
     </div>
     <div class="aliado-item">Casa Leo</div>
@@ -807,7 +797,7 @@ footer{
   <div class="footer-grid">
     <div>
       <div class="footer-logo">
-        <img src="https://kwelsocial.com/wp-content/uploads/2023/11/KWEL-SOCIAL-1.png" alt="Kwel Social" style="width:80px;height:80px;object-fit:contain;">
+        <img src="https://kwelsocial.com/wp-content/uploads/2023/11/KWEL-SOCIAL-1.png" alt="Kwel Social">
         <span class="footer-logo-text">Kwel Social</span>
       </div>
       <p class="footer-desc" data-es="Corporación sin ánimo de lucro que impulsa el desarrollo rural, la agroecología, la agricultura de precisión y el bienestar comunitario en Antioquia, desde 2012." data-en="Nonprofit corporation driving rural development, agroecology, precision agriculture and community wellbeing in Antioquia, since 2012.">Corporación sin ánimo de lucro que impulsa el desarrollo rural, la agroecología, la agricultura de precisión y el bienestar comunitario en Antioquia, desde 2012.</p>
@@ -833,15 +823,15 @@ footer{
     <div>
       <div class="footer-heading" data-es="Contacto" data-en="Contact">Contacto</div>
       <ul class="footer-links">
-        <li><a href="mailto:gerenciakwel@gmail.com">gerenciakwel@gmail.com</a></li>
-        <li><a href="tel:+573021011871">302 101 1871</a></li>
+        <li><a href="mailto:kwelsocial@gmail.com">kwelsocial@gmail.com</a></li>
+        <li><a href="tel:+573008561465">300 856 1465</a></li>
         <li><span style="color:rgba(255,255,255,0.4);">Cl 52 Sur N° 43A 20 Of. 1110</span></li>
         <li><span style="color:rgba(255,255,255,0.4);">Ed. Scala, Sabaneta — Antioquia</span></li>
       </ul>
       <div class="footer-social" style="margin-top:20px;">
         <a href="https://www.instagram.com/kwelsocialorg/" class="soc-btn" target="_blank" rel="noopener" aria-label="Instagram">📸</a>
-        <a href="https://wa.me/573021011871" class="soc-btn" target="_blank" rel="noopener" aria-label="WhatsApp">💬</a>
-        <a href="mailto:gerenciakwel@gmail.com" class="soc-btn" aria-label="Email">✉️</a>
+        <a href="https://wa.me/573008561465" class="soc-btn" target="_blank" rel="noopener" aria-label="WhatsApp">💬</a>
+        <a href="mailto:kwelsocial@gmail.com" class="soc-btn" aria-label="Email">✉️</a>
       </div>
     </div>
   </div>
@@ -859,6 +849,7 @@ footer{
 
 <script>
 // ── LANG TOGGLE ──
+const traducciones = {};
 function setLang(lang) {
   document.querySelectorAll('.lang-btn').forEach(b => b.classList.toggle('active', b.textContent === lang.toUpperCase()));
   document.querySelectorAll('[data-' + lang + ']').forEach(el => {
@@ -876,30 +867,14 @@ function toggleNav() {
   links.classList.toggle('open');
   overlay.classList.toggle('open');
   const isOpen = links.classList.contains('open');
-  document.body.style.overflow = isOpen ? 'hidden' : '';
   ham.children[0].style.transform = isOpen ? 'rotate(45deg) translate(4px,4px)' : '';
   ham.children[1].style.opacity   = isOpen ? '0' : '1';
   ham.children[2].style.transform = isOpen ? 'rotate(-45deg) translate(4px,-4px)' : '';
 }
 
-// Cerrar menú al hacer click en cualquier link
-document.querySelectorAll('#navLinks a').forEach(link => {
-  link.addEventListener('click', () => {
-    const links = document.getElementById('navLinks');
-    const overlay = document.getElementById('navOverlay');
-    const ham = document.getElementById('hamburger');
-    links.classList.remove('open');
-    overlay.classList.remove('open');
-    document.body.style.overflow = '';
-    ham.children[0].style.transform = '';
-    ham.children[1].style.opacity = '1';
-    ham.children[2].style.transform = '';
-  });
-});
-
 // ── STICKY NAV SHADOW ──
 window.addEventListener('scroll', () => {
-  document.querySelector('nav').style.boxShadow =
+  document.querySelector('nav').style.boxShadow = 
     window.scrollY > 10 ? '0 2px 20px rgba(0,0,0,0.08)' : 'none';
 });
 
@@ -908,16 +883,16 @@ function selectMonto(el, val) {
   document.querySelectorAll('.dona-monto').forEach(m => m.classList.remove('sel'));
   el.classList.add('sel');
   const inp = document.getElementById('montoInput');
-  if (val) { inp.value = val; }
+  if (val) { inp.value = val; inp.placeholder = 'O ingresa el monto en pesos COP'; }
   else { inp.value = ''; inp.focus(); }
 }
 
 function irADona() {
   const monto = document.getElementById('montoInput').value || '100000';
-  window.location.href = './dona.html?monto=' + monto;
+  window.location.href = 'dona.html?monto=' + monto;
 }
 
-// ── INTERSECTION OBSERVER ──
+// ── INTERSECTION OBSERVER (fade-up en scroll) ──
 const obs = new IntersectionObserver((entries) => {
   entries.forEach(e => {
     if (e.isIntersecting) { e.target.style.opacity='1'; e.target.style.transform='translateY(0)'; }
@@ -931,7 +906,6 @@ document.querySelectorAll('.proyecto-card, .drone-feat, .sec-titulo, .imp-item')
   obs.observe(el);
 });
 </script>
-
 <div class="nav-overlay" id="navOverlay" onclick="toggleNav()"></div>
 </body>
 </html>
