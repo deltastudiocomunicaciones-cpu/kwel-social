@@ -882,6 +882,21 @@ function toggleNav() {
   ham.children[2].style.transform = isOpen ? 'rotate(-45deg) translate(4px,-4px)' : '';
 }
 
+// Cerrar menú al hacer click en cualquier link
+document.querySelectorAll('#navLinks a').forEach(link => {
+  link.addEventListener('click', () => {
+    const links = document.getElementById('navLinks');
+    const overlay = document.getElementById('navOverlay');
+    const ham = document.getElementById('hamburger');
+    links.classList.remove('open');
+    overlay.classList.remove('open');
+    document.body.style.overflow = '';
+    ham.children[0].style.transform = '';
+    ham.children[1].style.opacity = '1';
+    ham.children[2].style.transform = '';
+  });
+});
+
 // ── STICKY NAV SHADOW ──
 window.addEventListener('scroll', () => {
   document.querySelector('nav').style.boxShadow =
