@@ -444,10 +444,11 @@ footer{
   nav{padding:0 20px;}
   .nav-links{display:none;}
   .hamburger{display:flex;}
-  .nav-links.open{
+ .nav-links.open{
     display:flex;flex-direction:column;gap:0;
     position:fixed;top:68px;left:0;right:0;bottom:0;
-    background:var(--verde);z-index:200;padding:32px 24px;
+    background:var(--verde);z-index:300;padding:32px 24px;
+    pointer-events:all;
   }
   .nav-links.open a{
     color:rgba(255,255,255,0.8);font-size:18px;padding:14px 0;
@@ -475,7 +476,7 @@ footer{
 }
 
 /* Mobile nav overlay close */
-.nav-overlay{display:none;position:fixed;inset:0;z-index:190;}
+.nav-overlay{display:none;position:fixed;inset:0;z-index:190;background:rgba(0,0,0,0.3);}
 .nav-overlay.open{display:block;}
 </style>
 </head>
