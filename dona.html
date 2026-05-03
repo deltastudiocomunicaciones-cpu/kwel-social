@@ -563,16 +563,32 @@ function setLang(lang) {
 
 // Nav mobile
 function toggleNav() {
-  const l = document.getElementById('navLinks');
-  const o = document.getElementById('navOverlay');
-  const h = document.getElementById('hamburger');
-  l.classList.toggle('open'); o.classList.toggle('open');
-  const open = l.classList.contains('open');
-  h.children[0].style.transform = open ? 'rotate(45deg) translate(4px,4px)' : '';
-  h.children[1].style.opacity = open ? '0' : '1';
-  h.children[2].style.transform = open ? 'rotate(-45deg) translate(4px,-4px)' : '';
+  const links = document.getElementById('navLinks');
+  const overlay = document.getElementById('navOverlay');
+  const ham = document.getElementById('hamburger');
+  links.classList.toggle('open');
+  overlay.classList.toggle('open');
+  const isOpen = links.classList.contains('open');
+  document.body.style.overflow = isOpen ? 'hidden' : '';
+  ham.children[0].style.transform = isOpen ? 'rotate(45deg) translate(4px,4px)' : '';
+  ham.children[1].style.opacity   = isOpen ? '0' : '1';
+  ham.children[2].style.transform = isOpen ? 'rotate(-45deg) translate(4px,-4px)' : '';
 }
 
+// Cerrar menú al hacer click en cualquier link
+document.querySelectorAll('#navLinks a').forEach(link => {
+  link.addEventListener('click', () => {
+    const links = document.getElementById('navLinks');
+    const overlay = document.getElementById('navOverlay');
+    const ham = document.getElementById('hamburger');
+    links.classList.remove('open');
+    overlay.classList.remove('open');
+    document.body.style.overflow = '';
+    ham.children[0].style.transform = '';
+    ham.children[1].style.opacity = '1';
+    ham.children[2].style.transform = '';
+  });
+});
 // Proyecto
 const proyNombres = { drones:'Drones Agrícolas', agroecologia:'Proyectos Agroecológicos', arte:'Arte y Cultura', albergue:'Albergue Animal' };
 function selProyecto(el, id) {
