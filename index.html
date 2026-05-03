@@ -860,7 +860,6 @@ footer{
 
 <script>
 // ── LANG TOGGLE ──
-const traducciones = {};
 function setLang(lang) {
   document.querySelectorAll('.lang-btn').forEach(b => b.classList.toggle('active', b.textContent === lang.toUpperCase()));
   document.querySelectorAll('[data-' + lang + ']').forEach(el => {
@@ -886,7 +885,7 @@ function toggleNav() {
 
 // ── STICKY NAV SHADOW ──
 window.addEventListener('scroll', () => {
-  document.querySelector('nav').style.boxShadow = 
+  document.querySelector('nav').style.boxShadow =
     window.scrollY > 10 ? '0 2px 20px rgba(0,0,0,0.08)' : 'none';
 });
 
@@ -895,16 +894,16 @@ function selectMonto(el, val) {
   document.querySelectorAll('.dona-monto').forEach(m => m.classList.remove('sel'));
   el.classList.add('sel');
   const inp = document.getElementById('montoInput');
-  if (val) { inp.value = val; inp.placeholder = 'O ingresa el monto en pesos COP'; }
+  if (val) { inp.value = val; }
   else { inp.value = ''; inp.focus(); }
 }
 
 function irADona() {
   const monto = document.getElementById('montoInput').value || '100000';
-  window.location.href = 'dona.html?monto=' + monto;
+  window.location.href = './dona.html?monto=' + monto;
 }
 
-// ── INTERSECTION OBSERVER (fade-up en scroll) ──
+// ── INTERSECTION OBSERVER ──
 const obs = new IntersectionObserver((entries) => {
   entries.forEach(e => {
     if (e.isIntersecting) { e.target.style.opacity='1'; e.target.style.transform='translateY(0)'; }
@@ -918,5 +917,7 @@ document.querySelectorAll('.proyecto-card, .drone-feat, .sec-titulo, .imp-item')
   obs.observe(el);
 });
 </script>
+
+<div class="nav-overlay" id="navOverlay" onclick="toggleNav()"></div>
 </body>
 </html>
