@@ -42,8 +42,6 @@ nav{position:sticky;top:0;z-index:100;background:rgba(250,250,247,0.96);backdrop
 .nav-cta:hover{background:var(--verde);color:var(--dorado);}
 .hamburger{display:none;flex-direction:column;gap:5px;cursor:pointer;background:none;border:none;padding:4px;}
 .hamburger span{display:block;width:24px;height:1.5px;background:var(--verde);transition:all .3s;}
-.nav-overlay{display:none;position:fixed;inset:0;z-index:190;}
-.nav-overlay.open{display:block;}
 
 /* ── PAGE HERO ── */
 .page-hero{
@@ -232,11 +230,12 @@ nav{position:sticky;top:0;z-index:100;background:rgba(250,250,247,0.96);backdrop
 }
 @media(max-width:768px){
   .topbar{padding:8px 20px;}
-  nav{padding:0 20px;}
+  nav{padding:0 20px;position:relative;z-index:500;}
   .nav-links{display:none;}
   .hamburger{display:flex;}
-  .nav-links.open{display:flex;flex-direction:column;gap:0;position:fixed;top:68px;left:0;right:0;bottom:0;background:var(--verde);z-index:200;padding:32px 24px;}
-  .nav-links.open a{color:rgba(255,255,255,0.8);font-size:18px;padding:14px 0;border-bottom:1px solid rgba(255,255,255,0.1);}
+  .nav-links.open{display:flex;flex-direction:column;position:absolute;top:68px;left:0;right:0;background:#1a4a2e;z-index:500;padding:16px 0;box-shadow:0 8px 32px rgba(0,0,0,0.3);}
+  .nav-links.open a{color:rgba(255,255,255,0.85);font-size:16px;padding:14px 24px;border-bottom:1px solid rgba(255,255,255,0.08);display:block;width:100%;}
+  .nav-links.open a:last-child{border-bottom:none;}
   .nav-cta{display:none;}
   .faq-section{padding:56px 20px;}
   .footer-strip{padding:32px 20px;flex-direction:column;align-items:flex-start;}
@@ -255,7 +254,7 @@ nav{position:sticky;top:0;z-index:100;background:rgba(250,250,247,0.96);backdrop
 
 <!-- TOPBAR -->
 <div class="topbar">
-  <span> Ed. Scala Of. 1110, Sabaneta &nbsp;·&nbsp; <a href="mailto:gerenciakwel@gmail.com">gerenciakwel@gmail.com</a> &nbsp;·&nbsp; <a href="tel:+573021011871">302 101 1871</a></span>
+  <span>📍 Ed. Scala Of. 1110, Sabaneta &nbsp;·&nbsp; <a href="mailto:kwelsocial@gmail.com">kwelsocial@gmail.com</a> &nbsp;·&nbsp; <a href="tel:+573008561465">300 856 1465</a></span>
   <div class="lang-toggle">
     <button class="lang-btn active" onclick="setLang('es')">ES</button>
     <button class="lang-btn" onclick="setLang('en')">EN</button>
@@ -265,7 +264,7 @@ nav{position:sticky;top:0;z-index:100;background:rgba(250,250,247,0.96);backdrop
 <!-- NAV -->
 <nav>
   <a href="./index.html" class="nav-logo">
-    <img src="https://kwelsocial.com/wp-content/uploads/2023/11/KWEL-SOCIAL.png" alt="Kwel Social" style="width:76px;height:76px;object-fit:contain;">
+    <img src="https://kwelsocial.com/wp-content/uploads/2023/11/KWEL-SOCIAL.png" alt="Kwel Social">
     <span class="nav-logo-text">Kwel Social</span>
   </a>
   <div class="nav-links" id="navLinks">
@@ -279,7 +278,7 @@ nav{position:sticky;top:0;z-index:100;background:rgba(250,250,247,0.96);backdrop
   <a href="./dona.html" class="nav-cta activo" data-es="Dona ahora" data-en="Donate now">Dona ahora</a>
   <button class="hamburger" id="hamburger" onclick="toggleNav()"><span></span><span></span><span></span></button>
 </nav>
-<div class="nav-overlay" id="navOverlay" onclick="toggleNav()"></div>
+
 
 <!-- PAGE HERO -->
 <section class="page-hero">
@@ -292,21 +291,21 @@ nav{position:sticky;top:0;z-index:100;background:rgba(250,250,247,0.96);backdrop
   </div>
   <div class="ph-right">
     <div class="rte-card">
-      <div class="rte-ico"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="var(--dorado)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><line x1="3" y1="22" x2="21" y2="22"/><line x1="6" y1="18" x2="6" y2="11"/><line x1="10" y1="18" x2="10" y2="11"/><line x1="14" y1="18" x2="14" y2="11"/><line x1="18" y1="18" x2="18" y2="11"/><polygon points="12 2 2 7 22 7"/></svg></div>
+      <div class="rte-ico">🏛️</div>
       <div>
         <div class="rte-titulo" data-es="Entidad legalmente habilitada" data-en="Legally authorized entity">Entidad legalmente habilitada</div>
         <div class="rte-texto" data-es="<strong>NIT 900.554.556-5</strong> · Régimen Tributario Especial. Registro DIAN vigente. Personería jurídica activa." data-en="<strong>NIT 900.554.556-5</strong> · Special Tax Regime. Current DIAN registration. Active legal status."><strong>NIT 900.554.556-5</strong> · Régimen Tributario Especial. Registro DIAN vigente. Personería jurídica activa.</div>
       </div>
     </div>
     <div class="rte-card">
-      <div class="rte-ico"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="var(--dorado)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><polyline points="9 15 11 17 15 13"/></svg></div>
+      <div class="rte-ico">📄</div>
       <div>
         <div class="rte-titulo" data-es="Certificado de donación garantizado" data-en="Guaranteed donation certificate">Certificado de donación garantizado</div>
         <div class="rte-texto" data-es="Emitimos certificado con validez tributaria en máximo <strong>5 días hábiles</strong>. Cumple todos los requisitos de la DIAN para deducción de renta." data-en="We issue a tax-valid certificate within a maximum of <strong>5 business days</strong>. Meets all DIAN requirements for income tax deduction.">Emitimos certificado con validez tributaria en máximo <strong>5 días hábiles</strong>. Cumple todos los requisitos de la DIAN para deducción de renta.</div>
       </div>
     </div>
     <div class="rte-card">
-      <div class="rte-ico"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="var(--dorado)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg></div>
+      <div class="rte-ico">💰</div>
       <div>
         <div class="rte-titulo" data-es="Descuento real en impuesto de renta" data-en="Real income tax discount">Descuento real en impuesto de renta</div>
         <div class="rte-texto" data-es="Si donas <strong>$1.000.000</strong> y tu tarifa de renta es del 25%, pagas <strong>$250.000 menos</strong> de impuestos. La donación neta te cuesta solo $750.000." data-en="If you donate <strong>$1,000,000</strong> and your tax rate is 25%, you pay <strong>$250,000 less</strong> in taxes. The net donation only costs you $750,000.">Si donas <strong>$1.000.000</strong> y tu tarifa de renta es del 25%, pagas <strong>$250.000 menos</strong> de impuestos. La donación neta te cuesta solo $750.000.</div>
@@ -329,22 +328,22 @@ nav{position:sticky;top:0;z-index:100;background:rgba(250,250,247,0.96);backdrop
         <div class="paso-num" data-es="Paso 1 — Elige el proyecto a apoyar" data-en="Step 1 — Choose the project to support">Paso 1 — Elige el proyecto a apoyar</div>
         <div class="proyectos-dona">
           <div class="proy-card sel" onclick="selProyecto(this,'drones')">
-            <div class="proy-ico"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2L8 8H4l4 4-2 6 6-3 6 3-2-6 4-4h-4z"/><line x1="12" y1="13" x2="12" y2="21"/></svg></div>
+            <div class="proy-ico">✈️</div>
             <div class="proy-nombre" data-es="Drones Agrícolas" data-en="Agricultural Drones">Drones Agrícolas</div>
             <div class="proy-desc" data-es="DJI Agras T100 · Agricultura de precisión" data-en="DJI Agras T100 · Precision agriculture">DJI Agras T100 · Agricultura de precisión</div>
           </div>
           <div class="proy-card" onclick="selProyecto(this,'agroecologia')">
-            <div class="proy-ico"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22V12"/><path d="M12 12C12 12 7 9 7 4a5 5 0 0 1 10 0c0 5-5 8-5 8z"/><path d="M12 12c0 0-3 2-3 6"/><path d="M12 12c0 0 3 2 3 6"/></svg></div>
+            <div class="proy-ico">🌱</div>
             <div class="proy-nombre" data-es="Proyectos Agroecológicos" data-en="Agroecological Projects">Proyectos Agroecológicos</div>
             <div class="proy-desc" data-es="Producción limpia y seguridad alimentaria" data-en="Clean production and food security">Producción limpia y seguridad alimentaria</div>
           </div>
           <div class="proy-card" onclick="selProyecto(this,'arte')">
-            <div class="proy-ico"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M8 14s1.5 2 4 2 4-2 4-2"/><circle cx="9" cy="10" r="1"/><circle cx="15" cy="10" r="1"/></svg></div>
+            <div class="proy-ico">🎨</div>
             <div class="proy-nombre" data-es="Arte y Cultura" data-en="Art & Culture">Arte y Cultura</div>
             <div class="proy-desc" data-es="Murales, concursos y expresión comunitaria" data-en="Murals, competitions and community expression">Murales, concursos y expresión comunitaria</div>
           </div>
           <div class="proy-card" onclick="selProyecto(this,'albergue')">
-            <div class="proy-ico"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg></div>
+            <div class="proy-ico">🐾</div>
             <div class="proy-nombre" data-es="Albergue Animal" data-en="Animal Shelter">Albergue Animal</div>
             <div class="proy-desc" data-es="Rescate y adopción responsable" data-en="Rescue and responsible adoption">Rescate y adopción responsable</div>
           </div>
@@ -372,7 +371,7 @@ nav{position:sticky;top:0;z-index:100;background:rgba(250,250,247,0.96);backdrop
         <div class="medios">
           <div class="medio-opt sel" onclick="selMedio(this,'pse')">
             <div class="medio-radio"></div>
-            <div class="medio-logo"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="5" width="20" height="14" rx="2"/><line x1="2" y1="10" x2="22" y2="10"/></svg></div>
+            <div class="medio-logo">🏦</div>
             <div class="medio-info">
               <div class="medio-nombre">PSE — Débito en línea</div>
               <div class="medio-desc" data-es="Pago directo desde tu cuenta bancaria. Seguro y certificado." data-en="Direct payment from your bank account. Secure and certified.">Pago directo desde tu cuenta bancaria. Seguro y certificado.</div>
@@ -380,7 +379,7 @@ nav{position:sticky;top:0;z-index:100;background:rgba(250,250,247,0.96);backdrop
           </div>
           <div class="medio-opt" onclick="selMedio(this,'transferencia')">
             <div class="medio-radio"></div>
-            <div class="medio-logo"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><line x1="3" y1="22" x2="21" y2="22"/><line x1="6" y1="18" x2="6" y2="11"/><line x1="10" y1="18" x2="10" y2="11"/><line x1="14" y1="18" x2="14" y2="11"/><line x1="18" y1="18" x2="18" y2="11"/><polygon points="12 2 2 7 22 7"/></svg></div>
+            <div class="medio-logo">🏛️</div>
             <div class="medio-info">
               <div class="medio-nombre" data-es="Transferencia bancaria" data-en="Bank transfer">Transferencia bancaria</div>
               <div class="medio-desc" data-es="Consigna directamente a nuestra cuenta. Te enviamos el certificado al correo." data-en="Deposit directly to our account. We send the certificate to your email.">Consigna directamente a nuestra cuenta. Te enviamos el certificado al correo.</div>
@@ -388,7 +387,7 @@ nav{position:sticky;top:0;z-index:100;background:rgba(250,250,247,0.96);backdrop
           </div>
           <div class="medio-opt" onclick="selMedio(this,'nequi')">
             <div class="medio-radio"></div>
-            <div class="medio-logo"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="2" width="14" height="20" rx="2"/><line x1="12" y1="18" x2="12" y2="18.01"/></svg></div>
+            <div class="medio-logo">📱</div>
             <div class="medio-info">
               <div class="medio-nombre">Nequi / Daviplata</div>
               <div class="medio-desc" data-es="Transfiere desde tu billetera móvil al número registrado." data-en="Transfer from your mobile wallet to the registered number.">Transfiere desde tu billetera móvil al número registrado.</div>
@@ -411,7 +410,7 @@ nav{position:sticky;top:0;z-index:100;background:rgba(250,250,247,0.96);backdrop
         <!-- DATOS NEQUI -->
         <div class="datos-transferencia" id="datosNequi">
           <div class="dt-titulo">Nequi / Daviplata</div>
-          <div class="dt-row"><span class="dt-label" data-es="Número" data-en="Number">Número</span><span class="dt-val">302 101 1871 <span class="dt-copy" onclick="copiar('nequi','3021011871')">copiar</span></span></div>
+          <div class="dt-row"><span class="dt-label" data-es="Número" data-en="Number">Número</span><span class="dt-val">300 856 1465 <span class="dt-copy" onclick="copiar('nequi','3008561465')">copiar</span></span></div>
           <div class="dt-row"><span class="dt-label" data-es="Titular" data-en="Holder">Titular</span><span class="dt-val">Corporación Social Kwel</span></div>
           <div class="dt-nota" data-es="⚠️ Registra en el mensaje: tu nombre completo y la palabra 'Donación'. Luego completa el formulario para recibir tu certificado." data-en="⚠️ Include in the message: your full name and the word 'Donation'. Then complete the form to receive your certificate.">⚠️ Registra en el mensaje: tu nombre completo y la palabra 'Donación'. Luego completa el formulario para recibir tu certificado.</div>
         </div>
@@ -530,7 +529,7 @@ nav{position:sticky;top:0;z-index:100;background:rgba(250,250,247,0.96);backdrop
     <strong style="color:rgba(255,255,255,0.55);">Corporación Social Kwel</strong><br>
     NIT 900.554.556-5 · Régimen Tributario Especial · DIAN<br>
     Cll 52 Sur N° 43A 20 Of. 1110 · Ed. Scala · Sabaneta, Antioquia<br>
-    gerenciakwel@gmail.com · 302 101 1871
+    kwelsocial@gmail.com · 300 856 1465
   </div>
   <div class="fs-links">
     <a href="./index.html" data-es="Inicio" data-en="Home">Inicio</a>
@@ -563,32 +562,25 @@ function setLang(lang) {
 
 // Nav mobile
 function toggleNav() {
-  const links = document.getElementById('navLinks');
-  const overlay = document.getElementById('navOverlay');
-  const ham = document.getElementById('hamburger');
-  links.classList.toggle('open');
-  overlay.classList.toggle('open');
-  const isOpen = links.classList.contains('open');
-  document.body.style.overflow = isOpen ? 'hidden' : '';
-  ham.children[0].style.transform = isOpen ? 'rotate(45deg) translate(4px,4px)' : '';
-  ham.children[1].style.opacity   = isOpen ? '0' : '1';
-  ham.children[2].style.transform = isOpen ? 'rotate(-45deg) translate(4px,-4px)' : '';
+  const l = document.getElementById('navLinks');
+  const h = document.getElementById('hamburger');
+  const isOpen = l.classList.toggle('open');
+  h.children[0].style.transform = isOpen ? 'rotate(45deg) translate(4px,4px)' : '';
+  h.children[1].style.opacity   = isOpen ? '0' : '1';
+  h.children[2].style.transform = isOpen ? 'rotate(-45deg) translate(4px,-4px)' : '';
 }
-
-// Cerrar menú al hacer click en cualquier link
-document.querySelectorAll('#navLinks a').forEach(link => {
-  link.addEventListener('click', () => {
-    const links = document.getElementById('navLinks');
-    const overlay = document.getElementById('navOverlay');
-    const ham = document.getElementById('hamburger');
-    links.classList.remove('open');
-    overlay.classList.remove('open');
-    document.body.style.overflow = '';
-    ham.children[0].style.transform = '';
-    ham.children[1].style.opacity = '1';
-    ham.children[2].style.transform = '';
+document.addEventListener('DOMContentLoaded', function() {
+  document.querySelectorAll('#navLinks a').forEach(function(link) {
+    link.addEventListener('click', function() {
+      document.getElementById('navLinks').classList.remove('open');
+      var h = document.getElementById('hamburger');
+      h.children[0].style.transform = '';
+      h.children[1].style.opacity = '1';
+      h.children[2].style.transform = '';
+    });
   });
 });
+
 // Proyecto
 const proyNombres = { drones:'Drones Agrícolas', agroecologia:'Proyectos Agroecológicos', arte:'Arte y Cultura', albergue:'Albergue Animal' };
 function selProyecto(el, id) {
@@ -669,7 +661,7 @@ function procesarDonacion() {
     '• Doc: ' + doc + '\n' +
     '• Correo: ' + correo
   );
-  window.open('https://wa.me/573021011871?text=' + msg, '_blank');
+  window.open('https://wa.me/573008561465?text=' + msg, '_blank');
 }
 
 // FAQ
