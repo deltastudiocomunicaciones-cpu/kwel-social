@@ -87,12 +87,13 @@ nav{
 .hero{
   min-height:92vh;display:grid;grid-template-columns:1fr 1fr;
   position:relative;overflow:hidden;
+  z-index:1;
 }
 .hero-left{
   background:var(--verde);
   padding:80px 64px 80px 48px;
   display:flex;flex-direction:column;justify-content:center;
-  position:relative;z-index:2;
+  position:relative;z-index:1;
 }
 .hero-left::after{
   content:'';position:absolute;right:-40px;top:0;bottom:0;
