@@ -445,10 +445,10 @@ footer{
   nav{padding:0 20px;}
   .nav-links{display:none;}
   .hamburger{display:flex;}
- .nav-links.open{
+.nav-links.open{
     display:flex;flex-direction:column;gap:0;
     position:fixed;top:68px;left:0;right:0;bottom:0;
-    background:var(--verde);z-index:300;padding:32px 24px;
+    background:var(--verde);z-index:9999;padding:32px 24px;
     pointer-events:all;
   }
   .nav-links.open a{
@@ -855,6 +855,7 @@ function toggleNav() {
   links.classList.toggle('open');
   overlay.classList.toggle('open');
   const isOpen = links.classList.contains('open');
+  document.body.style.overflow = isOpen ? 'hidden' : '';
   ham.children[0].style.transform = isOpen ? 'rotate(45deg) translate(4px,4px)' : '';
   ham.children[1].style.opacity   = isOpen ? '0' : '1';
   ham.children[2].style.transform = isOpen ? 'rotate(-45deg) translate(4px,-4px)' : '';
